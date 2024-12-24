@@ -36,9 +36,9 @@ background-color: rgb(47, 91, 76);</string>
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>70</y>
-      <width>441</width>
+      <x>180</x>
+      <y>50</y>
+      <width>541</width>
       <height>621</height>
      </rect>
     </property>
@@ -47,6 +47,7 @@ background-color: rgb(47, 91, 76);</string>
 
 QGroupBox {
     border: 2px solid #5A9;
+	border-color: rgb(131, 65, 0)
     border-radius: 15px; /* Köşe yuvarlama yarıçapı */
     margin-top: 10px; /* Başlık kısmı için üst boşluk */
     background-color: #E0F7E9; /* Arkaplan rengi */
@@ -58,7 +59,7 @@ QGroupBox {
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>40</x>
        <y>40</y>
        <width>401</width>
        <height>61</height>
@@ -77,22 +78,16 @@ QGroupBox {
     <widget class="QGroupBox" name="verticalGroupBox">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>40</x>
        <y>130</y>
-       <width>401</width>
+       <width>450</width>
        <height>381</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(191, 183, 165);
-
-QGroupBox {
-    border: 2px solid #5A9;
-	border-color:  rgb(191, 183, 165);
-    border-radius: 15px; /* Köşe yuvarlama yarıçapı */
-    margin-top: 10px; /* Başlık kısmı için üst boşluk */
-    background-color: #E0F7E9; /* Arkaplan rengi */
-}</string>
+border-color:  rgb(191, 183, 165);
+</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="leftMargin">
@@ -226,6 +221,9 @@ QGroupBox {
           <pointsize>14</pointsize>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true"> border-color: rgb(191, 183, 165);</string>
+        </property>
         <property name="text">
          <string>Şifre</string>
         </property>
@@ -252,10 +250,10 @@ QGroupBox {
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>290</x>
+       <x>360</x>
        <y>530</y>
-       <width>131</width>
-       <height>41</height>
+       <width>121</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="font">
@@ -265,7 +263,9 @@ QGroupBox {
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(47, 91, 76);</string>
+      <string notr="true">
+background-color: rgb(131, 65, 0);
+border-radius: 10px;</string>
      </property>
      <property name="text">
       <string>KAYDET</string>
