@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/gardenPic">
+    <file>saksı-Photoroom2.png</file>
+    <file>ustYazi.png</file>
+    <file>saksı-Photoroom.png</file>
+  </qresource>
+</RCC>
