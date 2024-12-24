@@ -13,8 +13,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        
+        #setExtendedState(JFrame.MAXIMIZED_BOTH);
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(996, 672)
+        #MainWindow.resize(996, 672)
+        #MainWindow.fixedsize(1920, 1080)
+        MainWindow.setFixedSize(1920, 1080)
+        #MainWindow.adjustSize()
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -26,7 +31,7 @@ class Ui_MainWindow(object):
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(110, 260, 781, 221))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(450, 420, 1000, 350))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
@@ -40,12 +45,24 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.pushButton_3.sizePolicy().hasHeightForWidth())
         self.pushButton_3.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(24)
+        font.setFamily("Maiandra GD")
+        font.setPointSize(50)
         self.pushButton_3.setFont(font)
-        self.pushButton_3.setStyleSheet("\n"
-"\n"
-"background-color: rgb(191, 183, 165);")
+        #self.pushButton_3.setStyleSheet("\n""\n""background-color: rgb(191, 183, 165);")
+        self.pushButton_3.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(191, 183, 165);
+                border-radius: 20px;  /* Yuvarlaklık */
+                padding: 10px;
+                font-size: 38px;
+            }
+            QPushButton:hover {
+                background-color: rgb(210, 200, 180);
+            }
+            QPushButton:pressed {
+                background-color: rgb(170, 160, 140);
+            }
+        """)
         self.pushButton_3.setObjectName("pushButton_3")
         self.verticalLayout_2.addWidget(self.pushButton_3)
         self.pushButton_4 = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -55,17 +72,30 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.pushButton_4.sizePolicy().hasHeightForWidth())
         self.pushButton_4.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(24)
+        font.setFamily("Maiandra GD")
+        font.setPointSize(50)
         self.pushButton_4.setFont(font)
-        self.pushButton_4.setStyleSheet("background-color: rgb(191, 183, 165);")
+        self.pushButton_4.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(191, 183, 165);
+                border-radius: 20px;  /* Yuvarlaklık */
+                padding: 10px;
+                font-size: 38px;
+            }
+            QPushButton:hover {
+                background-color: rgb(210, 200, 180);
+            }
+            QPushButton:pressed {
+                background-color: rgb(170, 160, 140);
+            }
+        """)
         self.pushButton_4.setObjectName("pushButton_4")
         self.verticalLayout_2.addWidget(self.pushButton_4)
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(0, 70, 991, 161))
+        self.label.setGeometry(QtCore.QRect(325, 125, 1300, 250))
         font = QtGui.QFont()
-        font.setFamily("Calibri")
-        font.setPointSize(60)
+        font.setFamily("Maiandra GD")
+        font.setPointSize(55)
         self.label.setFont(font)
         self.label.setStyleSheet("\n"
 "background-image: url(:/gardenPic/ustYazi.png);\n"
@@ -75,7 +105,7 @@ class Ui_MainWindow(object):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
-        self.graphicsView.setGeometry(QtCore.QRect(760, -110, 291, 381))
+        self.graphicsView.setGeometry(QtCore.QRect(1550, -90, 487, 500))
         self.graphicsView.setStyleSheet("border-color: rgb(47, 91, 76);\n"
 "border-left-color: rgb(47, 91, 76);\n"
 "background: transparent;\n"
@@ -88,7 +118,7 @@ class Ui_MainWindow(object):
         self.graphicsView.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.graphicsView.setObjectName("graphicsView")
         self.graphicsView_2 = QtWidgets.QGraphicsView(self.centralwidget)
-        self.graphicsView_2.setGeometry(QtCore.QRect(-40, 360, 291, 381))
+        self.graphicsView_2.setGeometry(QtCore.QRect(-70, 600, 487, 500))
         self.graphicsView_2.setStyleSheet("border-color: rgb(47, 91, 76);\n"
 "border-left-color: rgb(47, 91, 76);\n"
 "background: transparent;\n"
