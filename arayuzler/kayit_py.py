@@ -66,7 +66,8 @@ QGroupBox {
         font = QtGui.QFont()
         font.setPointSize(16)
         self.ad_line.setFont(font)
-        self.ad_line.setStyleSheet("background-color: rgb(254, 255, 251);")
+        self.ad_line.setStyleSheet("background-color: rgb(254, 255, 251);\n"
+"border-radius: 10px;")
         self.ad_line.setObjectName("ad_line")
         self.verticalLayout_2.addWidget(self.ad_line)
         self.soyad_label = QtWidgets.QLabel(self.verticalGroupBox)
@@ -80,7 +81,8 @@ QGroupBox {
         font = QtGui.QFont()
         font.setPointSize(16)
         self.soyad_line.setFont(font)
-        self.soyad_line.setStyleSheet("background-color: rgb(254, 255, 251);")
+        self.soyad_line.setStyleSheet("background-color: rgb(254, 255, 251);\n"
+"border-radius: 10px;")
         self.soyad_line.setObjectName("soyad_line")
         self.verticalLayout_2.addWidget(self.soyad_line)
         self.label_5 = QtWidgets.QLabel(self.verticalGroupBox)
@@ -95,6 +97,7 @@ QGroupBox {
         font.setPointSize(16)
         self.mail_line.setFont(font)
         self.mail_line.setStyleSheet("background-color: rgb(254, 255, 251);\n"
+"border-radius: 10px;"
 "")
         self.mail_line.setObjectName("mail_line")
         self.verticalLayout_2.addWidget(self.mail_line)
@@ -115,6 +118,7 @@ QGroupBox {
         font.setPointSize(16)
         self.dateEdit.setFont(font)
         self.dateEdit.setStyleSheet("background-color: rgb(254, 255, 251);\n"
+"border-radius: 10px;"
 "")
         self.dateEdit.setObjectName("dateEdit")
         self.verticalLayout_2.addWidget(self.dateEdit)
@@ -131,6 +135,7 @@ QGroupBox {
         font.setPointSize(16)
         self.sifre_line.setFont(font)
         self.sifre_line.setStyleSheet("background-color: rgb(254, 255, 251);\n"
+"border-radius: 10px;"
 "")
         self.sifre_line.setEchoMode(QtWidgets.QLineEdit.Password)
         self.sifre_line.setObjectName("sifre_line")
@@ -141,9 +146,19 @@ QGroupBox {
         font.setFamily("Maiandra GD")
         font.setPointSize(14)
         self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("\n"
-"background-color: rgb(131, 65, 0);\n"
-"border-radius: 10px;")
+        self.pushButton.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(131, 65, 0);
+                border-radius: 20px;  /* Yuvarlaklık */
+                padding: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(170, 70, 0);
+            }
+            QPushButton:pressed {
+                background-color: rgb(145, 70, 0);
+            }
+        """)
         self.pushButton.setObjectName("pushButton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)

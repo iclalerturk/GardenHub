@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
 "background-color: rgb(47, 91, 76);")
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox.setGeometry(QtCore.QRect(675, 280, 541, 621))
+        self.groupBox.setGeometry(QtCore.QRect(675, 320, 541, 465))
         self.groupBox.setStyleSheet("""
 QGroupBox {
     border: 2px solid rgb(131, 65, 0); /* Kenar rengi ve kalınlığı */
@@ -38,7 +38,7 @@ QGroupBox {
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
         self.label = QtWidgets.QLabel(self.groupBox)
-        self.label.setGeometry(QtCore.QRect(40, 40, 401, 61))
+        self.label.setGeometry(QtCore.QRect(40, 40, 430, 61))
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(32)
@@ -46,7 +46,7 @@ QGroupBox {
         self.label.setObjectName("label")
         self.label.setStyleSheet("""background-color: rgb(191, 183, 165);""")
         self.verticalGroupBox = QtWidgets.QGroupBox(self.groupBox)
-        self.verticalGroupBox.setGeometry(QtCore.QRect(40, 130, 450, 381))
+        self.verticalGroupBox.setGeometry(QtCore.QRect(40, 130, 450, 200))
         self.verticalGroupBox.setStyleSheet("background-color: rgb(191, 183, 165);\n"
 "border-color:  rgb(191, 183, 165);\n"
 "")
@@ -54,35 +54,8 @@ QGroupBox {
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalGroupBox)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label_3 = QtWidgets.QLabel(self.verticalGroupBox)
-        font = QtGui.QFont()
-        font.setFamily("Maiandra GD")
-        font.setPointSize(14)
-        self.label_3.setFont(font)
-        self.label_3.setStyleSheet("")
-        self.label_3.setObjectName("label_3")
-        self.verticalLayout_2.addWidget(self.label_3)
-        self.ad_line = QtWidgets.QLineEdit(self.verticalGroupBox)
-        font = QtGui.QFont()
-        font.setPointSize(16)
-        self.ad_line.setFont(font)
-        self.ad_line.setStyleSheet("background-color: rgb(254, 255, 251);")
-        self.ad_line.setObjectName("ad_line")
-        self.verticalLayout_2.addWidget(self.ad_line)
-        self.soyad_label = QtWidgets.QLabel(self.verticalGroupBox)
-        font = QtGui.QFont()
-        font.setFamily("Maiandra GD")
-        font.setPointSize(14)
-        self.soyad_label.setFont(font)
-        self.soyad_label.setObjectName("soyad_label")
-        self.verticalLayout_2.addWidget(self.soyad_label)
-        self.soyad_line = QtWidgets.QLineEdit(self.verticalGroupBox)
-        font = QtGui.QFont()
-        font.setPointSize(16)
-        self.soyad_line.setFont(font)
-        self.soyad_line.setStyleSheet("background-color: rgb(254, 255, 251);")
-        self.soyad_line.setObjectName("soyad_line")
-        self.verticalLayout_2.addWidget(self.soyad_line)
+        
+        
         self.label_5 = QtWidgets.QLabel(self.verticalGroupBox)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
@@ -95,6 +68,7 @@ QGroupBox {
         font.setPointSize(16)
         self.mail_line.setFont(font)
         self.mail_line.setStyleSheet("background-color: rgb(254, 255, 251);\n"
+"border-radius: 10px;"
 "")
         self.mail_line.setObjectName("mail_line")
         self.verticalLayout_2.addWidget(self.mail_line)
@@ -105,19 +79,8 @@ QGroupBox {
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.verticalLayout_2.addWidget(self.label_6)
-        self.dateEdit = QtWidgets.QDateEdit(self.verticalGroupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.dateEdit.sizePolicy().hasHeightForWidth())
-        self.dateEdit.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setPointSize(16)
-        self.dateEdit.setFont(font)
-        self.dateEdit.setStyleSheet("background-color: rgb(254, 255, 251);\n"
-"")
-        self.dateEdit.setObjectName("dateEdit")
-        self.verticalLayout_2.addWidget(self.dateEdit)
+        
+        
         self.label_7 = QtWidgets.QLabel(self.verticalGroupBox)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
@@ -131,19 +94,30 @@ QGroupBox {
         font.setPointSize(16)
         self.sifre_line.setFont(font)
         self.sifre_line.setStyleSheet("background-color: rgb(254, 255, 251);\n"
+"border-radius: 10px;"
 "")
         self.sifre_line.setEchoMode(QtWidgets.QLineEdit.Password)
         self.sifre_line.setObjectName("sifre_line")
         self.verticalLayout_2.addWidget(self.sifre_line)
         self.pushButton = QtWidgets.QPushButton(self.groupBox)
-        self.pushButton.setGeometry(QtCore.QRect(360, 530, 121, 51))
+        self.pushButton.setGeometry(QtCore.QRect(360, 365, 121, 51))
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(14)
         self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("\n"
-"background-color: rgb(131, 65, 0);\n"
-"border-radius: 10px;")
+        self.pushButton.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(131, 65, 0);
+                border-radius: 20px;  /* Yuvarlaklık */
+                padding: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(170, 70, 0);
+            }
+            QPushButton:pressed {
+                background-color: rgb(145, 70, 0);
+            }
+        """)
         self.pushButton.setObjectName("pushButton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -201,13 +175,10 @@ QGroupBox {
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "KAYIT OL"))
-        self.label_3.setText(_translate("MainWindow", "Ad"))
-        self.soyad_label.setText(_translate("MainWindow", "Soyad"))
+        self.label.setText(_translate("MainWindow", "KULLANICI GİRİŞİ"))
         self.label_5.setText(_translate("MainWindow", "E-Mail"))
-        self.label_6.setText(_translate("MainWindow", "Doğum Tarihi"))
         self.label_7.setText(_translate("MainWindow", "Şifre"))
-        self.pushButton.setText(_translate("MainWindow", "KAYDET"))
+        self.pushButton.setText(_translate("MainWindow", "Giriş Yap"))
         self.label2.setText(_translate("MainWindow", "GARDEN HUB"))
 import resimler_rc
 
