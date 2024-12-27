@@ -9,7 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import kullaniciSecSayfasi_py
+import kayit_py
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -146,11 +147,27 @@ class Ui_MainWindow(object):
 import resimler_rc
 
 
+class IlkSayfa(QtWidgets.QMainWindow):
+    def __init__(self) -> None:
+        super().__init__()
+        self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
+        self.ui.setupUi(self)
+        self.ui.pushButton_3.clicked.connect(self.openKullaniciSec)
+        self.ui.pushButton_4.clicked.connect(self.openKaydol)
+
+    def openKullaniciSec(self):
+        self.kullaniciSecSayfasi = kullaniciSecSayfasi_py.kullaniciSecSayfasi()
+        self.kullaniciSecSayfasi.show()
+        self.close()
+
+    def openKaydol(self):
+        self.kaydolSayfasi = kayit_py.KaydolSayfa()
+        self.kaydolSayfasi.show()
+        self.close()
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    window = IlkSayfa()
+    window.show()
     sys.exit(app.exec_())

@@ -10,7 +10,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
+import yoneticiGiris 
+import kullaniciGiris
+import ilkSayfa_py
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
@@ -91,6 +93,8 @@ class Ui_MainWindow(object):
         """)
         self.pushButton_4.setObjectName("pushButton_4")
         self.verticalLayout_2.addWidget(self.pushButton_4)
+        #self.yoneticiGirisSayfasiAc = yoneticiGirisSayfasi()
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(325, 125, 1300, 250))
         font = QtGui.QFont()
@@ -129,6 +133,31 @@ class Ui_MainWindow(object):
 "")
         self.graphicsView_2.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.graphicsView_2.setObjectName("graphicsView_2")
+
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setGeometry(QtCore.QRect(20, 20, 101, 51))
+        font = QtGui.QFont()
+        font.setFamily("Maiandra GD")
+        font.setPointSize(14)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.pushButton_2.setFont(font)
+        self.pushButton_2.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(131, 65, 0);
+                border-radius: 10px;  /* Yuvarlaklık */
+                padding: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(170, 70, 0);
+            }
+            QPushButton:pressed {
+                background-color: rgb(145, 70, 0);
+            }
+        """)
+        self.pushButton_2.setObjectName("pushButton_2")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -140,17 +169,44 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
         self.pushButton_3.setText(_translate("MainWindow", "KULLANICI GİRİŞİ"))
         self.pushButton_4.setText(_translate("MainWindow", "YÖNETİCİ GİRİŞİ"))
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
+    
+
 import resimler_rc
 
 
+
+class kullaniciSecSayfasi(QtWidgets.QMainWindow):
+    def __init__(self) -> None:
+        super().__init__()
+        self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
+        self.ui.setupUi(self)
+        self.ui.pushButton_4.clicked.connect(self.openYoneticiGiris)
+        self.ui.pushButton_3.clicked.connect(self.openKullaniciGiris)
+        self.ui.pushButton_2.clicked.connect(self.geriGit)
+
+    def geriGit(self):
+        self.close()
+        self.ilkSayfa = ilkSayfa_py.IlkSayfa()
+        self.ilkSayfa.show()
+        self.close()
+    
+    def openYoneticiGiris(self):
+        self.yoneticiGirisSayfasi = yoneticiGiris.YoneticiGirisSayfa()
+        self.yoneticiGirisSayfasi.show()
+        self.close() 
+    
+    def openKullaniciGiris(self):
+        self.kullaniciGirisSayfasi = kullaniciGiris.KullaniciGirisSayfa()
+        self.kullaniciGirisSayfasi.show()
+        self.close()
+ 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    window = kullaniciSecSayfasi()
+    window.show()
     sys.exit(app.exec_())
