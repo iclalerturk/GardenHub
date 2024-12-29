@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import kullaniciSecSayfasi_py
 import kullaniciAnaSayfa 
-import kullanicilar as kullanici
+import kullanicilar as user
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -217,6 +217,7 @@ class KullaniciGirisSayfa(QtWidgets.QMainWindow):
                 self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
                 self.ui.setupUi(self)
                 self.ui.pushButton_2.clicked.connect(self.geriGit)
+                self.ui.pushButton.clicked.connect(self.login)
 
         def geriGit(self):
             self.close()
@@ -229,13 +230,13 @@ class KullaniciGirisSayfa(QtWidgets.QMainWindow):
             self.ilkSayfa.show()
         
         def login(self):
-            email = self.mail_line.text()
-            sifre = self.sifre_line.text()
-            kullanici = kullanici.get_user_from_db(email, sifre)
+            print(f"Mail Line içeriği: {self.ui.mail_line.text()}")
+            email = self.ui.mail_line.text()
+            sifre = self.ui.sifre_line.text()
+            kullanici = user.Kullanici.get_user_from_db(email, sifre)
 
             if kullanici:
-                self.error_label.setText("")
-                self.parent().kullaniciaGit(kullanici)
+                self.kullaniciaGit(kullanici)
 
 if __name__ == "__main__":
     import sys
