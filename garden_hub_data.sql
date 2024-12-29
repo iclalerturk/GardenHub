@@ -20,17 +20,17 @@ INSERT INTO kullanicilar VALUES ('Paul', 'Atreides', nextval('kullanici_id_seq')
 
 INSERT INTO yonetici VALUES ('admin@gardenhub.com', 'admin');
 -- urunler
-INSERT INTO urunler VALUES ('Havuç', 2, 40,2);
-INSERT INTO urunler VALUES ('Maydaoz', 3, 50,2);
-INSERT INTO urunler VALUES ('Marul', 5, 60,2);
-INSERT INTO urunler VALUES ('Nane', 6, 60,2);
-INSERT INTO urunler VALUES ('Patates', 4, 40,2);
-INSERT INTO urunler VALUES ('Biber', 3, 80,2);
-INSERT INTO urunler VALUES ('Fasulye', 8, 70,2);
-INSERT INTO urunler VALUES ('Salatalık', 10, 30,2);
-INSERT INTO urunler VALUES ('Domates', 5, 55,2);
-INSERT INTO urunler VALUES ('Üzüm', 4, 50,2);
-
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Havuç', 2, 40,2);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Maydaoz', 3, 50,2);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Marul', 5, 60,2);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Nane', 6, 60,2);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Patates', 4, 40,2);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Biber', 3, 80,2);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Fasulye', 8, 70,2);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Salatalık', 10, 30,2);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Domates', 5, 55,2);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Üzüm', 4, 50,2);
+--alter table urunler add column urun_id int;
 -- Ekipman
 
 INSERT INTO Ekipman VALUES (0, 'Kürek', '12', 40);

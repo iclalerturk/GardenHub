@@ -188,7 +188,7 @@ class Pazar(QtWidgets.QMainWindow):
             
             
     def satinal_buton_tiklandi(self, row_index):
-        equipment_id = self.ekipman.get_equipments()[row_index].ekipman_id
+        urun_id = self.ekipman.get_equipments()[row_index].ekipman_id
         if self.ekipman.rent_equipment(equipment_id,self.kullanici):
             self.load_data() 
         else:

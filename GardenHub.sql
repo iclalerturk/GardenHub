@@ -9,7 +9,7 @@ CREATE TABLE kullanicilar (
     mail VARCHAR(70) NOT NULL,
     sifre VARCHAR(20) NOT NULL,
     bdate DATE,
-    butce INT DEFAULT 0,
+    butce numeric(10,2) DEFAULT 0,
     user_type VARCHAR(50) CHECK (user_type IN ('Kiraci', 'Kullanici')),
     CONSTRAINT yas_sinir CHECK (AGE(CURRENT_DATE, bdate) >= INTERVAL '18 years')
 );
@@ -19,7 +19,12 @@ create table yonetici(
 	sifre varchar(20)
 );
 
+create sequence urun_id_seq
+minvalue 1000
+increment by 1
+
 create table urunler(
+	urun_id int not null primary key,
 	urun_adi varchar(20) not null,
 	kg int,
 	fiyat int NOT NULL CHECK (Fiyat > 0),

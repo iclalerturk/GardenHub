@@ -1,7 +1,8 @@
 import psycopg2
 
 class Urunler:
-    def __init__(self, urun_adi=None, kg=None, fiyat=None, sahip_id=None):
+    def __init__(self,urun_id=None, urun_adi=None, kg=None, fiyat=None, sahip_id=None):
+        self.urun_id = urun_id
         self.urun_adi = urun_adi
         self.kg = kg
         self.fiyat = fiyat
@@ -23,10 +24,10 @@ class Urunler:
 
     def get_urun_from_db(self):
         try:
-            query = "SELECT urun_adi, kg, fiyat, sahip_id from urunler"
+            query = "SELECT urun_id, urun_adi, kg, fiyat, sahip_id from urunler"
             self.cursor.execute(query)
             user_data = self.cursor.fetchall()
-            return [Urunler(row[0], row[1], row[2], row[3]) for row in user_data]
+            return [Urunler(row[0], row[1], row[2], row[3], row[3]) for row in user_data]
         except Exception as e:
             print("Error: ", e)
             return []
