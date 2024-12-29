@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import bahceler
 import ekipmanlar
+import classes.kullanicilar as Kullanici
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -186,10 +187,11 @@ import resimler_rc
 
 
 class KullaniciAnaSayfa(QtWidgets.QMainWindow):
-        def __init__(self) -> None:
+        def __init__(self,kullanici: Kullanici.Kullanici) -> None:
                 super().__init__()
                 self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
                 self.ui.setupUi(self)
+                self.kullanici=kullanici
                 self.ui.pushButton_3.clicked.connect(self.ekipmanlaraGit)
                 self.ui.pushButton_4.clicked.connect(self.bahcelereGit)
         def ekipmanlaraGit(self):
@@ -200,6 +202,8 @@ class KullaniciAnaSayfa(QtWidgets.QMainWindow):
             self.close()
             self.ilkSayfa = bahceler.Bahceler()
             self.ilkSayfa.show()   
+  
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
