@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import kullaniciAnaSayfa
+import yoneticiAnaSayfa
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -140,14 +140,16 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
         item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "EKİPMAN ADI"))
+        item.setText(_translate("MainWindow", "KULLANICI ADI"))
         item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "EKİPMAN ADEDİ"))
+        item.setText(_translate("MainWindow", "KULLANICI SOYADI"))
+        item = self.tableWidget.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "KULLANICI MAİLİ"))
 
 import resimler_rc
 
 
-class Ekipman(QtWidgets.QMainWindow):
+class KullanicilariGoruntule(QtWidgets.QMainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
@@ -156,13 +158,13 @@ class Ekipman(QtWidgets.QMainWindow):
     
     def geriGit(self):
         self.close()
-        self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa()
+        self.ilkSayfa = yoneticiAnaSayfa.YoneticiAnaSayfa()
         self.ilkSayfa.show()
         
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    window = Ekipman()
+    window = KullanicilariGoruntule()
     window.show()
     sys.exit(app.exec_())

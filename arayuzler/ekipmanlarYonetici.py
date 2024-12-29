@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import kullaniciAnaSayfa
+import yoneticiAnaSayfa
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -126,6 +126,7 @@ class Ui_MainWindow(object):
         """)
         self.pushButton_2.setObjectName("pushButton_2")
 
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -147,7 +148,7 @@ class Ui_MainWindow(object):
 import resimler_rc
 
 
-class Ekipman(QtWidgets.QMainWindow):
+class EkipmanlarYonetici(QtWidgets.QMainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
@@ -156,13 +157,13 @@ class Ekipman(QtWidgets.QMainWindow):
     
     def geriGit(self):
         self.close()
-        self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa()
+        self.ilkSayfa = yoneticiAnaSayfa.YoneticiAnaSayfa()
         self.ilkSayfa.show()
         
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    window = Ekipman()
+    window = EkipmanlarYonetici()
     window.show()
     sys.exit(app.exec_())

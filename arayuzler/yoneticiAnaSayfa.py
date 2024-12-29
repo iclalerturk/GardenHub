@@ -9,8 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import kullaniciSecSayfasi_py
-import kayit_py
+import kullanicilariGoruntule
+import ekipmanlarYonetici
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -228,11 +228,23 @@ import resimler_rc
 
 
 class YoneticiAnaSayfa(QtWidgets.QMainWindow):
-    def __init__(self) -> None:
-        super().__init__()
-        self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
-        self.ui.setupUi(self)
+        def __init__(self) -> None:
+                super().__init__()
+                self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
+                self.ui.setupUi(self)
+                self.ui.pushButton_6.clicked.connect(self.ekipmanlarYoneticiGit)
+                self.ui.pushButton.clicked.connect(self.kullanicilariGoruntule)
+
+        def kullanicilariGoruntule(self):
+            self.close()
+            self.ilkSayfa = kullanicilariGoruntule.KullanicilariGoruntule()
+            self.ilkSayfa.show()
+            
         
+        def ekipmanlarYoneticiGit(self):
+                self.close()
+                self.ilkSayfa = kullanicilariGoruntule.KullanicilariGoruntule()
+                self.ilkSayfa.show()
 
 if __name__ == "__main__":
     import sys
