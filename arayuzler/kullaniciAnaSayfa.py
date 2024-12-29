@@ -249,9 +249,9 @@ class KullaniciAnaSayfa(QtWidgets.QMainWindow):
             self.close()
             self.ilkSayfa = ekipmanlar.Ekipman()
             self.ilkSayfa.show()
-        def bahcelereGit(self):
+        def bahcelereGit(self,kullanici):
             self.close()
-            self.ilkSayfa = bahceler.Bahceler()
+            self.ilkSayfa = bahceler.Bahceler(kullanici)
             self.ilkSayfa.show()   
         def bakiyeGoruntule(self):
                 bakiye_mesaji = f"Bakiyeniz: {self.kullanici.butce} TL"

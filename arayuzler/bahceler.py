@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import kullaniciAnaSayfa
+import kullanicilar as Kullanici
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -403,15 +404,15 @@ import resimler_rc
 
 
 class Bahceler(QtWidgets.QMainWindow):
-    def __init__(self) -> None:
+    def __init__(self, kullanici: Kullanici.Kullanici) -> None:
             super().__init__()
             self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
             self.ui.setupUi(self)
             self.ui.pushButton_2.clicked.connect(self.geriGit)
     
-    def geriGit(self):
+    def geriGit(self,kullanici):
         self.close()
-        self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa()
+        self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(kullanici)
         self.ilkSayfa.show()
 if __name__ == "__main__":
     import sys
