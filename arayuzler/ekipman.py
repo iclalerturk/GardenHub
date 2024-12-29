@@ -1,6 +1,10 @@
 import psycopg2
-class Ekipman:
-    def __init__(self):
+class Ekipman_class:
+    def __init__(self,ekipman_id=None, ekipman_adi=None, ekipman_sayisi=None, fiyat=None):
+        self.ekipman_id = ekipman_id
+        self.ekipman_adi = ekipman_adi
+        self.ekipman_sayisi = ekipman_sayisi
+        self.fiyat = fiyat
         self.hostname = 'localhost'
         self.username = 'postgres'
         self.database = 'GardenHub'
@@ -19,13 +23,25 @@ class Ekipman:
             print("Database connection failed:", e)
 
     def get_equipments(self):
-        query = "SELECT id, ekipman_adi, ekipman_adedi, fiyat FROM ekipmanlar"
+        query = "SELECT ekipman_id, ekipman_adi, ekipman_sayisi, fiyat FROM ekipman"
         self.cursor.execute(query)
         rows = self.cursor.fetchall()
-        return [Ekipman(row[0], row[1], row[2], row[3]) for row in rows]
+        return [Ekipman_class(row[0], row[1], row[2], row[3]) for row in rows]
 
-    def rent_equipment(self, equipment_id):
-        query = "UPDATE ekipmanlar SET ekipman_adedi = ekipman_adedi - 1 WHERE id = %s AND ekipman_adedi > 0"
+    def rent_equipment(self, equipment_id,kullanici):
+        query = "SELECT fiyat FROM ekipman WHERE ekipman_id = %s"
         self.cursor.execute(query, (equipment_id,))
-        self.conn.commit()
-        return self.cursor.rowcount > 0
+        price = self.cursor.fetchone()[0]
+        if kullanici.butce < price:
+           return False
+        else:
+            query = "UPDATE ekipman SET ekipman_sayisi = ekipman_sayisi - 1 WHERE ekipman_id = %s AND ekipman_sayisi > 0"
+            self.cursor.execute(query, (equipment_id,))
+            kullanici.butce -= price
+            query = "UPDATE kullanicilar SET butce = %s WHERE kullanici_id = %s "
+            self.cursor.execute(query, (kullanici.butce,kullanici.kullanici_id,))
+            print(kullanici.butce)
+            self.conn.commit()
+            return True
+
+        

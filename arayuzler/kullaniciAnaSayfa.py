@@ -235,7 +235,7 @@ class KullaniciAnaSayfa(QtWidgets.QMainWindow):
 
         def ekipmanlaraGit(self):
             self.close()
-            self.ilkSayfa = ekipmanlar.Ekipman()
+            self.ilkSayfa = ekipmanlar.Ekipman(self.kullanici)
             self.ilkSayfa.show()
         def bahcelereGit(self,kullanici: user.Kullanici):
             self.close()

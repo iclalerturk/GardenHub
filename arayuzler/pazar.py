@@ -10,9 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import kullaniciAnaSayfa
-import ekipman as ek
-import kullanicilar as user
-from PyQt5.QtWidgets import QMessageBox
+import ekipman
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
@@ -145,55 +144,45 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
         item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "EKİPMAN ADI"))
+        item.setText(_translate("MainWindow", "ÜRÜN ADI"))
         item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "EKİPMAN ADEDİ"))
+        item.setText(_translate("MainWindow", "ÜRÜN KİLOSU"))
         item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "EKİPMAN FİYATI"))
+        item.setText(_translate("MainWindow", "ÜRÜN FİYATI"))
 import resimler_rc
 
 
-class Ekipman(QtWidgets.QMainWindow):
-    def __init__(self,kullanici: user.Kullanici) -> None:
+class Pazar(QtWidgets.QMainWindow):
+    def __init__(self) -> None:
         super().__init__()
         self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
         self.ui.setupUi(self)
-        self.kullanici=kullanici
-        self.ui.pushButton_2.clicked.connect(self.geriGit)
-        self.ekipman=ek.Ekipman_class()
-        self.load_data()
+        #self.ui.pushButton_2.clicked.connect(self.geriGit)
+        #self.ekipman=Ekipman()
+        #self.load_data()
         
     
-    def geriGit(self):
-        self.close()
-        self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(self.kullanici)
-        self.ilkSayfa.show()
-        
+    # def geriGit(self):
+    #     self.close()
+    #     self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa()
+    #     self.ilkSayfa.show()
     def load_data(self):
-        equipments = self.ekipman.get_equipments()
+        equipments = self.db.get_equipments()
         self.ui.tableWidget.setRowCount(len(equipments))
         for row_idx, equipment in enumerate(equipments):
             self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(equipment.ekipman_adi))
-            self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(str(equipment.ekipman_sayisi)))
+            self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(str(equipment.ekipman_adedi)))
             self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(f"{equipment.fiyat:.2f} TL"))
-
+            
+            # Kirala butonunu ekle
             button = QtWidgets.QPushButton("Kirala")
             button.clicked.connect(lambda _, r=row_idx: self.kirala_buton_tiklandi(r))
             self.ui.tableWidget.setCellWidget(row_idx, 3, button)
-            
-    def kirala_buton_tiklandi(self, row_index):
-        equipment_id = self.ekipman.get_equipments()[row_index].ekipman_id
-        if self.ekipman.rent_equipment(equipment_id,self.kullanici):
-            self.load_data() 
-        else:
-            bakiye_mesaji = f"Yetersiz Bakiye.\nBakiyeniz: {self.kullanici.butce} TL"
-            QMessageBox.information(self, "Bakiye Görüntüle", bakiye_mesaji)
-            print("Ekipman kiralanamadı.")
         
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    window = Ekipman()
+    window = Pazar()
     window.show()
     sys.exit(app.exec_())
