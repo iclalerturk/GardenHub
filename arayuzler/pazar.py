@@ -188,8 +188,11 @@ class Pazar(QtWidgets.QMainWindow):
             
             
     def satinal_buton_tiklandi(self, row_index):
-        urun_id = self.ekipman.get_equipments()[row_index].ekipman_id
-        if self.ekipman.rent_equipment(equipment_id,self.kullanici):
+        urun_id = self.urun.get_urun_from_db()[row_index].urun_id
+        if self.kullanici.butce>=self.urun.get_urun_from_db()[row_index].fiyat:
+            self.urun.urunSatinAl(urun_id,1)
+            self.kullanici.butce -= self.urun.get_urun_from_db()[row_index].fiyat
+            self.kullanici.bakiye_guncelle(self.kullanici.butce)
             self.load_data() 
         else:
             bakiye_mesaji = f"Yetersiz Bakiye.\nBakiyeniz: {self.kullanici.butce} TL"

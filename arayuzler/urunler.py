@@ -35,4 +35,12 @@ class Urunler:
     def urunekle(self,urun_adi,kg,fiyat, sahip_id):
         
         self.cursor.execute("insert into urunler values( %s , %s, %s)",urun_adi, kg, fiyat, sahip_id)
+    
+    def urunSatinAl(self,urun_id,kg):
+        query = "SELECT fiyat FROM urunler WHERE urun_id = %s"
+        self.cursor.execute(query, (urun_id,))
+        price = self.cursor.fetchone()[0]
+        query = "UPDATE urunler SET kg = kg - %s WHERE urun_id = %s AND kg > 0"
+        self.cursor.execute(query, (kg,urun_id,))
+        self.conn.commit()
 
