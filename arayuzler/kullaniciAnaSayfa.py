@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import bahceler
 import ekipmanlar
 
 class Ui_MainWindow(object):
@@ -190,12 +191,15 @@ class KullaniciAnaSayfa(QtWidgets.QMainWindow):
                 self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
                 self.ui.setupUi(self)
                 self.ui.pushButton_3.clicked.connect(self.ekipmanlaraGit)
-
+                self.ui.pushButton_4.clicked.connect(self.bahcelereGit)
         def ekipmanlaraGit(self):
             self.close()
             self.ilkSayfa = ekipmanlar.Ekipman()
             self.ilkSayfa.show()
+        def bahcelereGit(self):
             self.close()
+            self.ilkSayfa = bahceler.Bahceler()
+            self.ilkSayfa.show()   
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

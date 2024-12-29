@@ -9,8 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import kullaniciSecSayfasi_py
-import kayit_py
+import kullaniciAnaSayfa
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -403,11 +402,20 @@ class Ui_MainWindow(object):
 import resimler_rc
 
 
+class Bahceler(QtWidgets.QMainWindow):
+    def __init__(self) -> None:
+            super().__init__()
+            self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
+            self.ui.setupUi(self)
+            self.ui.pushButton_2.clicked.connect(self.geriGit)
+    
+    def geriGit(self):
+        self.close()
+        self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa()
+        self.ilkSayfa.show()
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    window = Bahceler()
+    window.show()
     sys.exit(app.exec_())
