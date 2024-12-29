@@ -243,7 +243,7 @@ class YoneticiAnaSayfa(QtWidgets.QMainWindow):
         
         def ekipmanlarYoneticiGit(self):
                 self.close()
-                self.ilkSayfa = kullanicilariGoruntule.KullanicilariGoruntule()
+                self.ilkSayfa = ekipmanlarYonetici.EkipmanlarYonetici()
                 self.ilkSayfa.show()
 
 if __name__ == "__main__":
