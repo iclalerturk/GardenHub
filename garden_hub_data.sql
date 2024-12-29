@@ -19,7 +19,6 @@ INSERT INTO kullanicilar VALUES ('Paul', 'Atreides', nextval('kullanici_id_seq')
 -- yonetici
 
 INSERT INTO yonetici VALUES ('admin@gardenhub.com', 'admin');
-
 -- urunler
 INSERT INTO urunler VALUES ('Havuç', 2, 40,2);
 INSERT INTO urunler VALUES ('Maydaoz', 3, 50,2);
