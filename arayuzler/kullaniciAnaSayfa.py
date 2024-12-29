@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QInputDialog
 
 import bahceler
 import ekipmanlar
@@ -197,17 +197,52 @@ class KullaniciAnaSayfa(QtWidgets.QMainWindow):
                 self.ui.pushButton_3.clicked.connect(self.ekipmanlaraGit)
                 self.ui.pushButton_4.clicked.connect(self.bahcelereGit)
                 self.ui.pushButton_2.clicked.connect(self.bakiyeGoruntule)
+                # self.ui.pushButton.clicked.connect(self.pazaraUrunEkleme)
+        
+        # def pazaraUrunEkleme(self):
+        #       urunAdi, urunKilosu, ok = QInputDialog.getDouble(
+        #                 self, 
+        #                 "Bakiye Güncelle", 
+        #                 "Yeni bakiyenizi girin:", 
+        #                 0,        # Varsayılan değer
+        #                 -999999,  # Minimum değer
+        #                 999999,   # Maksimum değer
+        #                 2         # Ondalık basamak sayısı
+        #         )
                 
+        #         if ok:  # Kullanıcı 'Tamam'a tıkladıysa
+        #                 self.kullanici.butce += yeni_bakiye  # Yeni bakiyeyi güncelle
+        #                 QMessageBox.information(self, "Başarılı", f"Bakiye başarıyla güncellendi: {yeni_bakiye} TL")
+        #         else:
+        #                 QMessageBox.warning(self, "İptal Edildi", "Bakiye güncelleme işlemi iptal edildi.")
+        
+        def bakiyeGuncelle(self): 
+                yeni_bakiye, ok = QInputDialog.getDouble(
+                        self, 
+                        "Bakiye Güncelle", 
+                        "Yeni bakiyenizi girin:", 
+                        0,        # Varsayılan değer
+                        -999999,  # Minimum değer
+                        999999,   # Maksimum değer
+                        2         # Ondalık basamak sayısı
+                )
+                
+                if ok:  # Kullanıcı 'Tamam'a tıkladıysa
+                        self.kullanici.butce += yeni_bakiye  # Yeni bakiyeyi güncelle
+                        QMessageBox.information(self, "Başarılı", f"Bakiye başarıyla güncellendi: {yeni_bakiye} TL")
+                else:
+                        QMessageBox.warning(self, "İptal Edildi", "Bakiye güncelleme işlemi iptal edildi.")
+
         def ekipmanlaraGit(self):
             self.close()
             self.ilkSayfa = ekipmanlar.Ekipman()
             self.ilkSayfa.show()
         def bahcelereGit(self,kullanici: user.Kullanici):
             self.close()
-            self.ilkSayfa = bahceler.Bahceler(kullanici)
+            self.ilkSayfa = bahceler.Bahceler(self.kullanici)
             self.ilkSayfa.show()
             print(kullanici)  
-        def bakiyeGoruntule(self,kullanici: user.Kullanici):
+        def bakiyeGoruntule(self):
                 bakiye_mesaji = f"Bakiyeniz: {self.kullanici.butce} TL"
                 QMessageBox.information(self, "Bakiye Görüntüle", bakiye_mesaji)
 
