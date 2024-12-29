@@ -9,6 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import bahceDurumu
+import ekipmanEkle
+import kullaniciSil
+import kullaniciEkle
 import kullanicilariGoruntule
 import ekipmanlarYonetici
 
@@ -234,18 +238,41 @@ class YoneticiAnaSayfa(QtWidgets.QMainWindow):
                 self.ui.setupUi(self)
                 self.ui.pushButton_6.clicked.connect(self.ekipmanlarYoneticiGit)
                 self.ui.pushButton.clicked.connect(self.kullanicilariGoruntule)
+                self.ui.pushButton_2.clicked.connect(self.kullaniciEkleyeGit)
+                self.ui.pushButton_5.clicked.connect(self.kullaniciSileGit)
+                self.ui.pushButton_3.clicked.connect(self.ekipmanEkleyeGit)
+                self.ui.pushButton_4.clicked.connect(self.bahceDurumunuGor)
+
+        def bahceDurumunuGor(self):
+            self.close()
+            self.ilkSayfa = bahceDurumu.BahceDurumunuGor()
+            self.ilkSayfa.show()
 
         def kullanicilariGoruntule(self):
             self.close()
             self.ilkSayfa = kullanicilariGoruntule.KullanicilariGoruntule()
             self.ilkSayfa.show()
-            
         
+        def kullaniciEkleyeGit(self):
+                self.close()
+                self.ilkSayfa = kullaniciEkle.KullaniciEkle()
+                self.ilkSayfa.show()
+
+        def kullaniciSileGit(self):
+                self.close()
+                self.ilkSayfa = kullaniciSil.KullaniciSil()
+                self.ilkSayfa.show()
+
         def ekipmanlarYoneticiGit(self):
                 self.close()
                 self.ilkSayfa = ekipmanlarYonetici.EkipmanlarYonetici()
                 self.ilkSayfa.show()
-
+        
+        def ekipmanEkleyeGit(self):
+                self.close()
+                self.ilkSayfa = ekipmanEkle.EkipmanEkle()
+                self.ilkSayfa.show()
+              
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

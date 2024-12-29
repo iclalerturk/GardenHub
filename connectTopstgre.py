@@ -20,12 +20,13 @@ try:
         print(resultSet.getString(1), resultSet.getString(2)) """
     
     cur = conn.cursor()
-    query = ''' insert into yonetici(mail,sifre) values('admin@hotmail.com','admin') '''
-    cur.execute(query)
+    #query = ''' insert into yonetici(mail,sifre) values('admin@hotmail.com','admin') '''
+    #cur.execute(query)
     conn.commit()
     query = ''' select * from yonetici '''
     cur.execute(query)
     rows = cur.fetchall()
+    print("a",rows[1][1])
     for row in rows:
         print(row)
     cur.close()
