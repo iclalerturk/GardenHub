@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import kullaniciSecSayfasi_py
 import kayit_py
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
@@ -164,6 +165,7 @@ class IlkSayfa(QtWidgets.QMainWindow):
         self.kaydolSayfasi = kayit_py.KaydolSayfa()
         self.kaydolSayfasi.show()
         self.close()
+    
 
 if __name__ == "__main__":
     import sys
