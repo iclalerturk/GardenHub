@@ -11,56 +11,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 
-class KullaniciAnaSayfa(QtWidgets.QMainWindow):
-    def __init__(self, kullanici: Kullanici.Kullanici) -> None:
-        super().__init__()
-        self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
-        self.ui.setupUi(self)
-        self.kullanici = kullanici
-
-        # Butonlara işlev ekleme
-        self.ui.pushButton_3.clicked.connect(self.ekipmanlaraGit)
-        self.ui.pushButton_4.clicked.connect(self.bahcelereGit)
-        self.ui.pushButton_2.clicked.connect(self.bakiyeGoruntule)
-
-    def ekipmanlaraGit(self):
-        self.close()
-        self.ilkSayfa = ekipmanlar.Ekipman()
-        self.ilkSayfa.show()
-
-    def bahcelereGit(self):
-        self.close()
-        self.ilkSayfa = bahceler.Bahceler()
-        self.ilkSayfa.show()
-
-    def bakiyeGoruntule(self):
-        # Kullanıcı bakiyesini mesaj kutusunda göster
-        bakiye_mesaji = f"Bakiyeniz: {self.kullanici.butce} TL"
-        QMessageBox.information(self, "Bakiye Görüntüle", bakiye_mesaji)
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-
-    # Örnek bir kullanıcı nesnesi oluştur
-    ornek_kullanici = Kullanici(
-        isim="Ali",
-        soyisim="Veli",
-        kullanici_id=1,
-        mail="ali@veli.com",
-        sifre="1234",
-        bdate="1990-01-01",
-        butce=500,
-        user_type="standart"
-    )
-
-    window = KullaniciAnaSayfa(ornek_kullanici)
-    window.show()
-    sys.exit(app.exec_())
-
 import bahceler
 import ekipmanlar
-import kullanicilar as Kullanici
+import kullanicilar as user
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -236,7 +189,7 @@ import resimler_rc
 
 
 class KullaniciAnaSayfa(QtWidgets.QMainWindow):
-        def __init__(self,kullanici: Kullanici.Kullanici) -> None:
+        def __init__(self,kullanici: user.Kullanici) -> None:
                 super().__init__()
                 self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
                 self.ui.setupUi(self)
@@ -249,11 +202,12 @@ class KullaniciAnaSayfa(QtWidgets.QMainWindow):
             self.close()
             self.ilkSayfa = ekipmanlar.Ekipman()
             self.ilkSayfa.show()
-        def bahcelereGit(self,kullanici):
+        def bahcelereGit(self,kullanici: user.Kullanici):
             self.close()
             self.ilkSayfa = bahceler.Bahceler(kullanici)
-            self.ilkSayfa.show()   
-        def bakiyeGoruntule(self):
+            self.ilkSayfa.show()
+            print(kullanici)  
+        def bakiyeGoruntule(self,kullanici: user.Kullanici):
                 bakiye_mesaji = f"Bakiyeniz: {self.kullanici.butce} TL"
                 QMessageBox.information(self, "Bakiye Görüntüle", bakiye_mesaji)
 

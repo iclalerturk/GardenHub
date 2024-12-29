@@ -224,7 +224,8 @@ class KullaniciGirisSayfa(QtWidgets.QMainWindow):
             self.ilkSayfa = kullaniciSecSayfasi_py.kullaniciSecSayfasi()
             self.ilkSayfa.show()
         
-        def kullaniciaGit(self,kullanici):
+        def kullaniciaGit(self,kullanici: user.Kullanici):
+            print(kullanici.butce)
             self.close()
             self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(kullanici)
             self.ilkSayfa.show()
@@ -234,8 +235,9 @@ class KullaniciGirisSayfa(QtWidgets.QMainWindow):
             email = self.ui.mail_line.text()
             sifre = self.ui.sifre_line.text()
             kullanici = user.Kullanici.get_user_from_db(email, sifre)
-
+            print(kullanici.butce)
             if kullanici:
+                print(kullanici.butce)
                 self.kullaniciaGit(kullanici)
 
 if __name__ == "__main__":
