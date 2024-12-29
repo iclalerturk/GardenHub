@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import bahceler
 import ekipmanlar
-import classes.kullanicilar as Kullanici
+import kullanicilar as Kullanici
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -210,3 +210,4 @@ if __name__ == "__main__":
     window = KullaniciAnaSayfa()
     window.show()
     sys.exit(app.exec_())
+    
