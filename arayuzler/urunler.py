@@ -1,57 +1,37 @@
 import psycopg2
 
 class Urunler:
-    def __init__(self, adi, kilosu, fiyati, sahipi_id):
-        self.adi = adi
-        self.kilosu = kilosu
-        self.fiyati = fiyati
-        self.sahipi_id = sahipi_id
-
-
-    
-    @staticmethod
-    def get_urun_from_db():
-        hostname = 'localhost'
-        username = 'postgres'
-        database = 'GardenHub'
-        password = '1234'
-        port_id = '5432'
-        try:
-            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id                   
-            )
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM urunler")
-            user_data = cursor.fetchall()
-            conn.close()
-            if user_data:
-                urunler_listesi = []
-                for data in user_data:
-                    urunler_listesi.append(Urunler(
-                        adi=data[0],
-                        kilosu=data[1],
-                        fiyati=data[2],
-                        sahipi_id=data[3]
-                    ))
-                return urunler_listesi  # Listeyi döndürüyoruz
-            return None
-        except Exception as e:
-            print("Error: ", e)
-            return None
+    def __init__(self, urun_adi=None, kg=None, fiyat=None, sahip_id=None):
+        self.urun_adi = urun_adi
+        self.kg = kg
+        self.fiyat = fiyat
+        self.sahip_id = sahip_id
         
-    def urunekle(adi,kilosu,fiyati, sahipi_id):
-        hostname = 'localhost'
-        username = 'postgres'
-        database = 'GardenHub'
-        password = '1234'
-        port_id = '5432'
+        self.hostname = 'localhost'
+        self.username = 'postgres'
+        self.database = 'GardenHub'
+        self.password = '1234'
+        self.port_id = '5432'
         try:
-            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id                   
+            self.conn = psycopg2.connect(host=self.hostname, user=self.username, password=self.password, dbname=self.database, port=self.port_id                   
             )
-            cursor = conn.cursor()
-            cursor.execute("insert into urunler values( %s , %s, %s)",adi, kilosu, fiyati, sahipi_id)
-
-        # cur.execute(query)
-        # conn.commit()
+            self.cursor = self.conn.cursor()
         except Exception as e:
             print("Error: ", e)
-            return None
+
+
+
+    def get_urun_from_db(self):
+        try:
+            query = "SELECT urun_adi, kg, fiyat, sahip_id from urunler"
+            self.cursor.execute(query)
+            user_data = self.cursor.fetchall()
+            return [Urunler(row[0], row[1], row[2], row[3]) for row in user_data]
+        except Exception as e:
+            print("Error: ", e)
+            return []
+        
+    def urunekle(self,urun_adi,kg,fiyat, sahip_id):
+        
+        self.cursor.execute("insert into urunler values( %s , %s, %s)",urun_adi, kg, fiyat, sahip_id)
+

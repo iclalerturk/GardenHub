@@ -41,7 +41,22 @@ class Kullanici:
             return None
         except Exception as e:
             print("Error: ", e)
-        
+
+    def bakiye_guncelle(self, bakiye):
+        hostname = 'localhost'
+        username = 'postgres'
+        database = 'GardenHub'
+        password = '1234'
+        port_id = '5432'
+        try:
+            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id)
+            cursor = conn.cursor()
+
+            cursor.execute("UPDATE kullanicilar SET butce = %s WHERE kullanici_id = %s", (bakiye, self.kullanici_id))
+            conn.commit()
+            conn.close()
+        except Exception as e:
+            print("Error: ", e) 
 
 
 

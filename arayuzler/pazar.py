@@ -9,8 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
+import urunler
 import kullaniciAnaSayfa
-import ekipman
+import kullanicilar as user
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -49,7 +51,7 @@ class Ui_MainWindow(object):
     
 """)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(4)
+        self.tableWidget.setColumnCount(5)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -59,13 +61,15 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, item)
-        self.tableWidget.horizontalHeader().setDefaultSectionSize(225)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(4, item)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(180)
 ###############################################################33333
-        self.tableWidget.insertRow(0)
-        self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Değer 1"))
-        self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Değer 2"))
-        self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem("Değer 3"))
-        self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem("Değer 3"))
+        # self.tableWidget.insertRow(0)
+        # self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Değer 1"))
+        # self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Değer 2"))
+        # self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem("Değer 3"))
+        # self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem("Değer 3"))
 ################################3333#############################333
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(325, 125, 1300, 250))
@@ -149,35 +153,48 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "ÜRÜN KİLOSU"))
         item = self.tableWidget.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "ÜRÜN FİYATI"))
+        item = self.tableWidget.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "ÜRÜNÜN SAHİBİ"))
 import resimler_rc
 
 
 class Pazar(QtWidgets.QMainWindow):
-    def __init__(self) -> None:
+    def __init__(self,kullanici: user.Kullanici) -> None:
         super().__init__()
         self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
         self.ui.setupUi(self)
-        #self.ui.pushButton_2.clicked.connect(self.geriGit)
-        #self.ekipman=Ekipman()
-        #self.load_data()
+        self.kullanici=kullanici
+        self.urun=urunler.Urunler()
+        self.ui.pushButton_2.clicked.connect(self.geriGit)
+        self.load_data()
         
     
-    # def geriGit(self):
-    #     self.close()
-    #     self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa()
-    #     self.ilkSayfa.show()
+    def geriGit(self):
+        self.close()
+        self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(self.kullanici)
+        self.ilkSayfa.show()
+        
     def load_data(self):
-        equipments = self.db.get_equipments()
-        self.ui.tableWidget.setRowCount(len(equipments))
-        for row_idx, equipment in enumerate(equipments):
-            self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(equipment.ekipman_adi))
-            self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(str(equipment.ekipman_adedi)))
-            self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(f"{equipment.fiyat:.2f} TL"))
+        gelenUrunler = self.urun.get_urun_from_db()
+        self.ui.tableWidget.setRowCount(len(gelenUrunler))
+        for row_idx, uruns in enumerate(gelenUrunler):
+            self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(uruns.urun_adi))
+            self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(str(uruns.kg)))
+            self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(f"{uruns.fiyat:.2f} TL"))
+            self.ui.tableWidget.setItem(row_idx, 3, QtWidgets.QTableWidgetItem(str(uruns.sahip_id)))
+            button = QtWidgets.QPushButton("Satın Al")
+            button.clicked.connect(lambda _, r=row_idx: self.satinal_buton_tiklandi(r))
+            self.ui.tableWidget.setCellWidget(row_idx, 4, button)
             
-            # Kirala butonunu ekle
-            button = QtWidgets.QPushButton("Kirala")
-            button.clicked.connect(lambda _, r=row_idx: self.kirala_buton_tiklandi(r))
-            self.ui.tableWidget.setCellWidget(row_idx, 3, button)
+            
+    def satinal_buton_tiklandi(self, row_index):
+        equipment_id = self.ekipman.get_equipments()[row_index].ekipman_id
+        if self.ekipman.rent_equipment(equipment_id,self.kullanici):
+            self.load_data() 
+        else:
+            bakiye_mesaji = f"Yetersiz Bakiye.\nBakiyeniz: {self.kullanici.butce} TL"
+            QMessageBox.information(self, "Bakiye Görüntüle", bakiye_mesaji)
+            print("Ekipman kiralanamadı.")
         
 
 if __name__ == "__main__":
