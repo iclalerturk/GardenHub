@@ -49,7 +49,7 @@ class Ui_MainWindow(object):
     
 """)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setColumnCount(4)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -57,12 +57,15 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(2, item)
-        self.tableWidget.horizontalHeader().setDefaultSectionSize(300)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(3, item)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(225)
 ###############################################################33333
         self.tableWidget.insertRow(0)
         self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Değer 1"))
         self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Değer 2"))
         self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem("Değer 3"))
+        self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem("Değer 3"))
 ################################3333#############################333
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(325, 125, 1300, 250))
@@ -144,7 +147,8 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "EKİPMAN ADI"))
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "EKİPMAN ADEDİ"))
-
+        item = self.tableWidget.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "EKİPMAN FİYATI"))
 import resimler_rc
 
 
@@ -153,15 +157,15 @@ class Ekipman(QtWidgets.QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
         self.ui.setupUi(self)
-        self.ui.pushButton_2.clicked.connect(self.geriGit)
-        self.ekipman=Ekipman()
-        self.load_data()
+        #self.ui.pushButton_2.clicked.connect(self.geriGit)
+        #self.ekipman=Ekipman()
+        #self.load_data()
         
     
-    def geriGit(self):
-        self.close()
-        self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa()
-        self.ilkSayfa.show()
+    # def geriGit(self):
+    #     self.close()
+    #     self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa()
+    #     self.ilkSayfa.show()
     def load_data(self):
         equipments = self.db.get_equipments()
         self.ui.tableWidget.setRowCount(len(equipments))
