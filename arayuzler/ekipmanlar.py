@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import kullaniciAnaSayfa
+import ekipman
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -153,11 +154,26 @@ class Ekipman(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
         self.ui.setupUi(self)
         self.ui.pushButton_2.clicked.connect(self.geriGit)
+        self.ekipman=Ekipman()
+        self.load_data()
+        
     
     def geriGit(self):
         self.close()
         self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa()
         self.ilkSayfa.show()
+    def load_data(self):
+        equipments = self.db.get_equipments()
+        self.ui.tableWidget.setRowCount(len(equipments))
+        for row_idx, equipment in enumerate(equipments):
+            self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(equipment.ekipman_adi))
+            self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(str(equipment.ekipman_adedi)))
+            self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(f"{equipment.fiyat:.2f} TL"))
+            
+            # Kirala butonunu ekle
+            button = QtWidgets.QPushButton("Kirala")
+            button.clicked.connect(lambda _, r=row_idx: self.kirala_buton_tiklandi(r))
+            self.ui.tableWidget.setCellWidget(row_idx, 3, button)
         
 
 if __name__ == "__main__":
