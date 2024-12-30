@@ -197,7 +197,7 @@ class KullaniciSil(QtWidgets.QMainWindow):
                 self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
                 self.ui.setupUi(self)
                 self.ui.pushButton_2.clicked.connect(self.geriGit)
-
+                self.ui.pushButton.clicked.connect(self.user_remove)
         def geriGit(self):
             self.close()
             self.ilkSayfa = yoneticiAnaSayfa.YoneticiAnaSayfa()
@@ -213,9 +213,11 @@ class KullaniciSil(QtWidgets.QMainWindow):
             )
             cursor = conn.cursor()
             mail=self.ui.mail_line.text()
-            query=("DELETE FROM kullanicilar WHERE mail = %s",(mail))
-            user_data = cursor.fetchone()
-
+            ###################################3kontrol yap ve silindi silinemedi mesajı ver bi de kullanıcı silindiğinde kiraladığı tarla boşaltılacak
+            query = "DELETE FROM kullanicilar WHERE mail = %s"
+            cursor.execute(query, (mail,))
+            conn.commit()
+            conn.close()
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

@@ -155,22 +155,22 @@ class BahceDurumunuGor(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
         self.ui.setupUi(self)
         self.ui.pushButton_2.clicked.connect(self.geriGit)
-        self.load_bahce()
+        # self.load_bahce()
     
     def geriGit(self):
         self.close()
         self.ilkSayfa = yoneticiAnaSayfa.YoneticiAnaSayfa()
         self.ilkSayfa.show()
 
-    def load_bahce(self):
-        query="SELECT bahce_id,soyisim,mail From Bahceler"
-        self.cursor.execute(query)
-        user=self.cursor.fetchall()
-        self.ui.tableWidget.setRowCount(len(user))
-        for row_idx, equipment in enumerate(user):
-            self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(user.isim))
-            self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(user.soyisim))
-            self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(user.mail))
+    # def load_bahce(self):
+    #     query="SELECT bahce_id,soyisim,mail From Bahceler"
+    #     self.cursor.execute(query)
+    #     user=self.cursor.fetchall()
+    #     self.ui.tableWidget.setRowCount(len(user))
+    #     for row_idx, equipment in enumerate(user):
+    #         self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(user.isim))
+    #         self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(user.soyisim))
+    #         self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(user.mail))
 
 if __name__ == "__main__":
     import sys

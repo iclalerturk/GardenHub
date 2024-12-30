@@ -262,6 +262,7 @@ class KullaniciEkle(QtWidgets.QMainWindow):
                 self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
                 self.ui.setupUi(self)
                 self.ui.pushButton_2.clicked.connect(self.geriGit)
+                self.ui.pushButton.clicked.connect(self.user_add)
 
         def geriGit(self):
             self.close()
@@ -283,8 +284,9 @@ class KullaniciEkle(QtWidgets.QMainWindow):
             mail=self.ui.mail_line.text()
             sifre=self.ui.sifre_line.text()
             bdate=self.ui.dateEdit.text()
-            query=("INSERT INTO kullanicilar VALUES(%s,%s,%s,%s,%s)",(isim,soyisim,mail,sifre,bdate))
-            user_data = cursor.fetchone()
+            query = "INSERT INTO kullanicilar VALUES( %s, %s, nextval('kullanici_id_seq'),%s, %s, %s)"
+            cursor.execute(query, (isim, soyisim, mail, sifre, bdate))
+            conn.commit()
 
 if __name__ == "__main__":
     import sys
