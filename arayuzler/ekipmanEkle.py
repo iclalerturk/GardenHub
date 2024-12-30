@@ -221,26 +221,38 @@ class EkipmanEkle(QtWidgets.QMainWindow):
                 self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
                 self.ui.setupUi(self)
                 self.ui.pushButton_2.clicked.connect(self.geriGit)
-
+                self.ui.pushButton.clicked.connect(self.add_equipment)
+                self.hostname = 'localhost'
+                self.username = 'postgres'
+                self.database = 'GardenHub'
+                self.password = '1234'
+                self.port_id = '5432'
+                try:
+                    self.conn = psycopg2.connect(
+                        host=self.hostname, 
+                        user=self.username, 
+                        password=self.password, 
+                        dbname=self.database, 
+                        port=self.port_id
+                    )
+                    self.cursor = self.conn.cursor()
+                except Exception as e:
+                    print("Error: ", e)
         def geriGit(self):
             self.close()
             self.ilkSayfa = yoneticiAnaSayfa.YoneticiAnaSayfa()
             self.ilkSayfa.show()
             self.close()
         def add_equipment(self):
-            hostname = 'localhost'
-            username = 'postgres'
-            database = 'GardenHub'
-            password = '1234'
-            port_id = '5432'
-            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id          
-            )
-            cursor = conn.cursor()
+            
             ekipman_adi=self.ui.ad_line.text()
             ekipman_sayisi=self.ui.soyad_line.text()
             fiyat=self.ui.mail_line.text()
-            query=("INSERT INTO Ekipman VALUES(%s,%s,%s,%s,%s)",(ekipman_adi,ekipman_sayisi,fiyat))
-            user_data = cursor.fetchone()
+            query="INSERT INTO ekipman VALUES(nextval('ekipman_id_seq'),%s,%s,%s)"
+            #################################¶3fonksiyon yazılacak
+            self.cursor.execute(query, (ekipman_adi,ekipman_sayisi,fiyat))
+            self.conn.commit()
+            self.conn.close()
 
 if __name__ == "__main__":
     import sys

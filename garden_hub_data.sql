@@ -33,16 +33,16 @@ INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Üzüm', 4, 50,2);
 --alter table urunler add column urun_id int;
 -- Ekipman
 
-INSERT INTO Ekipman VALUES (0, 'Kürek', '12', 40);
-INSERT INTO Ekipman VALUES (1, 'Çapa', '7', 50);
-INSERT INTO Ekipman VALUES (2, 'Budama Makası', '8', 60);
-INSERT INTO Ekipman VALUES (3, 'Balta', '3', 60);
-INSERT INTO Ekipman VALUES (4, 'Tırmık', '5', 40);
-INSERT INTO Ekipman VALUES (5, 'El Arabası', '3', 80);
-INSERT INTO Ekipman VALUES (6, 'Çim Makası', '6', 70);
-INSERT INTO Ekipman VALUES (7, 'Eldiven', '15', 30);
-INSERT INTO Ekipman VALUES (8, 'Bahçe Hortumu', '16', 55);
-INSERT INTO Ekipman VALUES (9, 'Kazma', '4', 50);
+INSERT INTO Ekipman VALUES (nextval('ekipman_id_seq'), 'Kürek', '12', 40);
+INSERT INTO Ekipman VALUES (nextval('ekipman_id_seq'), 'Çapa', '7', 50);
+INSERT INTO Ekipman VALUES (nextval('ekipman_id_seq'), 'Budama Makası', '8', 60);
+INSERT INTO Ekipman VALUES (nextval('ekipman_id_seq'), 'Balta', '3', 60);
+INSERT INTO Ekipman VALUES (nextval('ekipman_id_seq'), 'Tırmık', '5', 40);
+INSERT INTO Ekipman VALUES (nextval('ekipman_id_seq'), 'El Arabası', '3', 80);
+INSERT INTO Ekipman VALUES (nextval('ekipman_id_seq'), 'Çim Makası', '6', 70);
+INSERT INTO Ekipman VALUES (nextval('ekipman_id_seq'), 'Eldiven', '15', 30);
+INSERT INTO Ekipman VALUES (nextval('ekipman_id_seq'), 'Bahçe Hortumu', '16', 55);
+INSERT INTO Ekipman VALUES (nextval('ekipman_id_seq'), 'Kazma', '4', 50);
 
 
 -- Bahceler

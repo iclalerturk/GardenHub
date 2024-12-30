@@ -31,6 +31,9 @@ create table urunler(
 	sahip_id int references kullanicilar(kullanici_id)	
 );
 
+create sequence ekipman_id_seq
+minvalue 10000
+increment by 1
 
 CREATE TABLE Ekipman (
 	ekipman_id int not null primary key,
