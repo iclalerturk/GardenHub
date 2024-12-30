@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import yoneticiAnaSayfa
-
+import ekipman as ek
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
@@ -143,7 +143,7 @@ class Ui_MainWindow(object):
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "EKİPMAN ADI"))
         item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "EKİPMAN ADEDİ"))
+        item.setText(_translate("MainWindow", "EKİPMAN ADEDİ")) #ekipman_fiyat ekle o da gözüksün
 
 import resimler_rc
 
@@ -154,11 +154,21 @@ class EkipmanlarYonetici(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
         self.ui.setupUi(self)
         self.ui.pushButton_2.clicked.connect(self.geriGit)
+        self.ekipman=ek.Ekipman_class()
+        self.load_data()
     
     def geriGit(self):
         self.close()
         self.ilkSayfa = yoneticiAnaSayfa.YoneticiAnaSayfa()
         self.ilkSayfa.show()
+
+    def load_data(self):
+        equipments = self.ekipman.get_equipments()
+        self.ui.tableWidget.setRowCount(len(equipments))
+        for row_idx, equipment in enumerate(equipments):
+            self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(equipment.ekipman_adi))
+            self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(str(equipment.ekipman_sayisi)))
+            self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(f"{equipment.fiyat:.2f} TL"))
         
 
 if __name__ == "__main__":

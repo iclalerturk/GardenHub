@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import yoneticiAnaSayfa
+import kullanicilar as user
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -150,17 +151,28 @@ import resimler_rc
 
 
 class KullanicilariGoruntule(QtWidgets.QMainWindow):
-    def __init__(self) -> None:
+    def __init__(self,kullanici: user.Kullanici) -> None:
         super().__init__()
         self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
         self.ui.setupUi(self)
+        self.kullanici=kullanici
         self.ui.pushButton_2.clicked.connect(self.geriGit)
+        self.get_user()
     
     def geriGit(self):
         self.close()
         self.ilkSayfa = yoneticiAnaSayfa.YoneticiAnaSayfa()
         self.ilkSayfa.show()
-        
+    
+    def get_user(self):
+        query="SELECT isim,soyisim,mail From kullanicilar"
+        self.cursor.execute(query)
+        user=self.cursor.fetchall()
+        self.ui.tableWidget.setRowCount(len(user))
+        for row_idx, equipment in enumerate(user):
+            self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(user.isim))
+            self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(user.soyisim))
+            self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(user.mail))
 
 if __name__ == "__main__":
     import sys

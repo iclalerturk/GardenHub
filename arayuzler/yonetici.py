@@ -33,6 +33,8 @@ class Yonetici:
             return None
         except Exception as e:
             print("Error: ", e)
+
+    
         
 
 
