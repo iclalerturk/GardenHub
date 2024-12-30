@@ -216,14 +216,14 @@ class YoneticiGirisSayfa(QtWidgets.QMainWindow):
                 self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
                 self.ui.setupUi(self)
                 self.ui.pushButton_2.clicked.connect(self.geriGit)
-
+                self.ui.pushButton.clicked.connect(self.login)
         def geriGit(self):
             self.close()
             self.ilkSayfa = kullaniciSecSayfasi_py.kullaniciSecSayfasi()
             self.ilkSayfa.show()
             self.close()
         
-        def yoneticiaGit(self,yonetici: boss.Yonetici):
+        def yoneticiaGit(self):
             self.close()
             self.ilkSayfa = yoneticiAnaSayfa.YoneticiAnaSayfa()
             self.ilkSayfa.show()
