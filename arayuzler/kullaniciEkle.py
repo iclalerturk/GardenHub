@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import yoneticiAnaSayfa
 import psycopg2
-
+from PyQt5.QtWidgets import QMessageBox
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -284,9 +284,20 @@ class KullaniciEkle(QtWidgets.QMainWindow):
             mail=self.ui.mail_line.text()
             sifre=self.ui.sifre_line.text()
             bdate=self.ui.dateEdit.text()
-            query = "INSERT INTO kullanicilar VALUES( %s, %s, nextval('kullanici_id_seq'),%s, %s, %s)"
-            cursor.execute(query, (isim, soyisim, mail, sifre, bdate))
+
+            cursor.execute("SELECT kullanici_mail_var_mi(%s);", (mail,))
             conn.commit()
+            varmi = cursor.fetchone()[0]
+            if varmi:                 
+                QMessageBox.information(self, "Bilgi", "Bu Maile Sahip Kullanıcı Var.")
+                conn.close()
+            else:            
+                query = "INSERT INTO kullanicilar VALUES( %s, %s, nextval('kullanici_id_seq'),%s, %s, %s)"
+                cursor.execute(query, (isim, soyisim, mail, sifre, bdate))
+                conn.commit()
+                conn.close()
+                QMessageBox.information(self, "Bilgi", "Kullanıcı Ekleme İşlemi Başarılı.")
+
 
 if __name__ == "__main__":
     import sys

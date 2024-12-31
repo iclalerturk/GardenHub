@@ -58,9 +58,7 @@ class Ui_MainWindow(object):
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(2, item)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(300)
-###############################################################33333
-        
-################################3333#############################333
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(325, 125, 1300, 250))
         font = QtGui.QFont()
@@ -170,8 +168,7 @@ class BahceDurumunuGor(QtWidgets.QMainWindow):
         password = '1234'
         port_id = '5432'
         try:
-            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id
-                    
+            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id                 
             )
             self.cursor = conn.cursor()
 
@@ -179,9 +176,7 @@ class BahceDurumunuGor(QtWidgets.QMainWindow):
             self.cursor.execute(query)
             rows = self.cursor.fetchall()
             query = "SELECT mail FROM kullanicilar where kullanici_id = %s"
-            # self.cursor.execute(query,(kullanici_id,))
             conn.commit()
-            # conn.close()
             self.ui.tableWidget.setRowCount(len(rows))
             for row_idx, row in enumerate(rows):
                 self.cursor.execute(query,(row[1],))

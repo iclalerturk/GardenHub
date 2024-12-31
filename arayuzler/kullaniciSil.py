@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import yoneticiAnaSayfa
 import psycopg2
-
+from PyQt5.QtWidgets import QMessageBox
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
@@ -214,10 +214,17 @@ class KullaniciSil(QtWidgets.QMainWindow):
             cursor = conn.cursor()
             mail=self.ui.mail_line.text()
             ###################################3kontrol yap ve silindi silinemedi mesajı ver bi de kullanıcı silindiğinde kiraladığı tarla boşaltılacak
-            query = "DELETE FROM kullanicilar WHERE mail = %s"
-            cursor.execute(query, (mail,))
-            conn.commit()
-            conn.close()
+            cursor.execute("SELECT kullanici_mail_var_mi(%s);", (mail,))
+            varmi = cursor.fetchone()[0]
+            if varmi:                 
+                query = "DELETE FROM kullanicilar WHERE mail = %s"
+                cursor.execute(query, (mail,))
+                conn.commit()
+                conn.close()
+                QMessageBox.information(self, "Bilgi", "Kullanıcı Silme İşlemi Başarılı.")
+            else:
+                QMessageBox.information(self, "Bilgi", "Bu Maile Sahip Kullanıcı Yok.")
+                conn.close()
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

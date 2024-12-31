@@ -90,4 +90,15 @@ CREATE TABLE EkipmanTalep (
     talep_tarihi DATE DEFAULT CURRENT_DATE
 );
 
+CREATE OR REPLACE FUNCTION kullanici_mail_var_mi(email TEXT)
+RETURNS BOOLEAN AS $$
+DECLARE
+    mail_var BOOLEAN;
+BEGIN
+    -- E-posta adresinin var olup olmadığını kontrol et
+    SELECT EXISTS (SELECT 1 FROM kullanicilar WHERE mail = email) INTO mail_var;
+
+    RETURN mail_var;
+END;
+$$ LANGUAGE plpgsql;
 
