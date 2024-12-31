@@ -56,15 +56,15 @@ create sequence kiralama_id_seq
 minvalue 1000
 increment by 1
 
--- 3. Kiralamalar Tablosu(eker)
+-- 3. Kiralamalar Tablosu
 CREATE TABLE Kiralamalar (
     kiralama_id int PRIMARY KEY,
     kullanici_id INT REFERENCES kullanicilar(kullanici_id),
     bahce_id INT REFERENCES Bahceler(bahce_id),
     baslangic_tarihi DATE NOT NULL,
-    sure INT NOT NULL CHECK (sure > 0),
     UNIQUE (kullanici_id, bahce_id)
 );
+
 CREATE TRIGGER trigger_update_bahce_durum
 AFTER INSERT ON Kiralamalar
 FOR EACH ROW

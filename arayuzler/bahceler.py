@@ -14,7 +14,7 @@ import bahce_class
 import kullaniciAnaSayfa
 import kullanicilar as Kullanici
 from PyQt5.QtWidgets import QMessageBox, QInputDialog
-from datetime import date, datetime
+from datetime import date
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
@@ -354,7 +354,7 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Bahçe Kirala"))
         self.label.setText(_translate("MainWindow", "Bahçeler"))
         self.label2.setText(_translate("MainWindow", "GARDEN HUB"))
-        self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
+        self.pushButton_geri.setText(_translate("MainWindow", "<- Geri"))
         self.pushButton_7.setText(_translate("MainWindow", "\n"
 "7\n"
 ""))
@@ -450,7 +450,7 @@ class Bahceler(QtWidgets.QMainWindow):
                                 QMessageBox.warning(self, "Hata", "Bahçe zaten kiralanmış.")
                                 return
                         else:
-                               kiralama.Kiralama().bahce_kirala(self.kullanici.kullanici_id, self.bahce.bahce_id, date.today(),1)
+                               kiralama.Kiralama().bahce_kirala(self.kullanici.kullanici_id, self.bahce.bahce_id, date.today())
                                QMessageBox.information(self, "Başarılı", "Bahçe kiralama işlemi başarılı.")
                                getattr(self.ui, f"pushButton_{self.bahce.bahce_id}").setStyleSheet("background-color: rgb(131, 65, 0);\n")
                      

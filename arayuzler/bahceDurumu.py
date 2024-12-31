@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import psycopg2
 import yoneticiAnaSayfa
 
 class Ui_MainWindow(object):
@@ -58,10 +59,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(2, item)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(300)
 ###############################################################33333
-        self.tableWidget.insertRow(0)
-        self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Değer 1"))
-        self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Değer 2"))
-        self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem("Değer 3"))
+        
 ################################3333#############################333
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(325, 125, 1300, 250))
@@ -140,11 +138,13 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
         item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "BAHÇE ID"))
+        item.setText(_translate("MainWindow", "Bahçe Numarası"))
         item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "KULLANICI MAİLİ")) #bunu nasıl alıcaz analamadım 
+        item.setText(_translate("MainWindow", "Kullanıcı Maili")) #bunu nasıl alıcaz analamadım 
         item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "EKTİĞİ ÜRÜN"))
+        item.setText(_translate("MainWindow", "Kiralama Tarihi"))
+        item = self.tableWidget.horizontalHeaderItem(3)
+        
 
 import resimler_rc
 
@@ -155,22 +155,47 @@ class BahceDurumunuGor(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
         self.ui.setupUi(self)
         self.ui.pushButton_2.clicked.connect(self.geriGit)
-        # self.load_bahce()
+        self.load_bahce()
     
     def geriGit(self):
         self.close()
         self.ilkSayfa = yoneticiAnaSayfa.YoneticiAnaSayfa()
         self.ilkSayfa.show()
 
-    # def load_bahce(self):
-    #     query="SELECT bahce_id,soyisim,mail From Bahceler"
-    #     self.cursor.execute(query)
-    #     user=self.cursor.fetchall()
-    #     self.ui.tableWidget.setRowCount(len(user))
-    #     for row_idx, equipment in enumerate(user):
-    #         self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(user.isim))
-    #         self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(user.soyisim))
-    #         self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(user.mail))
+   
+    def load_bahce(self):
+        hostname = 'localhost'
+        username = 'postgres'
+        database = 'GardenHub'
+        password = '1234'
+        port_id = '5432'
+        try:
+            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id
+                    
+            )
+            self.cursor = conn.cursor()
+
+            query = "SELECT bahce_id,kullanici_id, baslangic_tarihi FROM Kiralamalar"
+            self.cursor.execute(query)
+            rows = self.cursor.fetchall()
+            query = "SELECT mail FROM kullanicilar where kullanici_id = %s"
+            # self.cursor.execute(query,(kullanici_id,))
+            conn.commit()
+            # conn.close()
+            self.ui.tableWidget.setRowCount(len(rows))
+            for row_idx, row in enumerate(rows):
+                self.cursor.execute(query,(row[1],))
+                mail = self.cursor.fetchone()[0]
+                conn.commit()
+                self.ui.tableWidget.setRowCount(len(rows))
+                self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(mail))
+                self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(row[2].strftime("%Y-%m-%d")))
+            conn.close()       
+               
+        except Exception as e:
+            print("Error: ", e)
+        
 
 if __name__ == "__main__":
     import sys
