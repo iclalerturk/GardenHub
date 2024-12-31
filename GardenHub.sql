@@ -102,3 +102,25 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
+CREATE OR REPLACE FUNCTION silinen_kullanici_ile_ilgili_kiralamalari_sil() 
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Kiralamalar tablosunda, silinen kullanıcının tüm kiralamalarını sil
+    DELETE FROM kiralamalar
+    WHERE kullanici_id = OLD.kullanici_id;
+
+    -- Trigger işlevi başarılıysa, NULL döndür
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER kullanici_silindiginde_kiralamalari_sil
+AFTER DELETE ON Kullanicilar
+FOR EACH ROW
+EXECUTE FUNCTION silinen_kullanici_ile_ilgili_kiralamalari_sil();
+
+
+
+
+

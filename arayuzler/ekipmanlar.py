@@ -185,6 +185,7 @@ class Ekipman(QtWidgets.QMainWindow):
         equipment_id = self.ekipman.get_equipments()[row_index].ekipman_id
         if self.ekipman.rent_equipment(equipment_id,self.kullanici):
             self.load_data() 
+            QMessageBox.information(self, "Bilgi", "Ekipman Kiralandı.")
         else:
             bakiye_mesaji = f"Yetersiz Bakiye.\nBakiyeniz: {self.kullanici.butce} TL"
             QMessageBox.information(self, "Bakiye Görüntüle", bakiye_mesaji)

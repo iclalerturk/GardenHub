@@ -194,6 +194,7 @@ class Pazar(QtWidgets.QMainWindow):
             self.kullanici.butce -= self.urun.get_urun_from_db()[row_index].fiyat
             self.kullanici.bakiye_guncelle(self.kullanici.butce)
             self.load_data() 
+            QMessageBox.information(self, "Bilgi", "Satın alma işlemi başarılı.")
         else:
             bakiye_mesaji = f"Yetersiz Bakiye.\nBakiyeniz: {self.kullanici.butce} TL"
             QMessageBox.information(self, "Bakiye Görüntüle", bakiye_mesaji)

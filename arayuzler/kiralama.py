@@ -41,7 +41,7 @@ class Kiralama:
         except Exception as e:
             print("Error: ", e)
     
-    def bahce_kirala(self, kullanici_id, bahce_id, baslangic_tarihi, sure):
+    def bahce_kirala(self, kullanici_id, bahce_id, baslangic_tarihi):
         
         hostname = 'localhost'
         username = 'postgres'
@@ -53,8 +53,8 @@ class Kiralama:
             conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id                   
             )
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO kiralamalar VALUES (nextval('kiralama_id_seq'),%s, %s, %s, %s)", 
-                       (kullanici_id, bahce_id, baslangic_tarihi, sure))
+            cursor.execute("INSERT INTO kiralamalar VALUES (nextval('kiralama_id_seq'),%s, %s, %s)", 
+                       (kullanici_id, bahce_id, baslangic_tarihi))
             conn.commit()  
             conn.close()
         except Exception as e:

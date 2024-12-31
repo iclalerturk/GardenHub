@@ -441,9 +441,7 @@ class Bahceler(QtWidgets.QMainWindow):
                         -99999,  # Minimum değer
                         999999,  # Maksimum değer
                         0        # Ondalık basamak sayısı
-                )
-                
-                
+                )         
                 if ok:  # Kullanıcı 'Tamam'a tıkladıysa
                         self.bahce = bahce_class.Bahce().get_bahce_from_db(bahceNo)
                         if self.bahce.durum == "Kiralanmis":
@@ -453,7 +451,9 @@ class Bahceler(QtWidgets.QMainWindow):
                                kiralama.Kiralama().bahce_kirala(self.kullanici.kullanici_id, self.bahce.bahce_id, date.today())
                                QMessageBox.information(self, "Başarılı", "Bahçe kiralama işlemi başarılı.")
                                getattr(self.ui, f"pushButton_{self.bahce.bahce_id}").setStyleSheet("background-color: rgb(131, 65, 0);\n")
-                     
+                               self.kullanici.bakiye_guncelle(- self.bahce.fiyat) 
+                               self.kullanici.butce = self.kullanici.butce - self.bahce.fiyat
+
                 else:
                         QMessageBox.warning(self, "İptal Edildi", "Kiralama işlemi iptal edildi.")
 
@@ -529,9 +529,9 @@ class Bahceler(QtWidgets.QMainWindow):
                 self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
                 QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
 
-        def geriGit(self,kullanici):
+        def geriGit(self):
                 self.close()
-                self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(kullanici)
+                self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(self.kullanici)
                 self.ilkSayfa.show()
 if __name__ == "__main__":
     import sys
