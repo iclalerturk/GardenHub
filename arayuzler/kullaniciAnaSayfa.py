@@ -271,7 +271,7 @@ class KullaniciAnaSayfa(QtWidgets.QMainWindow):
         #         else:
         #                 QMessageBox.warning(self, "İptal Edildi", "Bakiye güncelleme işlemi iptal edildi.")
         
-        def pazariGoruntule(self,kullanici: user.Kullanici):
+        def pazariGoruntule(self):
                 self.close()
                 self.ilkSayfa = pazar.Pazar(self.kullanici)
                 self.ilkSayfa.show()
@@ -300,11 +300,11 @@ class KullaniciAnaSayfa(QtWidgets.QMainWindow):
             self.close()
             self.ilkSayfa = ekipmanlar.Ekipman(self.kullanici)
             self.ilkSayfa.show()
-        def bahcelereGit(self,kullanici: user.Kullanici):
+        def bahcelereGit(self):
             self.close()
             self.ilkSayfa = bahceler.Bahceler(self.kullanici)
             self.ilkSayfa.show()
-            print(kullanici)  
+            print(self.kullanici)  
         def bakiyeGoruntule(self):
                 bakiye_mesaji = f"Bakiyeniz: {self.kullanici.butce} TL"
                 QMessageBox.information(self, "Bakiye Görüntüle", bakiye_mesaji)

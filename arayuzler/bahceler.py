@@ -9,9 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import bahce_class
 import kullaniciAnaSayfa
 import kullanicilar as Kullanici
-
+from PyQt5.QtWidgets import QMessageBox
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
@@ -27,16 +28,16 @@ class Ui_MainWindow(object):
         self.centralwidget.setStyleSheet("background-color: rgb(34, 136, 85);\n"
 "background-color: rgb(47, 91, 76);")
         self.centralwidget.setObjectName("centralwidget")
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(20, 20, 101, 51))
+        self.pushButton_geri = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_geri.setGeometry(QtCore.QRect(20, 20, 101, 51))
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_2.setFont(font)
-        self.pushButton_2.setStyleSheet("""
+        self.pushButton_geri.setFont(font)
+        self.pushButton_geri.setStyleSheet("""
             QPushButton {
                 background-color: rgb(131, 65, 0);
                 border-radius: 10px;  /* Yuvarlaklık */
@@ -50,7 +51,7 @@ class Ui_MainWindow(object):
             }
         """)
 
-        self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_geri.setObjectName("pushButton_geri")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(325, 20, 1300, 250))
         font = QtGui.QFont()
@@ -103,198 +104,198 @@ class Ui_MainWindow(object):
         self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_3.setSpacing(0)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.pushButton_23 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_7 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_23.setFont(font)
-        self.pushButton_23.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_7.setFont(font)
+        self.pushButton_7.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_23.setObjectName("pushButton_23")
-        self.gridLayout_3.addWidget(self.pushButton_23, 1, 2, 1, 1)
-        self.pushButton_31 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_7.setObjectName("7")
+        self.gridLayout_3.addWidget(self.pushButton_7, 1, 2, 1, 1)
+        self.pushButton_9 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_31.setFont(font)
-        self.pushButton_31.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_9.setFont(font)
+        self.pushButton_9.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_31.setObjectName("pushButton_31")
-        self.gridLayout_3.addWidget(self.pushButton_31, 3, 0, 1, 1)
-        self.pushButton_32 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_9.setObjectName("9")
+        self.gridLayout_3.addWidget(self.pushButton_9, 3, 0, 1, 1)
+        self.pushButton_10 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_32.setFont(font)
-        self.pushButton_32.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_10.setFont(font)
+        self.pushButton_10.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_32.setObjectName("pushButton_32")
-        self.gridLayout_3.addWidget(self.pushButton_32, 3, 1, 1, 1)
-        self.pushButton_24 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_10.setObjectName("10")
+        self.gridLayout_3.addWidget(self.pushButton_10, 3, 1, 1, 1)
+        self.pushButton_8 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_24.setFont(font)
-        self.pushButton_24.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_8.setFont(font)
+        self.pushButton_8.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_24.setObjectName("pushButton_24")
-        self.gridLayout_3.addWidget(self.pushButton_24, 1, 3, 1, 1)
-        self.pushButton_25 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_8.setObjectName("8")
+        self.gridLayout_3.addWidget(self.pushButton_8, 1, 3, 1, 1)
+        self.pushButton_6 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_25.setFont(font)
-        self.pushButton_25.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_6.setFont(font)
+        self.pushButton_6.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_25.setObjectName("pushButton_25")
-        self.gridLayout_3.addWidget(self.pushButton_25, 1, 1, 1, 1)
-        self.pushButton_26 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_6.setObjectName("6")
+        self.gridLayout_3.addWidget(self.pushButton_6, 1, 1, 1, 1)
+        self.pushButton_5 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_26.setFont(font)
-        self.pushButton_26.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_5.setFont(font)
+        self.pushButton_5.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_26.setObjectName("pushButton_26")
-        self.gridLayout_3.addWidget(self.pushButton_26, 1, 0, 1, 1)
-        self.pushButton_27 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_5.setObjectName("5")
+        self.gridLayout_3.addWidget(self.pushButton_5, 1, 0, 1, 1)
+        self.pushButton_1 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_27.setFont(font)
-        self.pushButton_27.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_1.setFont(font)
+        self.pushButton_1.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_27.setObjectName("pushButton_27")
-        self.gridLayout_3.addWidget(self.pushButton_27, 0, 0, 1, 1)
-        self.pushButton_28 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_1.setObjectName("1")
+        self.gridLayout_3.addWidget(self.pushButton_1, 0, 0, 1, 1)
+        self.pushButton_2 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_28.setFont(font)
-        self.pushButton_28.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_2.setFont(font)
+        self.pushButton_2.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_28.setObjectName("pushButton_28")
-        self.gridLayout_3.addWidget(self.pushButton_28, 0, 1, 1, 1)
-        self.pushButton_29 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_2.setObjectName("2")
+        self.gridLayout_3.addWidget(self.pushButton_2, 0, 1, 1, 1)
+        self.pushButton_3 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_29.setFont(font)
-        self.pushButton_29.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_3.setFont(font)
+        self.pushButton_3.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_29.setObjectName("pushButton_29")
-        self.gridLayout_3.addWidget(self.pushButton_29, 0, 2, 1, 1)
-        self.pushButton_30 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_3.setObjectName("3")
+        self.gridLayout_3.addWidget(self.pushButton_3, 0, 2, 1, 1)
+        self.pushButton_4 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_30.setFont(font)
-        self.pushButton_30.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_4.setFont(font)
+        self.pushButton_4.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_30.setObjectName("pushButton_30")
-        self.gridLayout_3.addWidget(self.pushButton_30, 0, 3, 1, 1)
-        self.pushButton_34 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_4.setObjectName("4")
+        self.gridLayout_3.addWidget(self.pushButton_4, 0, 3, 1, 1)
+        self.pushButton_12 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_34.setFont(font)
-        self.pushButton_34.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_12.setFont(font)
+        self.pushButton_12.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_34.setObjectName("pushButton_34")
-        self.gridLayout_3.addWidget(self.pushButton_34, 3, 3, 1, 1)
-        self.pushButton_36 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_12.setObjectName("12")
+        self.gridLayout_3.addWidget(self.pushButton_12, 3, 3, 1, 1)
+        self.pushButton_14 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_36.setFont(font)
-        self.pushButton_36.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_14.setFont(font)
+        self.pushButton_14.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_36.setObjectName("pushButton_36")
-        self.gridLayout_3.addWidget(self.pushButton_36, 4, 1, 1, 1)
-        self.pushButton_35 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_14.setObjectName("14")
+        self.gridLayout_3.addWidget(self.pushButton_14, 4, 1, 1, 1)
+        self.pushButton_13 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_35.setFont(font)
-        self.pushButton_35.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_13.setFont(font)
+        self.pushButton_13.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_35.setObjectName("pushButton_35")
-        self.gridLayout_3.addWidget(self.pushButton_35, 4, 0, 1, 1)
-        self.pushButton_37 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_13.setObjectName("13")
+        self.gridLayout_3.addWidget(self.pushButton_13, 4, 0, 1, 1)
+        self.pushButton_15 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_37.setFont(font)
-        self.pushButton_37.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_15.setFont(font)
+        self.pushButton_15.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_37.setObjectName("pushButton_37")
-        self.gridLayout_3.addWidget(self.pushButton_37, 4, 2, 1, 1)
-        self.pushButton_38 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_15.setObjectName("15")
+        self.gridLayout_3.addWidget(self.pushButton_15, 4, 2, 1, 1)
+        self.pushButton_16 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_38.setFont(font)
-        self.pushButton_38.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_16.setFont(font)
+        self.pushButton_16.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_38.setObjectName("pushButton_38")
-        self.gridLayout_3.addWidget(self.pushButton_38, 4, 3, 1, 1)
-        self.pushButton_33 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_16.setObjectName("16")
+        self.gridLayout_3.addWidget(self.pushButton_16, 4, 3, 1, 1)
+        self.pushButton_11 = QtWidgets.QPushButton(self.widget)
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(30)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.pushButton_33.setFont(font)
-        self.pushButton_33.setStyleSheet("background-color: rgb(170, 160, 140);\n"
+        self.pushButton_11.setFont(font)
+        self.pushButton_11.setStyleSheet("background-color: rgb(170, 160, 140);\n"
 "font: \"Maiandra GD\";")
-        self.pushButton_33.setObjectName("pushButton_33")
-        self.gridLayout_3.addWidget(self.pushButton_33, 3, 2, 1, 1)
+        self.pushButton_11.setObjectName("11")
+        self.gridLayout_3.addWidget(self.pushButton_11, 3, 2, 1, 1)
 
         self.label2 = QtWidgets.QLabel(self.centralwidget)
         self.label2.setGeometry(QtCore.QRect(325, 20, 1300, 250))
@@ -352,68 +353,158 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Bahçeler"))
         self.label2.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
-        self.pushButton_23.setText(_translate("MainWindow", "\n"
+        self.pushButton_7.setText(_translate("MainWindow", "\n"
 "7\n"
 ""))
-        self.pushButton_31.setText(_translate("MainWindow", "\n"
+        self.pushButton_9.setText(_translate("MainWindow", "\n"
 "9\n"
 ""))
-        self.pushButton_32.setText(_translate("MainWindow", "\n"
+        self.pushButton_10.setText(_translate("MainWindow", "\n"
 "10\n"
 ""))
-        self.pushButton_24.setText(_translate("MainWindow", "\n"
+        self.pushButton_8.setText(_translate("MainWindow", "\n"
 "8\n"
 ""))
-        self.pushButton_25.setText(_translate("MainWindow", "\n"
+        self.pushButton_6.setText(_translate("MainWindow", "\n"
 "6\n"
 ""))
-        self.pushButton_26.setText(_translate("MainWindow", "\n"
+        self.pushButton_5.setText(_translate("MainWindow", "\n"
 "5\n"
 ""))
-        self.pushButton_27.setText(_translate("MainWindow", "\n"
+        self.pushButton_1.setText(_translate("MainWindow", "\n"
 "1\n"
 ""))
-        self.pushButton_28.setText(_translate("MainWindow", "\n"
+        self.pushButton_2.setText(_translate("MainWindow", "\n"
 "2\n"
 ""))
-        self.pushButton_29.setText(_translate("MainWindow", "\n"
+        self.pushButton_3.setText(_translate("MainWindow", "\n"
 "3\n"
 ""))
-        self.pushButton_30.setText(_translate("MainWindow", "\n"
+        self.pushButton_4.setText(_translate("MainWindow", "\n"
 "4\n"
 ""))
-        self.pushButton_34.setText(_translate("MainWindow", "\n"
+        self.pushButton_12.setText(_translate("MainWindow", "\n"
 "12\n"
 ""))
-        self.pushButton_36.setText(_translate("MainWindow", "\n"
+        self.pushButton_14.setText(_translate("MainWindow", "\n"
 "14\n"
 ""))
-        self.pushButton_35.setText(_translate("MainWindow", "\n"
+        self.pushButton_13.setText(_translate("MainWindow", "\n"
 "13\n"
 ""))
-        self.pushButton_37.setText(_translate("MainWindow", "\n"
+        self.pushButton_15.setText(_translate("MainWindow", "\n"
 "15\n"
 ""))
-        self.pushButton_38.setText(_translate("MainWindow", "\n"
+        self.pushButton_16.setText(_translate("MainWindow", "\n"
 "16\n"
 ""))
-        self.pushButton_33.setText(_translate("MainWindow", "\n"
+        self.pushButton_11.setText(_translate("MainWindow", "\n"
 "11\n"
 ""))
 import resimler_rc
 
 
 class Bahceler(QtWidgets.QMainWindow):
-    def __init__(self, kullanici: Kullanici.Kullanici) -> None:
+        def __init__(self, kullanici: Kullanici.Kullanici) -> None:
             super().__init__()
             self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
             self.ui.setupUi(self)
-            self.ui.pushButton_2.clicked.connect(self.geriGit)
-    
-    def geriGit(self,kullanici):
-        self.close()
-        self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(kullanici)
-        self.ilkSayfa.show()
+            self.bahceRenkleri()
+            self.ui.pushButton_geri.clicked.connect(self.geriGit)
+            self.kullanici = kullanici
+            self.ui.pushButton_1.clicked.connect(self.birSecildi)
+            self.ui.pushButton_2.clicked.connect(self.ikiSecildi)
+            self.ui.pushButton_3.clicked.connect(self.ucSecildi)
+            self.ui.pushButton_4.clicked.connect(self.dortSecildi)
+            self.ui.pushButton_5.clicked.connect(self.besSecildi)
+            self.ui.pushButton_6.clicked.connect(self.altiSecildi)
+            self.ui.pushButton_7.clicked.connect(self.yediSecildi)
+            self.ui.pushButton_8.clicked.connect(self.sekizSecildi)
+            self.ui.pushButton_9.clicked.connect(self.dokuzSecildi)
+            self.ui.pushButton_10.clicked.connect(self.onSecildi)
+            self.ui.pushButton_11.clicked.connect(self.onbirSecildi)
+            self.ui.pushButton_12.clicked.connect(self.onikiSecildi)
+            self.ui.pushButton_13.clicked.connect(self.onucSecildi)
+            self.ui.pushButton_14.clicked.connect(self.ondortSecildi)
+            self.ui.pushButton_15.clicked.connect(self.onbesSecildi)
+            self.ui.pushButton_16.clicked.connect(self.onaltiSecildi)
+
+        def bahceRenkleri(self):
+                for i in range(1, 17):
+                        self.bahce = bahce_class.Bahce().get_bahce_from_db(i)
+                        if self.bahce.durum == "Kiralanmis":
+                                getattr(self.ui, f"pushButton_{i}").setStyleSheet("background-color: rgb(131, 65, 0);\n")
+
+        def birSecildi(self):
+                self.bahce_id = 1               
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def ikiSecildi(self):
+                self.bahce_id = 2
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def ucSecildi(self):
+                self.bahce_id = 3
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def dortSecildi(self):
+                self.bahce_id = 4
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def besSecildi(self):
+                self.bahce_id = 5
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def altiSecildi(self):
+                self.bahce_id = 6
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def yediSecildi(self):
+                self.bahce_id = 7
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def sekizSecildi(self):
+                self.bahce_id = 8
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def dokuzSecildi(self):
+                self.bahce_id = 9
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def onSecildi(self):
+                self.bahce_id = 10
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def onbirSecildi(self):
+                self.bahce_id = 11
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def onikiSecildi(self):
+                self.bahce_id = 12
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def onucSecildi(self):
+                self.bahce_id = 13
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+       
+        def ondortSecildi(self):
+                self.bahce_id = 14
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def onbesSecildi(self):
+                self.bahce_id = 15
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+        def onaltiSecildi(self):
+                self.bahce_id = 16
+                self.bahce = bahce_class.Bahce().get_bahce_from_db(self.bahce_id)
+                QMessageBox.information(self, "Bahçe Bilgileri", f"Alan: {self.bahce.alan}\nKonum: {self.bahce.konum}\nToprak Tipi: {self.bahce.toprak_tipi}\nDurum: {self.bahce.durum}\nFiyat: {self.bahce.fiyat}")
+
+        def geriGit(self,kullanici):
+                self.close()
+                self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(kullanici)
+                self.ilkSayfa.show()
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

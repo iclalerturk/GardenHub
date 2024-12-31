@@ -1,7 +1,7 @@
 import psycopg2
 
 class Bahce:
-    def __init__(self, bahce_id, alan, konum, toprak_tipi, durum, fiyat):
+    def __init__(self, bahce_id=None, alan=None, konum=None, toprak_tipi=None, durum=None, fiyat=None):
         self.bahce_id = bahce_id
         self.alan = alan
         self.konum = konum
@@ -23,7 +23,7 @@ class Bahce:
             )
             cursor = conn.cursor()
 
-            cursor.execute("SELECT * FROM Bahceler WHERE bahce_id = %d", (bahce_id))
+            cursor.execute("SELECT * FROM Bahceler WHERE bahce_id = %s", (bahce_id,))
             user_data = cursor.fetchone()
             conn.close()
             if bahce_id:
