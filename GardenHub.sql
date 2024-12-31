@@ -52,6 +52,10 @@ CREATE TABLE Bahceler (
     fiyat NUMERIC(10,2) NOT NULL CHECK (Fiyat > 0)
 );
 
+create sequence kiralama_id_seq
+minvalue 1000
+increment by 1
+
 -- 3. Kiralamalar Tablosu(eker)
 CREATE TABLE Kiralamalar (
     kiralama_id int PRIMARY KEY,
@@ -61,6 +65,22 @@ CREATE TABLE Kiralamalar (
     sure INT NOT NULL CHECK (sure > 0),
     UNIQUE (kullanici_id, bahce_id)
 );
+CREATE TRIGGER trigger_update_bahce_durum
+AFTER INSERT ON Kiralamalar
+FOR EACH ROW
+EXECUTE FUNCTION update_bahce_durum_on_kiralama();
+
+CREATE OR REPLACE FUNCTION update_bahce_durum_on_kiralama()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Kiralama eklenen bahçenin durumunu "Kiralanmış" olarak güncelle
+    UPDATE bahceler
+    SET durum = 'Kiralanmis'
+    WHERE bahce_id = NEW.bahce_id;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
 CREATE TABLE EkipmanTalep (
     talep_id int PRIMARY KEY,

@@ -9,10 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import kiralama
 import bahce_class
 import kullaniciAnaSayfa
 import kullanicilar as Kullanici
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QInputDialog
+from datetime import date, datetime
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
@@ -412,6 +414,7 @@ class Bahceler(QtWidgets.QMainWindow):
             self.bahceRenkleri()
             self.ui.pushButton_geri.clicked.connect(self.geriGit)
             self.kullanici = kullanici
+            self.ui.pushButton.clicked.connect(self.bahceKirala)
             self.ui.pushButton_1.clicked.connect(self.birSecildi)
             self.ui.pushButton_2.clicked.connect(self.ikiSecildi)
             self.ui.pushButton_3.clicked.connect(self.ucSecildi)
@@ -428,6 +431,31 @@ class Bahceler(QtWidgets.QMainWindow):
             self.ui.pushButton_14.clicked.connect(self.ondortSecildi)
             self.ui.pushButton_15.clicked.connect(self.onbesSecildi)
             self.ui.pushButton_16.clicked.connect(self.onaltiSecildi)
+
+        def bahceKirala(self):
+                bahceNo, ok = QInputDialog.getDouble(
+                        self, 
+                        "Bahce Kirala", 
+                        "Kiralamak istediğiniz bahce Numarasini girin:", 
+                        0,        # Varsayılan değer
+                        -99999,  # Minimum değer
+                        999999,  # Maksimum değer
+                        0        # Ondalık basamak sayısı
+                )
+                
+                
+                if ok:  # Kullanıcı 'Tamam'a tıkladıysa
+                        self.bahce = bahce_class.Bahce().get_bahce_from_db(bahceNo)
+                        if self.bahce.durum == "Kiralanmis":
+                                QMessageBox.warning(self, "Hata", "Bahçe zaten kiralanmış.")
+                                return
+                        else:
+                               kiralama.Kiralama().bahce_kirala(self.kullanici.kullanici_id, self.bahce.bahce_id, date.today(),1)
+                               QMessageBox.information(self, "Başarılı", "Bahçe kiralama işlemi başarılı.")
+                               getattr(self.ui, f"pushButton_{self.bahce.bahce_id}").setStyleSheet("background-color: rgb(131, 65, 0);\n")
+                     
+                else:
+                        QMessageBox.warning(self, "İptal Edildi", "Kiralama işlemi iptal edildi.")
 
         def bahceRenkleri(self):
                 for i in range(1, 17):
