@@ -99,7 +99,7 @@ EXECUTE FUNCTION sifirla_bahce_durum_on_bahceler();
 CREATE OR REPLACE FUNCTION sifirla_bahce_durum_on_bahceler()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- Kiralama eklenen bahçenin durumunu "Kiralanmış" olarak güncelle
+    -- silinen bahçenin durumunu "Bos" olarak güncelle
     UPDATE bahceler
     SET durum = 'Bos'
     WHERE bahce_id = NEW.bahce_id;
