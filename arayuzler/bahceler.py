@@ -447,12 +447,17 @@ class Bahceler(QtWidgets.QMainWindow):
                         if self.bahce.durum == "Kiralanmis":
                                 QMessageBox.warning(self, "Hata", "Bahçe zaten kiralanmış.")
                                 return
-                        else:
-                               kiralama.Kiralama().bahce_kirala(self.kullanici.kullanici_id, self.bahce.bahce_id, date.today())
-                               QMessageBox.information(self, "Başarılı", "Bahçe kiralama işlemi başarılı.")
-                               getattr(self.ui, f"pushButton_{self.bahce.bahce_id}").setStyleSheet("background-color: rgb(131, 65, 0);\n")
-                               self.kullanici.bakiye_guncelle(- self.bahce.fiyat) 
-                               self.kullanici.butce = self.kullanici.butce - self.bahce.fiyat
+                        else:   
+                                if self.kullanici.butce < self.bahce.fiyat:
+                                       QMessageBox.warning(self, "Hata", "Yetersiz Bakiye")
+                                       return
+                                else:
+                                        kiralama.Kiralama().bahce_kirala(self.kullanici.kullanici_id, self.bahce.bahce_id, date.today())
+                                        QMessageBox.information(self, "Başarılı", "Bahçe kiralama işlemi başarılı.")
+                                        getattr(self.ui, f"pushButton_{self.bahce.bahce_id}").setStyleSheet("background-color: rgb(131, 65, 0);\n")
+                                        self.kullanici.butce = self.kullanici.butce - self.bahce.fiyat 
+                                        self.kullanici.bakiye_guncelle(self.kullanici.butce) 
+                              
 
                 else:
                         QMessageBox.warning(self, "İptal Edildi", "Kiralama işlemi iptal edildi.")
