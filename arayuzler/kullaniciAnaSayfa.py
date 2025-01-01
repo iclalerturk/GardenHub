@@ -12,6 +12,7 @@ from decimal import Decimal
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QInputDialog
 
+import ilkSayfa_py
 import pazar
 import bahceler
 import ekipmanlar
@@ -185,6 +186,30 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.pushButton_6, 1, 2, 1, 1)
 
+        self.pushButton_cikis = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_cikis.setGeometry(QtCore.QRect(20, 20, 150, 51))
+        font = QtGui.QFont()
+        font.setFamily("Maiandra GD")
+        font.setPointSize(14)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.pushButton_cikis.setFont(font)
+        self.pushButton_cikis.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(131, 65, 0);
+                border-radius: 10px;  /* Yuvarlaklık */
+                padding: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(170, 70, 0);
+            }
+            QPushButton:pressed {
+                background-color: rgb(145, 70, 0);
+            }
+        """)
+        self.pushButton_cikis.setObjectName("pushButton_cikis")
+
         self.graphicsView.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.graphicsView.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.graphicsView.setObjectName("graphicsView")
@@ -236,6 +261,7 @@ class Ui_MainWindow(object):
 "BAKİYE\n"
 "YUKLE\n"
 ""))
+        self.pushButton_cikis.setText(_translate("MainWindow", "ÇIKIŞ YAP"))
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
 import resimler_rc
 
@@ -251,6 +277,7 @@ class KullaniciAnaSayfa(QtWidgets.QMainWindow):
                 self.ui.pushButton_2.clicked.connect(self.bakiyeGoruntule)
                 self.ui.pushButton_6.clicked.connect(self.bakiyeGuncelle)
                 self.ui.pushButton_5.clicked.connect(self.pazariGoruntule)
+                self.ui.pushButton_cikis.clicked.connect(self.cikisYap)
 
                 # self.ui.pushButton.clicked.connect(self.pazaraUrunEkleme)
         
@@ -271,6 +298,11 @@ class KullaniciAnaSayfa(QtWidgets.QMainWindow):
         #         else:
         #                 QMessageBox.warning(self, "İptal Edildi", "Bakiye güncelleme işlemi iptal edildi.")
         
+        def cikisYap(self):
+                self.close()
+                self.ilkSayfa = ilkSayfa_py.IlkSayfa()
+                self.ilkSayfa.show()
+
         def pazariGoruntule(self):
                 self.close()
                 self.ilkSayfa = pazar.Pazar(self.kullanici)

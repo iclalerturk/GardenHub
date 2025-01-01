@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import ilkSayfa_py
 import bahceDurumu
 import ekipmanEkle
 import kullaniciSil
@@ -177,6 +178,31 @@ class Ui_MainWindow(object):
 "            }")
         self.pushButton_4.setObjectName("pushButton_4")
         self.gridLayout.addWidget(self.pushButton_4, 1, 1, 1, 1)
+
+        self.pushButton_cikis = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_cikis.setGeometry(QtCore.QRect(20, 20, 150, 51))
+        font = QtGui.QFont()
+        font.setFamily("Maiandra GD")
+        font.setPointSize(14)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.pushButton_cikis.setFont(font)
+        self.pushButton_cikis.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(131, 65, 0);
+                border-radius: 10px;  /* Yuvarlaklık */
+                padding: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(170, 70, 0);
+            }
+            QPushButton:pressed {
+                background-color: rgb(145, 70, 0);
+            }
+        """)
+        self.pushButton_cikis.setObjectName("pushButton_cikis")
+
         self.graphicsView.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.graphicsView.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.graphicsView.setObjectName("graphicsView")
@@ -227,6 +253,7 @@ class Ui_MainWindow(object):
 "BAHÇELERİN\n"
 "DURUMUNU GÖR\n"
 ""))
+        self.pushButton_cikis.setText(_translate("MainWindow", "ÇIKIŞ YAP"))
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
 import resimler_rc
 
@@ -242,6 +269,12 @@ class YoneticiAnaSayfa(QtWidgets.QMainWindow):
                 self.ui.pushButton_5.clicked.connect(self.kullaniciSileGit)
                 self.ui.pushButton_3.clicked.connect(self.ekipmanEkleyeGit)
                 self.ui.pushButton_4.clicked.connect(self.bahceDurumunuGor)
+                self.ui.pushButton_cikis.clicked.connect(self.cikisYap)
+                
+        def cikisYap(self):
+                self.close()
+                self.ilkSayfa = ilkSayfa_py.IlkSayfa()
+                self.ilkSayfa.show()
 
         def bahceDurumunuGor(self):
             self.close()
