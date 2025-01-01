@@ -4,16 +4,16 @@
 -- SELECT * FROM kullanicilar;
 -- DELETE FROM kullanicilar;
 
-INSERT INTO kullanicilar VALUES ('Ford', 'Prefect', nextval('kullanici_id_seq'), 'fordprefect@hitchhiker.com', '12345678', '1970-01-01', 0, 'Kiraci');
-INSERT INTO kullanicilar VALUES ('Arthur', 'Dent', nextval('kullanici_id_seq'), 'arthurdent@earth.com', '12345678', '1977-06-24', 0, 'Kiraci');
-INSERT INTO kullanicilar VALUES ('Zaphod', 'Beeblebrox', nextval('kullanici_id_seq'), 'zaphodbeeblebrox@galaxy.com', '12345678', '1965-11-29', 0, 'Kiraci');
-INSERT INTO kullanicilar VALUES ('Tricia', 'McMillan', nextval('kullanici_id_seq'), 'trillian@earth.com', '12345678', '1978-02-10', 0, 'Kiraci');
-INSERT INTO kullanicilar VALUES ('Seray', 'Çelik', nextval('kullanici_id_seq'), 'seraycelik@gardenhub.com', '12345678', '2000-01-01', 0, 'Kiraci');
-INSERT INTO kullanicilar VALUES ('İclal', 'Ertürk', nextval('kullanici_id_seq'), 'iclalerturk@gardenhub.com', '12345678', '2000-01-01', 0, 'Kiraci');
-INSERT INTO kullanicilar VALUES ('Şeyma', 'Başaran', nextval('kullanici_id_seq'), 'seymabasaran@gardenhub.com', '12345678', '2000-01-01', 0, 'Kiraci');
-INSERT INTO kullanicilar VALUES ('Luke', 'Skywalker', nextval('kullanici_id_seq'), 'lukeskywalker@galaxy.com', '12345678', '1960-05-04', 0, 'Kiraci');
-INSERT INTO kullanicilar VALUES ('Leia', 'Organa', nextval('kullanici_id_seq'), 'leiaorgana@galaxy.com', '12345678', '1960-05-04', 0, 'Kiraci');
-INSERT INTO kullanicilar VALUES ('Paul', 'Atreides', nextval('kullanici_id_seq'), 'paulatreides@arrakis.com', '12345678', '1980-07-08', 0, 'Kiraci');
+INSERT INTO kullanicilar VALUES ('Ford', 'Prefect', nextval('kullanici_id_seq'), 'fordprefect@hitchhiker.com', '12345678', '1970-01-01', 0, 'Kullanici');
+INSERT INTO kullanicilar VALUES ('Arthur', 'Dent', nextval('kullanici_id_seq'), 'arthurdent@earth.com', '12345678', '1977-06-24', 0, 'Kullanici');
+INSERT INTO kullanicilar VALUES ('Zaphod', 'Beeblebrox', nextval('kullanici_id_seq'), 'zaphodbeeblebrox@galaxy.com', '12345678', '1965-11-29', 0, 'Kullanici');
+INSERT INTO kullanicilar VALUES ('Tricia', 'McMillan', nextval('kullanici_id_seq'), 'trillian@earth.com', '12345678', '1978-02-10', 0, 'Kullanici');
+INSERT INTO kullanicilar VALUES ('Seray', 'Çelik', nextval('kullanici_id_seq'), 'seraycelik@gardenhub.com', '12345678', '2000-01-01', 0, 'Kullanici');
+INSERT INTO kullanicilar VALUES ('İclal', 'Ertürk', nextval('kullanici_id_seq'), 'iclalerturk@gardenhub.com', '12345678', '2000-01-01', 0, 'Kullanici');
+INSERT INTO kullanicilar VALUES ('Şeyma', 'Başaran', nextval('kullanici_id_seq'), 'seymabasaran@gardenhub.com', '12345678', '2000-01-01', 0, 'Kullanici');
+INSERT INTO kullanicilar VALUES ('Luke', 'Skywalker', nextval('kullanici_id_seq'), 'lukeskywalker@galaxy.com', '12345678', '1960-05-04', 0, 'Kullanici');
+INSERT INTO kullanicilar VALUES ('Leia', 'Organa', nextval('kullanici_id_seq'), 'leiaorgana@galaxy.com', '12345678', '1960-05-04', 0, 'Kullanici');
+INSERT INTO kullanicilar VALUES ('Paul', 'Atreides', nextval('kullanici_id_seq'), 'paulatreides@arrakis.com', '12345678', '1980-07-08', 0, 'Kullanici');
 
 
 -- yonetici

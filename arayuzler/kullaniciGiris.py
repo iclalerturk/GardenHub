@@ -8,12 +8,8 @@ import kullanicilar as user
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
-        #setExtendedState(JFrame.MAXIMIZED_BOTH);
         MainWindow.setObjectName("MainWindow")
-        #MainWindow.resize(996, 672)
-        #MainWindow.fixedsize(1920, 1080)
         MainWindow.setFixedSize(1920, 1080)
-        #MainWindow.adjustSize()
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -208,7 +204,7 @@ import resimler_rc
 class KullaniciGirisSayfa(QtWidgets.QMainWindow):
         def __init__(self) -> None:
                 super().__init__()
-                self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
+                self.ui = Ui_MainWindow()
                 self.ui.setupUi(self)
                 self.ui.pushButton_2.clicked.connect(self.geriGit)
                 self.ui.pushButton.clicked.connect(self.login)

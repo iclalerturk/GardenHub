@@ -59,11 +59,16 @@ increment by 1
 -- 3. Kiralamalar Tablosu
 CREATE TABLE Kiralamalar (
     kiralama_id int PRIMARY KEY,
-    kullanici_id INT REFERENCES kullanicilar(kullanici_id),
+    kullanici_id INT,
     bahce_id INT REFERENCES Bahceler(bahce_id),
     baslangic_tarihi DATE NOT NULL,
-    UNIQUE (kullanici_id, bahce_id)
+	constraint kullanicilar_kullanici_id_fkey foreign key (kullanici_id) 
+	references kullanicilar(kullanici_id) on delete cascade
 );
+select * from kiralamalar
+drop trigger trigger_update_bahce_durum on kiralamalar
+drop function update_bahce_durum_on_kiralama
+drop table kiralamalar
 
 CREATE TRIGGER trigger_update_bahce_durum
 AFTER INSERT ON Kiralamalar
@@ -77,7 +82,27 @@ BEGIN
     UPDATE bahceler
     SET durum = 'Kiralanmis'
     WHERE bahce_id = NEW.bahce_id;
+	--kullanicinin türünü kiracaı yap
+	UPDATE kullanicilar
+	set user_type = 'Kiraci'
+	where kullanici_id=NEW.kullanici_id;
+	
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
+CREATE TRIGGER trigger_sifirla_bahce_durum
+AFTER DELETE ON Kiralamalar
+FOR EACH ROW
+EXECUTE FUNCTION sifirla_bahce_durum_on_bahceler();
+
+CREATE OR REPLACE FUNCTION sifirla_bahce_durum_on_bahceler()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Kiralama eklenen bahçenin durumunu "Kiralanmış" olarak güncelle
+    UPDATE bahceler
+    SET durum = 'Bos'
+    WHERE bahce_id = NEW.bahce_id;
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -102,23 +127,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
-CREATE OR REPLACE FUNCTION silinen_kullanici_ile_ilgili_kiralamalari_sil() 
-RETURNS TRIGGER AS $$
-BEGIN
-    -- Kiralamalar tablosunda, silinen kullanıcının tüm kiralamalarını sil
-    DELETE FROM kiralamalar
-    WHERE kullanici_id = OLD.kullanici_id;
-
-    -- Trigger işlevi başarılıysa, NULL döndür
-    RETURN NULL;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER kullanici_silindiginde_kiralamalari_sil
-AFTER DELETE ON Kullanicilar
-FOR EACH ROW
-EXECUTE FUNCTION silinen_kullanici_ile_ilgili_kiralamalari_sil();
 
 
 
