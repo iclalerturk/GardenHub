@@ -41,6 +41,23 @@ CREATE TABLE Ekipman (
 	ekipman_sayisi int not null,
     fiyat NUMERIC(10,2) NOT NULL CHECK (fiyat > 0)
 );
+create or replace function ekipman_ekle(ekipman_adi2 ekipman.ekipman_adi%type,ekipman_sayisi2 int,
+fiyat2 ekipman.fiyat%type )
+returns void as $$
+declare
+	mevcut ekipman.ekipman_adi%type;
+begin
+	select ekipman_id into mevcut from ekipman where ekipman_adi=ekipman_adi2;
+	if mevcut is not null then
+		update ekipman set ekipman_sayisi = ekipman_sayisi+ ekipman_sayisi2
+		where ekipman_adi=ekipman_adi2;
+	else
+		INSERT INTO ekipman VALUES(nextval('ekipman_id_seq'),ekipman_adi2,
+		ekipman_sayisi2, fiyat2);
+	end if;
+end;
+$$ language 'plpgsql'
+
 
 -- 2. Bahçeler Tablosu
 CREATE TABLE Bahceler (

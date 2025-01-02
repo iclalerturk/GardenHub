@@ -248,8 +248,8 @@ class EkipmanEkle(QtWidgets.QMainWindow):
             ekipman_adi=self.ui.ad_line.text()
             ekipman_sayisi=self.ui.soyad_line.text()
             fiyat=self.ui.mail_line.text()
-            query="INSERT INTO ekipman VALUES(nextval('ekipman_id_seq'),%s,%s,%s)"
-            #################################¶3fonksiyon yazılacak
+            query="select ekipman_ekle(%s,%s,%s)"  #
+            #################################eklenenin fiyat kontrolünü sağla
             self.cursor.execute(query, (ekipman_adi,ekipman_sayisi,fiyat))
             self.conn.commit()
             self.conn.close()
