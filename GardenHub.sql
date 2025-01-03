@@ -30,7 +30,7 @@ create table urunler(
 	fiyat int NOT NULL CHECK (Fiyat > 0),
 	sahip_id int references kullanicilar(kullanici_id)	
 );
-
+--abcs
 create or replace function ürün_ekle(ürün_adi2 urun.urun_adi%type,urun_kilosu2 int,
 fiyat2 urun.fiyat%type, sahip_id2 int)
 returns void as $$
