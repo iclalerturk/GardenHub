@@ -48,7 +48,6 @@ begin
 end;
 $$ language 'plpgsql'
 
-
 create sequence ekipman_id_seq
 minvalue 10000
 increment by 1

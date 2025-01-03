@@ -164,7 +164,7 @@ class EkipmanGoruntuleme(QtWidgets.QMainWindow):
             )
             self.cursor = conn.cursor()
 
-            query = "SELECT ekipman_adi,miktar FROM kiralananekipmanlar, ekipmanlar where kiralananekipmanlar.ekipman_id = ekipmanlar.ekipman_id and kullanici_id = %s"
+            query = "SELECT ekipman_adi,miktar FROM kiralananekipmanlar, Ekipman where kiralananekipmanlar.ekipman_id = Ekipman.ekipman_id and kullanici_id = %s"
             self.cursor.execute(query,(self.kullanici.kullanici_id,))
             rows = self.cursor.fetchall()
             conn.commit()

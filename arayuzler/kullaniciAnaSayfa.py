@@ -283,22 +283,10 @@ class KullaniciAnaSayfa(QtWidgets.QMainWindow):
                 self.ui.pushButton.clicked.connect(self.pazaraUrunEkleme)
         
         def pazaraUrunEkleme(self):
-              urunAdi, urunKilosu, ok = QInputDialog.getDouble(
-                        self, 
-                        "Bakiye Güncelle", 
-                        "Yeni bakiyenizi girin:", 
-                        0,        # Varsayılan değer
-                        -999999,  # Minimum değer
-                        999999,   # Maksimum değer
-                        2         # Ondalık basamak sayısı
-                )
-                
-                if ok:  # Kullanıcı 'Tamam'a tıkladıysa
-                        self.kullanici.butce += yeni_bakiye  # Yeni bakiyeyi güncelle
-                        QMessageBox.information(self, "Başarılı", f"Bakiye başarıyla güncellendi: {yeni_bakiye} TL")
-                else:
-                        QMessageBox.warning(self, "İptal Edildi", "Bakiye güncelleme işlemi iptal edildi.")
-        
+                self.close()
+                self.ilkSayfa = urunEkle.UrunEkle(self.kullanici)
+                self.ilkSayfa.show()
+
         def cikisYap(self):
                 self.close()
                 self.ilkSayfa = ilkSayfa_py.IlkSayfa()
