@@ -6,7 +6,7 @@ CREATE TABLE kullanicilar (
     isim VARCHAR(20) NOT NULL,
     soyisim VARCHAR(20) NOT NULL,
     kullanici_id INT NOT NULL PRIMARY KEY,
-    mail VARCHAR(70) NOT NULL,
+    mail VARCHAR(70) NOT NULL,--primary olcak
     sifre VARCHAR(20) NOT NULL,
     bdate DATE,
     butce numeric(10,2) DEFAULT 0,

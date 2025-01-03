@@ -27,7 +27,7 @@ class Urunler:
             query = "SELECT urun_id, urun_adi, kg, fiyat, sahip_id from urunler"
             self.cursor.execute(query)
             user_data = self.cursor.fetchall()
-            return [Urunler(row[0], row[1], row[2], row[3], row[3]) for row in user_data]
+            return [Urunler(row[0], row[1], row[2], row[3], row[4]) for row in user_data]
         except Exception as e:
             print("Error: ", e)
             return []

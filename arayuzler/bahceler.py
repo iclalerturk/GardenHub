@@ -453,7 +453,7 @@ class Bahceler(QtWidgets.QMainWindow):
                                        return
                                 else:
                                         kiralama.Kiralama().bahce_kirala(self.kullanici.kullanici_id, self.bahce.bahce_id, date.today())
-                                        QMessageBox.information(self, "Başarılı", "Bahçe kiralama işlemi başarılı.")
+                                        QMessageBox.information(self, "Başarılı", "Bahçe kiralama işlemi başarılı.\n kullanıcı tipi: Kiracı, bahce tipi: Kiralanmis olarak değiştiren trigger tetiklendi.")
                                         getattr(self.ui, f"pushButton_{self.bahce.bahce_id}").setStyleSheet("background-color: rgb(131, 65, 0);\n")
                                         self.kullanici.butce = self.kullanici.butce - self.bahce.fiyat 
                                         self.kullanici.bakiye_guncelle(self.kullanici.butce) 
