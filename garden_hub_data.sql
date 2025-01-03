@@ -67,4 +67,18 @@ INSERT INTO Bahceler VALUES (16, 10, '4/4', 'Torf', 'Bos', '600');
 
 -- Kiralamalar
 
+
+INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),10,11,'2025-01-01');
+INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),9,7,'2025-01-03');
+INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),8,5,'2024-12-03');
+INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),7,16,'2024-12-03');
+INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),6,14,'2025-01-01');
+INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),5,2,'2025-01-01');
+INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),5,3,'2025-01-01');
+INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),4,6,'2025-01-01');
+INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),4,8,'2025-01-01');
+INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),1,15,'2025-01-01');
+
+
+
 -- EkipmanTalep
