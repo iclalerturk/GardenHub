@@ -246,8 +246,8 @@ class Ui_MainWindow(object):
 ""))
 
         self.pushButton_3.setText(_translate("MainWindow", "\n"
-"EKİPMANLARIN\n"
-"DURUMUNU GÖR\n"
+"EKİPMANLAR\n"
+"SAYFASI\n"
 ""))
         self.pushButton_4.setText(_translate("MainWindow", "\n"
 "BAHÇELERİ\n"

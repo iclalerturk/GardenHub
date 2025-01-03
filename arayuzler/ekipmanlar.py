@@ -131,6 +131,25 @@ class Ui_MainWindow(object):
         """)
         self.pushButton_2.setObjectName("pushButton_2")
 
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(1600, 815, 261, 131))
+        font = QtGui.QFont()
+        font.setFamily("Maiandra GD")
+        font.setPointSize(18)
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("QPushButton {\n"
+"                background-color: rgb(131, 65, 0);\n"
+"                border-radius: 10px;  /* Yuvarlaklık */\n"
+"                padding: 10px;\n"
+"            }\n"
+"            QPushButton:hover {\n"
+"                background-color: rgb(170, 70, 0);\n"
+"            }\n"
+"            QPushButton:pressed {\n"
+"                background-color: rgb(145, 70, 0);\n"
+"            }")
+        self.pushButton.setObjectName("pushButton")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -144,12 +163,14 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
+        self.pushButton.setText(_translate("MainWindow", "KİRALADIĞIM\nEKİPMANLARI\nGÖRÜNTÜLE"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "EKİPMAN ADI"))
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "EKİPMAN ADEDİ"))
         item = self.tableWidget.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "EKİPMAN FİYATI"))
+
 import resimler_rc
 
 
