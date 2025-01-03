@@ -232,7 +232,7 @@ class BahceDurumunuGor(QtWidgets.QMainWindow):
             query = "SELECT bahce_id,kullanici_id, baslangic_tarihi FROM Kiralamalar"
             self.cursor.execute(query)
             rows = self.cursor.fetchall()
-            query = "SELECT mail FROM kullanicilar where kullanici_id = %s"
+            query = "SELECT mail FROM kullanici_mail WHERE kullanici_id = %s" #kullanici_mail viewi kullanıldı
             conn.commit()
             self.ui.tableWidget.setRowCount(len(rows))
             for row_idx, row in enumerate(rows):

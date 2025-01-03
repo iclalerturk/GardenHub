@@ -164,6 +164,9 @@ END;
 $$ LANGUAGE plpgsql;
 
 
+CREATE OR REPLACE VIEW kullanici_mail AS
+SELECT mail
+FROM kullanicilar;
 
 
 
