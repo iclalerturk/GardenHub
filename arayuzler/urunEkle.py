@@ -241,6 +241,7 @@ class UrunEkle(QtWidgets.QMainWindow):
                     self.cursor = self.conn.cursor()
                 except Exception as e:
                     print("Error: ", e)
+                
         def geriGit(self):
             self.close()
             self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(self.kullanici)
@@ -250,15 +251,17 @@ class UrunEkle(QtWidgets.QMainWindow):
             urun_adi=self.ui.ad_line.text()
             urunun_kilosu=self.ui.soyad_line.text()
             fiyat=self.ui.mail_line.text()
-            query="select urun_ekle(%s,%s,%s,%s)"  #
-            #################################eklenenin fiyat kontrolünü sağla
-            self.cursor.execute(query, (urun_adi,urunun_kilosu,fiyat,self.kullanici.kullanici_id))
-            if self.cursor.rowcount > 0:
+            query="select urun_ekle(%s,%s,%s,%s)"
+            try:
+                self.cursor.execute(query, (urun_adi,urunun_kilosu,fiyat,self.kullanici.kullanici_id))
                 self.show_message("Başarılı", "Ürün başarıyla eklendi.", QMessageBox.Information)
-            else:
+            except psycopg2.IntegrityError as e:
+                # Eğer veritabanı kısıtlaması nedeniyle hata oluşursa
+                self.show_message("Başarısız", "Ürün eklenemedi. Lütfen tekrar deneyin.", QMessageBox.Warning)
+            except Exception as e:
+                # Genel hata yakalama (örn. bağlantı hatası, vs.)
                 self.show_message("Başarısız", "Ürün eklenemedi. Lütfen tekrar deneyin.", QMessageBox.Warning)
             self.conn.commit()
-            self.conn.close()
         def show_message(self, title, message, icon_type):
             msg = QMessageBox()
             msg.setIcon(icon_type)
