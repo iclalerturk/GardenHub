@@ -114,6 +114,44 @@ class Ui_MainWindow(object):
         """)
         self.pushButton_2.setObjectName("pushButton_2")
 
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(1545, 750, 300, 175))
+        font = QtGui.QFont()
+        font.setFamily("Maiandra GD")
+        font.setPointSize(18)
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("QPushButton {\n"
+"                background-color: rgb(131, 65, 0);\n"
+"                border-radius: 10px;  /* Yuvarlaklık */\n"
+"                padding: 10px;\n"
+"            }\n"
+"            QPushButton:hover {\n"
+"                background-color: rgb(170, 70, 0);\n"
+"            }\n"
+"            QPushButton:pressed {\n"
+"                background-color: rgb(145, 70, 0);\n"
+"            }")
+        self.pushButton.setObjectName("pushButton")
+
+        self.pushButton3 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton3.setGeometry(QtCore.QRect(1545, 525, 300, 175))
+        font = QtGui.QFont()
+        font.setFamily("Maiandra GD")
+        font.setPointSize(18)
+        self.pushButton3.setFont(font)
+        self.pushButton3.setStyleSheet("QPushButton {\n"
+"                background-color: rgb(131, 65, 0);\n"
+"                border-radius: 10px;  /* Yuvarlaklık */\n"
+"                padding: 10px;\n"
+"            }\n"
+"            QPushButton:hover {\n"
+"                background-color: rgb(170, 70, 0);\n"
+"            }\n"
+"            QPushButton:pressed {\n"
+"                background-color: rgb(145, 70, 0);\n"
+"            }")
+        self.pushButton3.setObjectName("pushButton")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -127,6 +165,8 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
+        self.pushButton.setText(_translate("MainWindow", "KİRACI OLAN\nKULLANICILARI\nGÖRÜNTÜLE"))
+        self.pushButton3.setText(_translate("MainWindow", "KİRACI OLMAYAN\nKULLANICILARI\nGÖRÜNTÜLE"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "KULLANICI ADI"))
         item = self.tableWidget.horizontalHeaderItem(1)
@@ -143,8 +183,52 @@ class KullanicilariGoruntule(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
         self.ui.setupUi(self)
         self.ui.pushButton_2.clicked.connect(self.geriGit)
+        self.ui.pushButton.clicked.connect(self.get_kiraci_olan_kullanicilar)
+        self.ui.pushButton3.clicked.connect(self.get_kiraci_olmayan_kullanicilar)
         self.get_user()
     
+    def get_kiraci_olmayan_kullanicilar(self):
+        hostname = 'localhost'
+        username = 'postgres'
+        database = 'GardenHub'
+        password = '1234'
+        port_id = '5432'
+        try:
+            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id
+            )
+            cursor = conn.cursor()
+            cursor.execute("SELECT isim,soyisim,mail From kullanicilar WHERE user_type='Kullanici'")          
+            users = cursor.fetchall()
+            conn.close()
+            self.ui.tableWidget.setRowCount(len(users))
+            if users:
+                user_info = "\n->".join([f"İsim: {user[0]}, Soyisim: {user[1]}, E-posta: {user[2]}" for user in users])
+                QtWidgets.QMessageBox.information(self, "Kullanıcılar", user_info)
+        except Exception as e:
+            print
+
+
+    def get_kiraci_olan_kullanicilar(self):
+        hostname = 'localhost'
+        username = 'postgres'
+        database = 'GardenHub'
+        password = '1234'
+        port_id = '5432'
+        try:
+            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id
+            )
+            cursor = conn.cursor()
+            cursor.execute("SELECT isim,soyisim,mail From kullanicilar EXCEPT SELECT isim,soyisim,mail From kullanicilar WHERE user_type='Kullanici'")          
+            users = cursor.fetchall()
+            conn.close()
+            self.ui.tableWidget.setRowCount(len(users))
+            if users:
+                user_info = "\n".join([f"İsim: {user[0]}, Soyisim: {user[1]}, E-posta: {user[2]}" for user in users])
+                QtWidgets.QMessageBox.information(self, "Kullanıcılar", user_info)
+        except Exception as e:
+            print("Error: ", e)
+
+
     def geriGit(self):
         self.close()
         self.ilkSayfa = yoneticiAnaSayfa.YoneticiAnaSayfa()
