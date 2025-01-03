@@ -31,8 +31,8 @@ create table urunler(
 	sahip_id int references kullanicilar(kullanici_id)	
 );
 
-create or replace function urun_ekle(urun_adi2 varchar(20),urun_kilosu2 int,
-fiyat2 int, sahip_id2 int)
+create or replace function ürün_ekle(ürün_adi2 urun.urun_adi%type,urun_kilosu2 int,
+fiyat2 urun.fiyat%type, sahip_id2 int)
 returns void as $$
 declare
 	mevcut urunler.urun_adi%type;
