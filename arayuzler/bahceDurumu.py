@@ -114,27 +114,25 @@ class Ui_MainWindow(object):
         self.pushButton_2.setObjectName("pushButton_2")
         
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_3.setGeometry(QtCore.QRect(20, 90, 101, 51))
+        self.pushButton_3.setGeometry(QtCore.QRect(1545, 750, 300, 175))
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
-        font.setPointSize(14)
+        font.setPointSize(18)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
         self.pushButton_3.setFont(font)
-        self.pushButton_3.setStyleSheet("""
-            QPushButton {
-                background-color: rgb(131, 65, 0);
-                border-radius: 10px;  /* Yuvarlaklık */
-                padding: 10px;
-            }
-            QPushButton:hover {
-                background-color: rgb(170, 70, 0);
-            }
-            QPushButton:pressed {
-                background-color: rgb(145, 70, 0);
-            }
-        """)
+        self.pushButton_3.setStyleSheet("QPushButton {\n"
+"                background-color: rgb(131, 65, 0);\n"
+"                border-radius: 10px;  /* Yuvarlaklık */\n"
+"                padding: 10px;\n"
+"            }\n"
+"            QPushButton:hover {\n"
+"                background-color: rgb(170, 70, 0);\n"
+"            }\n"
+"            QPushButton:pressed {\n"
+"                background-color: rgb(145, 70, 0);\n"
+"            }")
         self.pushButton_3.setObjectName("pushButton_3")
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -150,7 +148,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
-        self.pushButton_3.setText(_translate("MainWindow", "Maili Göster"))
+        self.pushButton_3.setText(_translate("MainWindow", "İstenilen Kullanıcının\nKiralama Bilgilerini\n Gör"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Bahçe Numarası"))
         item = self.tableWidget.horizontalHeaderItem(1)

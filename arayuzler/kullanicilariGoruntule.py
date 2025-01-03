@@ -197,12 +197,12 @@ class KullanicilariGoruntule(QtWidgets.QMainWindow):
             conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id
             )
             cursor = conn.cursor()
-            cursor.execute("SELECT isim,soyisim,mail From kullanicilar WHERE user_type='Kullanici'")          
+            cursor.execute("SELECT isim,soyisim,mail From kullanicilar EXCEPT SELECT isim,soyisim,mail From kullanicilar WHERE user_type='Kiraci'")          
             users = cursor.fetchall()
             conn.close()
             # self.ui.tableWidget.setRowCount(len(users))
             if users:
-                user_info = "\n->".join([f"İsim: {user[0]}, Soyisim: {user[1]}, E-posta: {user[2]}" for user in users])
+                user_info = "\n".join([f"-> İsim: {user[0]}, Soyisim: {user[1]}, E-posta: {user[2]}" for user in users])
                 QtWidgets.QMessageBox.information(self, "Kullanıcılar", user_info)
         except Exception as e:
             print
@@ -223,7 +223,7 @@ class KullanicilariGoruntule(QtWidgets.QMainWindow):
             conn.close()
             # self.ui.tableWidget.setRowCount(len(users))
             if users:
-                user_info = "\n->".join([f"İsim: {user[0]}, Soyisim: {user[1]}, E-posta: {user[2]}" for user in users])
+                user_info = "\n->".join([f"-> İsim: {user[0]}, Soyisim: {user[1]}, E-posta: {user[2]}" for user in users])
                 QtWidgets.QMessageBox.information(self, "Kullanıcılar", user_info)
         except Exception as e:
             print("Error: ", e)
