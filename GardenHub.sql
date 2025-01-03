@@ -165,7 +165,7 @@ $$ LANGUAGE plpgsql;
 
 
 CREATE OR REPLACE VIEW kullanici_mail AS
-SELECT mail
+SELECT mail, kullanici_id
 FROM kullanicilar;
 
 
