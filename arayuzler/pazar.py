@@ -133,6 +133,32 @@ class Ui_MainWindow(object):
             }
         """)
         self.pushButton_2.setObjectName("pushButton_2")
+        
+        self.pushButton_sirala = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_sirala.setGeometry(QtCore.QRect(100, 20, 101, 51))  # Butonun konumu
+        font = QtGui.QFont()
+        font.setFamily("Maiandra GD")
+        font.setPointSize(14)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.pushButton_sirala.setFont(font)
+        self.pushButton_sirala.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(131, 65, 0);
+                border-radius: 10px;  /* Yuvarlaklık */
+                padding: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(170, 70, 0);
+            }
+            QPushButton:pressed {
+                background-color: rgb(145, 70, 0);
+            }
+        """)
+        self.pushButton_sirala.setObjectName("pushButton_sirala")
+        
+        
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -147,6 +173,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
+        self.pushButton_sirala.setText("Sırala")
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "ÜRÜN ADI"))
         item = self.tableWidget.horizontalHeaderItem(1)
@@ -166,6 +193,7 @@ class Pazar(QtWidgets.QMainWindow):
         self.kullanici=kullanici
         self.urun=urunler.Urunler()
         self.ui.pushButton_2.clicked.connect(self.geriGit)
+        self.pushButton_sirala.clicked.connect(self.sirala)
         self.load_data()
         
     
@@ -185,7 +213,9 @@ class Pazar(QtWidgets.QMainWindow):
             button = QtWidgets.QPushButton("Satın Al")
             button.clicked.connect(lambda _, r=row_idx: self.satinal_buton_tiklandi(r))
             self.ui.tableWidget.setCellWidget(row_idx, 4, button)
-            
+    def sirala(self):
+        self.load_data(order_by_price=True)
+       
             
     def satinal_buton_tiklandi(self, row_index):
         urun_id = self.urun.get_urun_from_db()[row_index].urun_id

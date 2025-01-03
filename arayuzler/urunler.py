@@ -22,9 +22,11 @@ class Urunler:
 
 
 
-    def get_urun_from_db(self):
+    def get_urun_from_db(self,order_by_price=False):
         try:
             query = "SELECT urun_id, urun_adi, kg, fiyat, sahip_id from urunler"
+            if order_by_price:
+                query += " ORDER BY fiyat ASC"
             self.cursor.execute(query)
             user_data = self.cursor.fetchall()
             return [Urunler(row[0], row[1], row[2], row[3], row[4]) for row in user_data]
