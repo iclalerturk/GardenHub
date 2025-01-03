@@ -4,6 +4,7 @@
 -- SELECT * FROM kullanicilar;
 -- DELETE FROM kullanicilar;
 
+
 INSERT INTO kullanicilar VALUES ('Ford', 'Prefect', nextval('kullanici_id_seq'), 'fordprefect@hitchhiker.com', '12345678', '1970-01-01', 0, 'Kullanici');
 INSERT INTO kullanicilar VALUES ('Arthur', 'Dent', nextval('kullanici_id_seq'), 'arthurdent@earth.com', '12345678', '1977-06-24', 0, 'Kullanici');
 INSERT INTO kullanicilar VALUES ('Zaphod', 'Beeblebrox', nextval('kullanici_id_seq'), 'zaphodbeeblebrox@galaxy.com', '12345678', '1965-11-29', 0, 'Kullanici');
