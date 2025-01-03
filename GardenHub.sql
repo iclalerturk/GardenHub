@@ -41,6 +41,7 @@ CREATE TABLE Ekipman (
 	ekipman_sayisi int not null,
     fiyat NUMERIC(10,2) NOT NULL CHECK (fiyat > 0)
 );
+DROP FUNCTION ekipman_ekle(character varying,integer,numeric)
 create or replace function ekipman_ekle(ekipman_adi2 ekipman.ekipman_adi%type,ekipman_sayisi2 int,
 fiyat2 ekipman.fiyat%type )
 returns void as $$
@@ -123,9 +124,9 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
-CREATE TABLE EkipmanTalep (
-    talep_id int PRIMARY KEY,
+--ekipman talebi kiralanan ekipmanlar olarak değiştirdim.
+--drop table EkipmanTalep
+CREATE TABLE kiralananEkipmanlar (
     kullanici_id INT REFERENCES Kullanicilar(kullanici_id),
     ekipman_id INT REFERENCES Ekipman(ekipman_id),
     miktar INT CHECK (Miktar > 0),

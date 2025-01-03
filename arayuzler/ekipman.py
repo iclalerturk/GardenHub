@@ -40,6 +40,14 @@ class Ekipman_class:
             kullanici.butce -= price
             query = "UPDATE kullanicilar SET butce = %s WHERE kullanici_id = %s "
             self.cursor.execute(query, (kullanici.butce,kullanici.kullanici_id,))
+            query = "SELECT * FROM kiralananEkipmanlar WHERE ekipman_id = %s and kullanici_id = %s"
+            self.cursor.execute(query, (equipment_id,kullanici.kullanici_id,))
+            if self.cursor.fetchone():
+                query = "UPDATE kiralananEkipmanlar SET miktar= miktar + 1 where ekipman_id = %s, kullanici_id = %s"
+            else:
+                query = "INSERT INTO kiralananEkipmanlar (ekipman_id, kullanici_id, miktar) VALUES (%s, %s, 1)"
+            self.cursor.execute(query, (equipment_id,kullanici.kullanici_id,))
+
             print(kullanici.butce)
             self.conn.commit()
             return True
