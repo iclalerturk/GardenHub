@@ -112,6 +112,30 @@ class Ui_MainWindow(object):
             }
         """)
         self.pushButton_2.setObjectName("pushButton_2")
+        
+        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_3.setGeometry(QtCore.QRect(20, 90, 101, 51))
+        font = QtGui.QFont()
+        font.setFamily("Maiandra GD")
+        font.setPointSize(14)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.pushButton_3.setFont(font)
+        self.pushButton_3.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(131, 65, 0);
+                border-radius: 10px;  /* Yuvarlaklık */
+                padding: 10px;
+            }
+            QPushButton:hover {
+                background-color: rgb(170, 70, 0);
+            }
+            QPushButton:pressed {
+                background-color: rgb(145, 70, 0);
+            }
+        """)
+        self.pushButton_3.setObjectName("pushButton_3")
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -126,6 +150,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
+        self.pushButton_3.setText(_translate("MainWindow", "Maili Göster"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Bahçe Numarası"))
         item = self.tableWidget.horizontalHeaderItem(1)
@@ -144,13 +169,56 @@ class BahceDurumunuGor(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()  # Burada doğru bir şekilde ui nesnesi başlatılıyor.
         self.ui.setupUi(self)
         self.ui.pushButton_2.clicked.connect(self.geriGit)
+        self.ui.pushButton_3.clicked.connect(self.showMailDialog)
         self.load_bahce()
     
     def geriGit(self):
         self.close()
         self.ilkSayfa = yoneticiAnaSayfa.YoneticiAnaSayfa()
         self.ilkSayfa.show()
+        
+    def showMailDialog(self):
+        mail, ok = QtWidgets.QInputDialog.getText(self, 'Mail Girin', 'Kullanıcı mailini girin:')
+        if ok and mail:
+            self.showKiralamaDetails(mail)
+    
+    def showKiralamaDetails(self, mail):
+        hostname = 'localhost'
+        username = 'postgres'
+        database = 'GardenHub'
+        password = '1234'
+        port_id = '5432'
+        try:
+            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id)
+            cursor = conn.cursor()
 
+            query = "SELECT kullanici_id FROM kullanicilar WHERE mail = %s"
+            cursor.execute(query, (mail,))
+            user_id = cursor.fetchone()
+            if user_id:
+                user_id = user_id[0]
+                query = "SELECT bahce_id, baslangic_tarihi FROM Kiralamalar WHERE kullanici_id = %s"
+                cursor.execute(query, (user_id,))
+                rows = cursor.fetchall()
+
+                if rows:
+                    msg = QtWidgets.QMessageBox(self)
+                    msg.setWindowTitle("Kiralama Bilgileri")
+                    msg.setText(f"Mail: {mail}")
+                    table = "<table border='1'><tr><th>Bahçe Numarası</th><th>Kiralama Tarihi</th></tr>"
+                    for row in rows:
+                        table += f"<tr><td>{row[0]}</td><td>{row[1].strftime('%Y-%m-%d')}</td></tr>"
+                    table += "</table>"
+                    msg.setInformativeText(table)
+                    msg.exec_()
+                else:
+                    QtWidgets.QMessageBox.warning(self, "Uyarı", "Bu mail ile kiralanmış bir bahçe bulunmamaktadır.")
+            else:
+                QtWidgets.QMessageBox.warning(self, "Uyarı", "Geçersiz mail adresi.")
+            conn.close()
+        except Exception as e:
+            print("Error: ", e)
+            QtWidgets.QMessageBox.critical(self, "Error", f"Veritabanı hatası: {e}")
    
     def load_bahce(self):
         hostname = 'localhost'
