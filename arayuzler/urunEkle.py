@@ -259,6 +259,12 @@ class UrunEkle(QtWidgets.QMainWindow):
                 self.show_message("Başarısız", "Ürün eklenemedi. Lütfen tekrar deneyin.", QMessageBox.Warning)
             self.conn.commit()
             self.conn.close()
+        def show_message(self, title, message, icon_type):
+            msg = QMessageBox()
+            msg.setIcon(icon_type)
+            msg.setText(message)
+            msg.setWindowTitle(title)
+            msg.exec_()
 
 if __name__ == "__main__":
     import sys
