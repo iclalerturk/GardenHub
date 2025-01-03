@@ -31,23 +31,6 @@ create table urunler(
 	sahip_id int references kullanicilar(kullanici_id)	
 );
 
-create or replace function ürün_ekle(ürün_adi2 urun.urun_adi%type,urun_kilosu2 int,
-fiyat2 urun.fiyat%type, sahip_id2 int)
-returns void as $$
-declare
-	mevcut urun.urun_adi%type;
-begin
-	select urun_id into mevcut from urunler where urun_adi=urun_adi2;
-	if mevcut is not null then
-		update urunler set kg = kg+ urun_kilosu2
-		where urun_adi=urun_adi2;
-	else
-		INSERT INTO urunler VALUES(nextval('urun_id_seq'),urun_adi2,
-		urun_kilosu2, fiyat2,sahip_id2);
-	end if;
-end;
-$$ language 'plpgsql'
-
 create sequence ekipman_id_seq
 minvalue 10000
 increment by 1
@@ -143,10 +126,11 @@ END;
 $$ LANGUAGE plpgsql;
 --ekipman talebi kiralanan ekipmanlar olarak değiştirdim.
 --drop table EkipmanTalep
+drop table kiralananEkipmanlar
 CREATE TABLE kiralananEkipmanlar (
     kullanici_id INT REFERENCES Kullanicilar(kullanici_id),
     ekipman_id INT REFERENCES Ekipman(ekipman_id),
-    miktar INT CHECK (Miktar > 0),
+    miktar INT default 0,
     talep_tarihi DATE DEFAULT CURRENT_DATE
 );
 
