@@ -200,7 +200,7 @@ class KullanicilariGoruntule(QtWidgets.QMainWindow):
             cursor.execute("SELECT isim,soyisim,mail From kullanicilar WHERE user_type='Kullanici'")          
             users = cursor.fetchall()
             conn.close()
-            self.ui.tableWidget.setRowCount(len(users))
+            # self.ui.tableWidget.setRowCount(len(users))
             if users:
                 user_info = "\n->".join([f"İsim: {user[0]}, Soyisim: {user[1]}, E-posta: {user[2]}" for user in users])
                 QtWidgets.QMessageBox.information(self, "Kullanıcılar", user_info)
@@ -221,9 +221,9 @@ class KullanicilariGoruntule(QtWidgets.QMainWindow):
             cursor.execute("SELECT isim,soyisim,mail From kullanicilar EXCEPT SELECT isim,soyisim,mail From kullanicilar WHERE user_type='Kullanici'")          
             users = cursor.fetchall()
             conn.close()
-            self.ui.tableWidget.setRowCount(len(users))
+            # self.ui.tableWidget.setRowCount(len(users))
             if users:
-                user_info = "\n".join([f"İsim: {user[0]}, Soyisim: {user[1]}, E-posta: {user[2]}" for user in users])
+                user_info = "\n->".join([f"İsim: {user[0]}, Soyisim: {user[1]}, E-posta: {user[2]}" for user in users])
                 QtWidgets.QMessageBox.information(self, "Kullanıcılar", user_info)
         except Exception as e:
             print("Error: ", e)
