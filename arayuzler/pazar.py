@@ -156,6 +156,28 @@ class Ui_MainWindow(object):
 "            }")
         self.pushButton_sirala.setObjectName("pushButton_sirala")
         
+        self.pushButton_aggregate = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_aggregate.setGeometry(QtCore.QRect(220, 20, 150, 51))  # Konum
+        font = QtGui.QFont()
+        font.setFamily("Maiandra GD")
+        font.setPointSize(14)
+        self.pushButton_aggregate.setFont(font)
+        self.pushButton_aggregate.setStyleSheet("""
+        QPushButton {
+            background-color: rgb(131, 65, 0);
+            border-radius: 10px;
+            padding: 10px;
+        }
+        QPushButton:hover {
+            background-color: rgb(170, 70, 0);
+        }
+        QPushButton:pressed {
+            background-color: rgb(145, 70, 0);
+        }
+        """)
+        self.pushButton_aggregate.setObjectName("pushButton_aggregate")
+
+        
         
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -172,6 +194,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
         self.pushButton_sirala.setText("Sırala")
+        self.pushButton_aggregate.setText("Toplam Stok Göster")
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "ÜRÜN ADI"))
         item = self.tableWidget.horizontalHeaderItem(1)
@@ -192,6 +215,7 @@ class Pazar(QtWidgets.QMainWindow):
         self.urun=urunler.Urunler()
         self.ui.pushButton_2.clicked.connect(self.geriGit)
         self.ui.pushButton_sirala.clicked.connect(self.sirala)
+        self.ui.pushButton_aggregate.clicked.connect(self.load_aggregated_data)
         self.load_data()
         
     
@@ -213,7 +237,29 @@ class Pazar(QtWidgets.QMainWindow):
             self.ui.tableWidget.setCellWidget(row_idx, 4, button)
     def sirala(self):
         self.load_data(order_by_price=True)
-       
+    def load_aggregated_data(self):
+        try:
+            query = """
+                SELECT sahip_id, COUNT(*) AS urun_sayisi, SUM(kg) AS toplam_kg
+                FROM urunler
+                GROUP BY sahip_id
+                HAVING SUM(kg) > 10
+                ORDER BY toplam_kg DESC
+            """
+            self.urun.cursor.execute(query)
+            result = self.urun.cursor.fetchall()
+
+            self.ui.tableWidget.setRowCount(len(result))
+            self.ui.tableWidget.setColumnCount(3)
+            self.ui.tableWidget.setHorizontalHeaderLabels(["Sahip ID", "Ürün Sayısı", "Toplam KG"])
+            for row_idx, row_data in enumerate(result):
+                self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(str(row_data[0])))
+                self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(str(row_data[1])))
+                self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(f"{row_data[2]:.2f} KG"))
+        except Exception as e:
+            QMessageBox.critical(self, "Hata", f"Veri yüklenirken bir hata oluştu: {e}")
+
+    
             
     def satinal_buton_tiklandi(self, row_index):
         urun_id = self.urun.get_urun_from_db()[row_index].urun_id
