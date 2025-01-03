@@ -157,7 +157,7 @@ class Ui_MainWindow(object):
         self.pushButton_sirala.setObjectName("pushButton_sirala")
         
         self.pushButton_aggregate = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_aggregate.setGeometry(QtCore.QRect(220, 20, 150, 51))  # Konum
+        self.pushButton_aggregate.setGeometry(QtCore.QRect(1550, 650, 261, 131))  # Konum
         font = QtGui.QFont()
         font.setFamily("Maiandra GD")
         font.setPointSize(14)
@@ -194,7 +194,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
         self.pushButton_sirala.setText("Sırala")
-        self.pushButton_aggregate.setText("Toplam Stok Göster")
+        self.pushButton_aggregate.setText("Satıcı Stok Göster")
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "ÜRÜN ADI"))
         item = self.tableWidget.horizontalHeaderItem(1)
@@ -240,7 +240,7 @@ class Pazar(QtWidgets.QMainWindow):
     def load_aggregated_data(self):
         try:
             query = """
-                SELECT sahip_id, COUNT(*) AS urun_sayisi, SUM(kg) AS toplam_kg
+                SELECT sahip_id, COUNT(*) AS sattigi_urun_sayisi, SUM(kg) AS toplam_kg
                 FROM urunler
                 GROUP BY sahip_id
                 HAVING SUM(kg) > 10
@@ -251,7 +251,7 @@ class Pazar(QtWidgets.QMainWindow):
 
             self.ui.tableWidget.setRowCount(len(result))
             self.ui.tableWidget.setColumnCount(3)
-            self.ui.tableWidget.setHorizontalHeaderLabels(["Sahip ID", "Ürün Sayısı", "Toplam KG"])
+            self.ui.tableWidget.setHorizontalHeaderLabels(["Sahip ID", "Sattığı Ürün Sayısı", "Toplam KG"])
             for row_idx, row_data in enumerate(result):
                 self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(str(row_data[0])))
                 self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(str(row_data[1])))
