@@ -17,6 +17,7 @@ import pazar
 import bahceler
 import ekipmanlar
 import kullanicilar as user
+import urunEkle
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -279,7 +280,7 @@ class KullaniciAnaSayfa(QtWidgets.QMainWindow):
                 self.ui.pushButton_5.clicked.connect(self.pazariGoruntule)
                 self.ui.pushButton_cikis.clicked.connect(self.cikisYap)
 
-                # self.ui.pushButton.clicked.connect(self.pazaraUrunEkleme)
+                self.ui.pushButton.clicked.connect(self.pazaraUrunEkleme)
         
         # def pazaraUrunEkleme(self):
         #       urunAdi, urunKilosu, ok = QInputDialog.getDouble(
