@@ -1,8 +1,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import psycopg2
+import ekipmanlar
 import kullanicilar as Kullanici
-import kullaniciAnaSayfa
 
 
 class Ui_MainWindow(object):
@@ -131,7 +131,7 @@ class Ui_MainWindow(object):
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Ekipman Adı"))
         item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "Kiralanan Adet"))
+        item.setText(_translate("MainWindow", "Talep Edilen Adet"))
         item = self.tableWidget.horizontalHeaderItem(2)
         
 
@@ -149,7 +149,7 @@ class EkipmanGoruntuleme(QtWidgets.QMainWindow):
     
     def geriGit(self):
         self.close()
-        self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(self.kullanici)
+        self.ilkSayfa = ekipmanlar.Ekipman(self.kullanici)
         self.ilkSayfa.show()
 
    

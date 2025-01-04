@@ -252,7 +252,7 @@ class EkipmanEkle(QtWidgets.QMainWindow):
             #################################eklenenin fiyat kontrolünü sağla
             self.cursor.execute(query, (ekipman_adi,ekipman_sayisi,fiyat))
             self.conn.commit()
-            self.conn.close()
+            
 
 if __name__ == "__main__":
     import sys

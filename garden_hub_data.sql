@@ -66,20 +66,20 @@ INSERT INTO Bahceler VALUES (15, 10, '4/3', 'Killi', 'Bos', '600');
 INSERT INTO Bahceler VALUES (16, 10, '4/4', 'Torf', 'Bos', '600');
 
 
--- Kiralamalar
+-- kiralananekipmanlar
 
 
-INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),10,11,'2025-01-01');
-INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),9,7,'2025-01-03');
-INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),8,5,'2024-12-03');
-INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),7,16,'2024-12-03');
-INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),6,14,'2025-01-01');
-INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),5,2,'2025-01-01');
-INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),5,3,'2025-01-01');
-INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),4,6,'2025-01-01');
-INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),4,8,'2025-01-01');
-INSERT INTO Kiralamalar VALUES (nextval('kiralama_id_seq'),1,15,'2025-01-01');
+INSERT INTO kiralananekipmanlar VALUES (3,10007,2,'2025-01-01');
+INSERT INTO kiralananekipmanlar VALUES (5,10006,3,'2025-01-03');
+INSERT INTO kiralananekipmanlar VALUES (8,10008,5,'2024-12-03');
+INSERT INTO kiralananekipmanlar VALUES (4,10007,1,'2024-12-03');
+INSERT INTO kiralananekipmanlar VALUES (4,10003,2,'2025-01-01');
+INSERT INTO kiralananekipmanlar VALUES (6,10008,4,'2025-01-01');
+INSERT INTO kiralananekipmanlar VALUES (2,10003,2,'2025-01-01');
+INSERT INTO kiralananekipmanlar VALUES (1,10005,1,'2025-01-01');
+INSERT INTO kiralananekipmanlar VALUES (1,10009,3,'2025-01-01');
+INSERT INTO kiralananekipmanlar VALUES (3,10005,5,'2025-01-01');
 
 
 
--- EkipmanTalep
+

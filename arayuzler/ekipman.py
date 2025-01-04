@@ -29,13 +29,14 @@ class Ekipman_class:
         return [Ekipman_class(row[0], row[1], row[2], row[3]) for row in rows]
 
     def rent_equipment(self, equipment_id,kullanici):
-        query = "SELECT fiyat FROM ekipman WHERE ekipman_id = %s"
+        query = "SELECT fiyat, ekipman_sayisi FROM ekipman WHERE ekipman_id = %s"
         self.cursor.execute(query, (equipment_id,))
         price = self.cursor.fetchone()[0]
+        # sayi = self.cursor.fetchone()[1]
         if kullanici.butce < price:
            return False
         else:
-            query = "UPDATE ekipman SET ekipman_sayisi = ekipman_sayisi - 1 WHERE ekipman_id = %s AND ekipman_sayisi > 0"
+            query = "UPDATE ekipman SET ekipman_sayisi = ekipman_sayisi - 1 WHERE ekipman_id = %s"
             self.cursor.execute(query, (equipment_id,))
             kullanici.butce -= price
             query = "UPDATE kullanicilar SET butce = %s WHERE kullanici_id = %s "
@@ -43,10 +44,11 @@ class Ekipman_class:
             query = "SELECT * FROM kiralananEkipmanlar WHERE ekipman_id = %s and kullanici_id = %s"
             self.cursor.execute(query, (equipment_id,kullanici.kullanici_id,))
             if self.cursor.fetchone():
-                query = "UPDATE kiralananEkipmanlar SET miktar= miktar + 1 where ekipman_id = %s, kullanici_id = %s"
+                query = "UPDATE kiralananEkipmanlar SET miktar= miktar + 1 WHERE ekipman_id = %s AND kullanici_id = %s"
+                self.cursor.execute(query, (equipment_id, kullanici.kullanici_id,))
             else:
                 query = "INSERT INTO kiralananEkipmanlar (ekipman_id, kullanici_id, miktar) VALUES (%s, %s, 1)"
-            self.cursor.execute(query, (equipment_id,kullanici.kullanici_id,))
+                self.cursor.execute(query, (equipment_id, kullanici.kullanici_id,))
 
             print(kullanici.butce)
             self.conn.commit()
