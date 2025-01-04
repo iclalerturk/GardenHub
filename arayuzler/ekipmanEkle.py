@@ -6,12 +6,8 @@ import psycopg2
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
-        #setExtendedState(JFrame.MAXIMIZED_BOTH);
         MainWindow.setObjectName("MainWindow")
-        #MainWindow.resize(996, 672)
-        #MainWindow.fixedsize(1920, 1080)
         MainWindow.setFixedSize(1920, 1080)
-        #MainWindow.adjustSize()
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -243,7 +239,6 @@ class EkipmanEkle(QtWidgets.QMainWindow):
             fiyat=self.ui.mail_line.text()
             query="select ekipman_ekle(%s,%s,%s)"  
             QMessageBox.information(self, "Bilgi", "Ekipman Eklenldi.")
-            #################################eklenenin fiyat kontrolünü sağla
             self.cursor.execute(query, (ekipman_adi,ekipman_sayisi,fiyat))
             self.conn.commit()
             

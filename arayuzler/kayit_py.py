@@ -6,13 +6,8 @@ import ilkSayfa_py
 from PyQt5.QtWidgets import QMessageBox
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        
-        #setExtendedState(JFrame.MAXIMIZED_BOTH);
         MainWindow.setObjectName("MainWindow")
-        #MainWindow.resize(996, 672)
-        #MainWindow.fixedsize(1920, 1080)
         MainWindow.setFixedSize(1920, 1080)
-        #MainWindow.adjustSize()
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)

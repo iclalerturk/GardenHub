@@ -8,12 +8,8 @@ from datetime import date
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
-        #setExtendedState(JFrame.MAXIMIZED_BOTH);
         MainWindow.setObjectName("MainWindow")
-        #MainWindow.resize(996, 672)
-        #MainWindow.fixedsize(1920, 1080)
         MainWindow.setFixedSize(1920, 1080)
-        #MainWindow.adjustSize()
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -76,6 +72,27 @@ class Ui_MainWindow(object):
 "                background-color: rgb(145, 70, 0);\n"
 "            }")
         self.pushButton.setObjectName("pushButton")
+
+        self.pushButton_bahce = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_bahce.setGeometry(QtCore.QRect(1300, 650, 261, 131))
+        font = QtGui.QFont()
+        font.setFamily("Maiandra GD")
+        font.setPointSize(18)
+        self.pushButton_bahce.setFont(font)
+        self.pushButton_bahce.setStyleSheet("QPushButton {\n"
+"                background-color: rgb(131, 65, 0);\n"
+"                border-radius: 10px;  /* Yuvarlaklık */\n"
+"                padding: 10px;\n"
+"            }\n"
+"            QPushButton:hover {\n"
+"                background-color: rgb(170, 70, 0);\n"
+"            }\n"
+"            QPushButton:pressed {\n"
+"                background-color: rgb(145, 70, 0);\n"
+"            }")
+        self.pushButton_bahce.setObjectName("pushButton_bahce")
+
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(500, 300, 721, 81))
         font = QtGui.QFont()
@@ -342,6 +359,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "Bahçe Kirala"))
+        self.pushButton_bahce.setText(_translate("MainWindow", "Bahçeler Türüne\n Göre Sınıflandır"))
         self.label.setText(_translate("MainWindow", "Bahçeler"))
         self.label2.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_geri.setText(_translate("MainWindow", "<- Geri"))
@@ -405,6 +423,7 @@ class Bahceler(QtWidgets.QMainWindow):
             self.ui.pushButton_geri.clicked.connect(self.geriGit)
             self.kullanici = kullanici
             self.ui.pushButton.clicked.connect(self.bahceKirala)
+            self.ui.pushButton_bahce.clicked.connect(self.bahceTuruSec)     
             self.ui.pushButton_1.clicked.connect(self.birSecildi)
             self.ui.pushButton_2.clicked.connect(self.ikiSecildi)
             self.ui.pushButton_3.clicked.connect(self.ucSecildi)
@@ -457,6 +476,29 @@ class Bahceler(QtWidgets.QMainWindow):
                         self.bahce = bahce_class.Bahce().get_bahce_from_db(i)
                         if self.bahce.durum == "Kiralanmis":
                                 getattr(self.ui, f"pushButton_{i}").setStyleSheet("background-color: rgb(131, 65, 0);\n")
+        
+        def bahceTuruSec(self):
+                tur, ok = QInputDialog.getText(
+                        self, 
+                        "Bahçe Türüne Göre Sınıflandırma", 
+                        "Aramak istediğiniz bahçe türünü girin:", 
+                        
+                )           
+                if ok: 
+                        gelenBahceler = bahce_class.Bahce().get_bahce(tur)
+                        if gelenBahceler:
+                                yazi = "Toprak Türüne Göre Bahçeler:\n"
+                                for bahce in gelenBahceler:
+                                        yazi += f"Bahce Numarasi: {bahce[0]}\n"
+                                QMessageBox.information(self, "Sonuç", yazi)       
+                        else:
+                                QMessageBox.information(self, "Sonuç Yok", "Belirtilen türde bahçe bulunamadı.")
+                else:
+                        QMessageBox.warning(self, "İptal Edildi", "İşlemi iptal edildi.")
+                        
+               
+
+
 
         def birSecildi(self):
                 self.bahce_id = 1               

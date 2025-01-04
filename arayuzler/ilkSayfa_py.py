@@ -6,12 +6,8 @@ import kayit_py
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
-        #setExtendedState(JFrame.MAXIMIZED_BOTH);
         MainWindow.setObjectName("MainWindow")
-        #MainWindow.resize(996, 672)
-        #MainWindow.fixedsize(1920, 1080)
         MainWindow.setFixedSize(1920, 1080)
-        #MainWindow.adjustSize()
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -40,7 +36,6 @@ class Ui_MainWindow(object):
         font.setFamily("Maiandra GD")
         font.setPointSize(50)
         self.pushButton_3.setFont(font)
-        #self.pushButton_3.setStyleSheet("\n""\n""background-color: rgb(191, 183, 165);")
         self.pushButton_3.setStyleSheet("""
             QPushButton {
                 background-color: rgb(191, 183, 165);

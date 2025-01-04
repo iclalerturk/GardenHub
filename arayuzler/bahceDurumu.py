@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-import psycopg2
+import kiralama
 import yoneticiAnaSayfa
 
 class Ui_MainWindow(object):
@@ -177,30 +177,15 @@ class BahceDurumunuGor(QtWidgets.QMainWindow):
     def showMailDialog(self):
         mail, ok = QtWidgets.QInputDialog.getText(self, 'Mail Girin', 'Kullanıcı mailini girin:')
         if ok and mail:
-            self.showKiralamaDetails(mail)
-    
-    def showKiralamaDetails(self, mail):
-        hostname = 'localhost'
-        username = 'postgres'
-        database = 'GardenHub'
-        password = '1234'
-        port_id = '5432'
-        try:
-            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id)
-            cursor = conn.cursor()
+            self.showKiralamaDetails2(mail)
 
-            query = "SELECT kullanici_id FROM kullanicilar WHERE mail = %s"
-            cursor.execute(query, (mail,))
-            user_id = cursor.fetchone()
-            if user_id:
-                user_id = user_id[0]
-                query = "SELECT bahce_id, baslangic_tarihi FROM Kiralamalar WHERE kullanici_id = %s"
-                cursor.execute(query, (user_id,))
-                rows = cursor.fetchall()
-
-                if rows:
+    def showKiralamaDetails2(self, mail):
+        sonuc=0
+        rows = kiralama.Kiralama().showKiralamaDetails(mail,sonuc)
+        if sonuc==1:
+             QtWidgets.QMessageBox.warning(self, "Uyarı", "Geçersiz mail adresi.")
+        if rows:
                     msg = QtWidgets.QMessageBox(self)
-                    # msg.setIcon(QtWidgets.QMessageBox.Information)
                     msg.setWindowTitle("Kiralama Bilgileri")
                     msg.setText(f"Mail: {mail}")
                     table ="""
@@ -236,44 +221,20 @@ class BahceDurumunuGor(QtWidgets.QMainWindow):
                                       
                     """)
                     msg.exec_()
-                else:
+        else:
                     QtWidgets.QMessageBox.warning(self, "Uyarı", "Bu mail ile kiralanmış bir bahçe bulunmamaktadır.")
-            else:
-                QtWidgets.QMessageBox.warning(self, "Uyarı", "Geçersiz mail adresi.")
-            conn.close()
-        except Exception as e:
-            print("Error: ", e)
-            QtWidgets.QMessageBox.critical(self, "Error", f"Veritabanı hatası: {e}")
    
     def load_bahce(self):
-        hostname = 'localhost'
-        username = 'postgres'
-        database = 'GardenHub'
-        password = '1234'
-        port_id = '5432'
-        try:
-            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id                 
-            )
-            self.cursor = conn.cursor()
-
-            query = "SELECT bahce_id,kullanici_id, baslangic_tarihi FROM Kiralamalar"
-            self.cursor.execute(query)
-            rows = self.cursor.fetchall()
-            query = "SELECT mail FROM kullanici_mail WHERE kullanici_id = %s" #kullanici_mail viewi kullanıldı
-            conn.commit()
-            self.ui.tableWidget.setRowCount(len(rows))
-            for row_idx, row in enumerate(rows):
-                self.cursor.execute(query,(row[1],))
-                mail = self.cursor.fetchone()[0]
-                conn.commit()
-                self.ui.tableWidget.setRowCount(len(rows))
-                self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(str(row[0])))
-                self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(mail))
-                self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(row[2].strftime("%Y-%m-%d")))
-            conn.close()       
-               
-        except Exception as e:
-            print("Error: ", e)
+        bahceler = kiralama.Kiralama().get_kiralama_from_db()
+        if bahceler:
+            self.ui.tableWidget.setRowCount(len(bahceler))
+            for idx, bahce in enumerate(bahceler):
+                self.ui.tableWidget.setItem(idx, 0, QtWidgets.QTableWidgetItem(str(bahce.bahce_id)))
+                self.ui.tableWidget.setItem(idx, 1, QtWidgets.QTableWidgetItem(bahce.mail))
+                self.ui.tableWidget.setItem(idx, 2, QtWidgets.QTableWidgetItem(bahce.baslangic_tarihi.strftime("%Y-%m-%d")))
+        else:
+            QtWidgets.QMessageBox.warning(self, "Uyarı", "Kiralama bulunamadı.")
+        
         
 
 if __name__ == "__main__":

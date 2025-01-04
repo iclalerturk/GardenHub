@@ -11,13 +11,9 @@ import urunEkle
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        
-        #setExtendedState(JFrame.MAXIMIZED_BOTH);
+ 
         MainWindow.setObjectName("MainWindow")
-        #MainWindow.resize(996, 672)
-        #MainWindow.fixedsize(1920, 1080)
         MainWindow.setFixedSize(1920, 1080)
-        #MainWindow.adjustSize()
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -113,7 +109,7 @@ class Ui_MainWindow(object):
 "                background-color: rgb(170, 160, 140);\n"
 "            }")
         self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout.addWidget(self.pushButton_2, 0, 2, 1, 1)###############3
+        self.gridLayout.addWidget(self.pushButton_2, 0, 2, 1, 1)
         
 
         self.pushButton_4 = QtWidgets.QPushButton(self.widget)

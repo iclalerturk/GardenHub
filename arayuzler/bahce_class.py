@@ -9,23 +9,24 @@ class Bahce:
         self.durum = durum
         self.fiyat = fiyat
 
-
-    @staticmethod
-    def get_bahce_from_db(bahce_id):
-        hostname = 'localhost'
-        username = 'postgres'
-        database = 'GardenHub'
-        password = '1234'
-        port_id = '5432'
+        self.hostname = 'localhost'
+        self.username = 'postgres'
+        self.database = 'GardenHub'
+        self.password = '1234'
+        self.port_id = '5432'
         try:
-            conn = psycopg2.connect(host=hostname, user=username, password=password, dbname=database, port=port_id
+            self.conn = psycopg2.connect(host=self.hostname, user=self.username, password=self.password, dbname=self.database, port=self.port_id
                     
             )
-            cursor = conn.cursor()
+            self.cursor = self.conn.cursor()
+        except Exception as e:
+            print("Error: ", e)
 
-            cursor.execute("SELECT * FROM Bahceler WHERE bahce_id = %s", (bahce_id,))
-            user_data = cursor.fetchone()
-            conn.close()
+    def get_bahce_from_db(self,bahce_id):  
+        try:
+            self.cursor.execute("SELECT * FROM Bahceler WHERE bahce_id = %s", (bahce_id,))
+            user_data = self.cursor.fetchone()
+            self.conn.close()
             if bahce_id:
                 return Bahce(
                     bahce_id=user_data[0],
@@ -40,6 +41,10 @@ class Bahce:
         except Exception as e:
             print("Error: ", e)
         
-
+    def get_bahce(self, toprak):
+        query = "SELECT bahce_id FROM bahceler WHERE toprak_tipi = %s ORDER BY bahce_id DESC"
+        self.cursor.execute(query, (toprak,))
+        rows = self.cursor.fetchall()
+        return rows
 
 
