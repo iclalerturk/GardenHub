@@ -224,6 +224,7 @@ class KullaniciSil(QtWidgets.QMainWindow):
                 QMessageBox.information(self, "Bilgi", "Kullanıcı Silme İşlemi Başarılı.\n Trigger tetiklendi.\n Kiralamalar tablosundan kullanici silindi.\n Kiraladığı bahçeler bos durumuna getirildi.")
             else:
                 QMessageBox.information(self, "Bilgi", "Bu Maile Sahip Kullanıcı Yok.")
+                
                 conn.close()
 if __name__ == "__main__":
     import sys

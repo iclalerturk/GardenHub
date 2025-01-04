@@ -256,10 +256,8 @@ class UrunEkle(QtWidgets.QMainWindow):
                 self.cursor.execute(query, (urun_adi,urunun_kilosu,fiyat,self.kullanici.kullanici_id))
                 self.show_message("Başarılı", "Ürün başarıyla eklendi.", QMessageBox.Information)
             except psycopg2.IntegrityError as e:
-                # Eğer veritabanı kısıtlaması nedeniyle hata oluşursa
                 self.show_message("Başarısız", "Ürün eklenemedi. Lütfen tekrar deneyin.", QMessageBox.Warning)
             except Exception as e:
-                # Genel hata yakalama (örn. bağlantı hatası, vs.)
                 self.show_message("Başarısız", "Ürün eklenemedi. Lütfen tekrar deneyin.", QMessageBox.Warning)
             self.conn.commit()
         def show_message(self, title, message, icon_type):

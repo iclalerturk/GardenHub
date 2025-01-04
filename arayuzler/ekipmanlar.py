@@ -164,7 +164,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
-        self.pushButton.setText(_translate("MainWindow", "KİRALADIĞIM\nEKİPMANLARI\nGÖRÜNTÜLE"))
+        self.pushButton.setText(_translate("MainWindow", "TALEP ETTİĞİM\nEKİPMANLARI\nGÖRÜNTÜLE"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "EKİPMAN ADI"))
         item = self.tableWidget.horizontalHeaderItem(1)
@@ -206,7 +206,18 @@ class Ekipman(QtWidgets.QMainWindow):
             self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(str(equipment.ekipman_sayisi)))
             self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(f"{equipment.fiyat:.2f} TL"))
 
-            button = QtWidgets.QPushButton("Kirala")
+            button = QtWidgets.QPushButton("Talep Et")
+            button.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(131, 65, 0);
+            }
+            QPushButton:hover {
+                background-color: rgb(170, 70, 0);
+            }
+            QPushButton:pressed {
+                background-color: rgb(145, 70, 0);
+            }
+        """)
             button.clicked.connect(lambda _, r=row_idx: self.kirala_buton_tiklandi(r))
             self.ui.tableWidget.setCellWidget(row_idx, 3, button)
             
@@ -214,11 +225,11 @@ class Ekipman(QtWidgets.QMainWindow):
         equipment_id = self.ekipman.get_equipments()[row_index].ekipman_id
         if self.ekipman.rent_equipment(equipment_id,self.kullanici):
             self.load_data() 
-            QMessageBox.information(self, "Bilgi", "Ekipman Kiralandı.")
+            QMessageBox.information(self, "Bilgi", "Ekipman Talep Edildi.")
         else:
             bakiye_mesaji = f"Yetersiz Bakiye.\nBakiyeniz: {self.kullanici.butce} TL"
             QMessageBox.information(self, "Bakiye Görüntüle", bakiye_mesaji)
-            print("Ekipman kiralanamadı.")
+            
         
 
 if __name__ == "__main__":

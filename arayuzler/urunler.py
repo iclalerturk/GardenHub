@@ -24,7 +24,7 @@ class Urunler:
 
     def get_urun_from_db(self,order_by_price=False):
         try:
-            query = "SELECT urun_id, urun_adi, kg, fiyat, sahip_id from urunler"
+            query = "SELECT * from get_urun"
             if order_by_price:
                 query += " ORDER BY fiyat ASC"
             self.cursor.execute(query)

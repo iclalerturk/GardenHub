@@ -37,10 +37,11 @@ returns void as $$
 declare
 	mevcut urunler.urun_adi%type;
 begin
-	select urun_id into mevcut from urunler where urun_adi=urun_adi2;
+	select urun_id into mevcut from urunler where urun_adi=urun_adi2 and sahip_id2
+	= sahip_id;
 	if mevcut is not null then
 		update urunler set kg = kg+ urun_kilosu2
-		where urun_adi=urun_adi2;
+		where urun_adi=urun_adi2 and sahip_id2 = sahip_id;
 	else
 		INSERT INTO urunler VALUES(nextval('urun_id_seq'),urun_adi2,
 		urun_kilosu2, fiyat2,sahip_id2);
@@ -163,11 +164,35 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
+--view
+--bahce durumunda kullanıldı
 CREATE OR REPLACE VIEW kullanici_mail AS
 SELECT mail, kullanici_id
 FROM kullanicilar;
 
+CREATE OR REPLACE VIEW get_urun AS
+SELECT urun_id, urun_adi, kg, fiyat, sahip_id from urunler;
+
+CREATE TYPE urun_stogu AS (urun_adi varchar(20), kg int, fiyat int);
+
+CREATE OR REPLACE FUNCTION urun_stogu_hesapla(urun_adi_1 varchar(20))
+RETURNS urun_stogu AS $$
+DECLARE
+	stok urun_stogu;
+	toplam_fiyat int;
+	toplam_kg int;
+	cur1 CURSOR FOR SELECT * FROM urunler WHERE urun_adi = urun_adi_1;
+BEGIN
+	toplam_fiyat :=0;
+	toplam_kg :=0;
+	FOR satir IN cur1 LOOP
+		toplam_fiyat := toplam_fiyat + (satir.fiyat * satir.kg);
+		toplam_kg := toplam_kg + satir.kg;
+	END LOOP;
+	SELECT urun_adi_1, toplam_kg, toplam_fiyat INTO stok;
+	RETURN stok;
+END;
+$$ language 'plpgsql'
 
 
-
+select urun_stogu_hesapla('Üzüm')

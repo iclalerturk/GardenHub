@@ -201,13 +201,41 @@ class BahceDurumunuGor(QtWidgets.QMainWindow):
 
                 if rows:
                     msg = QtWidgets.QMessageBox(self)
+                    # msg.setIcon(QtWidgets.QMessageBox.Information)
                     msg.setWindowTitle("Kiralama Bilgileri")
                     msg.setText(f"Mail: {mail}")
-                    table = "<table border='1'><tr><th>Bahçe Numarası</th><th>Kiralama Tarihi</th></tr>"
+                    table ="""
+                    <table border='1' style='background-color: white; border-collapse: collapse; width: 100%;'>
+                        <tr>
+                            <th style='background-color: rgb(240, 240, 240);'>Bahçe Numarası</th>
+                            <th style='background-color: rgb(240, 240, 240);'>Kiralama Tarihi</th>
+                        </tr>
+                    """
                     for row in rows:
-                        table += f"<tr><td>{row[0]}</td><td>{row[1].strftime('%Y-%m-%d')}</td></tr>"
+
+                        table += f"<tr style='background-color: white;'><td>{row[0]}</td><td>{row[1].strftime('%Y-%m-%d')}</td></tr>"
                     table += "</table>"
                     msg.setInformativeText(table)
+                    msg.setStyleSheet("""
+                        QMessageBox {
+                            background-color: rgb(255, 255, 255);  /* Açık yeşil arka plan */
+                            color: black;  /* Yazı rengi */
+                        }
+                        QMessageBox QLabel {
+                            background-color: rgb(255, 255, 255); 
+                        }
+                        QMessageBox QPushButton {
+                            background-color: rgb(131, 65, 0);  /* Buton arka plan rengi */
+                            color: black;  /* Buton yazı rengi */           
+                        }
+                        QMessageBox QPushButton:hover {
+                            background-color: rgb(170, 70, 0);  /* Buton üzerine gelindiğinde renk değişimi */
+                        }
+                        QMessageBox QPushButton:pressed {
+                            background-color: rgb(145, 70, 0);  /* Buton basıldığında renk değişimi */
+                        }
+                                      
+                    """)
                     msg.exec_()
                 else:
                     QtWidgets.QMessageBox.warning(self, "Uyarı", "Bu mail ile kiralanmış bir bahçe bulunmamaktadır.")
