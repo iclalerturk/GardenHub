@@ -52,13 +52,7 @@ class Ui_MainWindow(object):
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, item)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(225)
-###############################################################33333
-        self.tableWidget.insertRow(0)
-        self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Değer 1"))
-        self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Değer 2"))
-        self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem("Değer 3"))
-        self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem("Değer 3"))
-################################3333#############################333
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(325, 125, 1300, 250))
         font = QtGui.QFont()
@@ -216,6 +210,9 @@ class Ekipman(QtWidgets.QMainWindow):
         if self.ekipman.rent_equipment(equipment_id,self.kullanici):
             self.load_data() 
             QMessageBox.information(self, "Bilgi", "Ekipman Talep Edildi.")
+        elif self.ekipman.get_equipments()[row_index].ekipman_sayisi==0:
+            QMessageBox.information(self, "Bilgi", "Ekipman Stokta Bulunmamaktadır.")
+        
         else:
             bakiye_mesaji = f"Yetersiz Bakiye.\nBakiyeniz: {self.kullanici.butce} TL"
             QMessageBox.information(self, "Bakiye Görüntüle", bakiye_mesaji)

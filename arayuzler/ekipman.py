@@ -31,10 +31,13 @@ class Ekipman_class:
     def rent_equipment(self, equipment_id,kullanici):
         query = "SELECT fiyat, ekipman_sayisi FROM ekipman WHERE ekipman_id = %s"
         self.cursor.execute(query, (equipment_id,))
-        price = self.cursor.fetchone()[0]
-        # sayi = self.cursor.fetchone()[1]
+        result = self.cursor.fetchone()
+        price = result[0]
+        sayi = result[1]
         if kullanici.butce < price:
-           return False
+            return False
+        elif sayi == 0:
+            return False
         else:
             query = "UPDATE ekipman SET ekipman_sayisi = ekipman_sayisi - 1 WHERE ekipman_id = %s"
             self.cursor.execute(query, (equipment_id,))

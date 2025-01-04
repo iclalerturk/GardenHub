@@ -1,9 +1,6 @@
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import psycopg2
 import yoneticiAnaSayfa
-import kullanicilar as user
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -200,10 +197,11 @@ class KullanicilariGoruntule(QtWidgets.QMainWindow):
             cursor.execute("SELECT isim,soyisim,mail From kullanicilar EXCEPT SELECT isim,soyisim,mail From kullanicilar WHERE user_type='Kiraci'")          
             users = cursor.fetchall()
             conn.close()
-            # self.ui.tableWidget.setRowCount(len(users))
-            if users:
-                user_info = "\n".join([f"-> İsim: {user[0]}, Soyisim: {user[1]}, E-posta: {user[2]}" for user in users])
-                QtWidgets.QMessageBox.information(self, "Kullanıcılar", user_info)
+            self.ui.tableWidget.setRowCount(len(users))
+            for row_idx, user in enumerate(users):
+                self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(user[0]))
+                self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(user[1]))
+                self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(user[2]))
         except Exception as e:
             print
 
@@ -221,10 +219,11 @@ class KullanicilariGoruntule(QtWidgets.QMainWindow):
             cursor.execute("SELECT isim,soyisim,mail From kullanicilar EXCEPT SELECT isim,soyisim,mail From kullanicilar WHERE user_type='Kullanici'")          
             users = cursor.fetchall()
             conn.close()
-            # self.ui.tableWidget.setRowCount(len(users))
-            if users:
-                user_info = "\n->".join([f"-> İsim: {user[0]}, Soyisim: {user[1]}, E-posta: {user[2]}" for user in users])
-                QtWidgets.QMessageBox.information(self, "Kullanıcılar", user_info)
+            self.ui.tableWidget.setRowCount(len(users))
+            for row_idx, user in enumerate(users):
+                self.ui.tableWidget.setItem(row_idx, 0, QtWidgets.QTableWidgetItem(user[0]))
+                self.ui.tableWidget.setItem(row_idx, 1, QtWidgets.QTableWidgetItem(user[1]))
+                self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(user[2]))
         except Exception as e:
             print("Error: ", e)
 

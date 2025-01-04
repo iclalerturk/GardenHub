@@ -1,4 +1,3 @@
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QInputDialog
 import urunler
@@ -316,7 +315,6 @@ class Pazar(QtWidgets.QMainWindow):
     
             
     def satinal_buton_tiklandi(self, row_index, gelenUrunler, order_by_price):
-        # urun_id = self.urun.get_urun_from_db(order_by_price)[row_index].urun_id
         if self.kullanici.butce>=gelenUrunler[row_index].fiyat:
             self.urun.urunSatinAl(gelenUrunler[row_index].urun_id,1)
             self.kullanici.butce -= gelenUrunler[row_index].fiyat

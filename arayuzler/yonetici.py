@@ -5,8 +5,6 @@ class Yonetici:
         
         self.mail = mail
         self.sifre = sifre
-        
-
     @staticmethod
     def get_admin_from_db(mail, sifre):
         hostname = 'localhost'
