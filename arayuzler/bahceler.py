@@ -73,6 +73,25 @@ class Ui_MainWindow(object):
 "            }")
         self.pushButton.setObjectName("pushButton")
 
+        self.pushButton_bahcelerim = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_bahcelerim.setGeometry(QtCore.QRect(1300, 485, 261, 131))
+        font = QtGui.QFont()
+        font.setFamily("Maiandra GD")
+        font.setPointSize(24)
+        self.pushButton_bahcelerim.setFont(font)
+        self.pushButton_bahcelerim.setStyleSheet("QPushButton {\n"
+"                background-color: rgb(131, 65, 0);\n"
+"                border-radius: 10px;  /* Yuvarlaklık */\n"
+"                padding: 10px;\n"
+"            }\n"
+"            QPushButton:hover {\n"
+"                background-color: rgb(170, 70, 0);\n"
+"            }\n"
+"            QPushButton:pressed {\n"
+"                background-color: rgb(145, 70, 0);\n"
+"            }")
+        self.pushButton_bahcelerim.setObjectName("pushButton_bahcelerim")
+
         self.pushButton_bahce = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_bahce.setGeometry(QtCore.QRect(1300, 650, 261, 131))
         font = QtGui.QFont()
@@ -359,7 +378,8 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "Bahçe Kirala"))
-        self.pushButton_bahce.setText(_translate("MainWindow", "Bahçeler Türüne\n Göre Sınıflandır"))
+        self.pushButton_bahcelerim.setText(_translate("MainWindow", "Kiraladığım\nBahçeler"))
+        self.pushButton_bahce.setText(_translate("MainWindow", "Bahçeleri Türüne\n Göre Sınıflandır"))
         self.label.setText(_translate("MainWindow", "Bahçeler"))
         self.label2.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_geri.setText(_translate("MainWindow", "<- Geri"))
@@ -423,6 +443,7 @@ class Bahceler(QtWidgets.QMainWindow):
             self.ui.pushButton_geri.clicked.connect(self.geriGit)
             self.kullanici = kullanici
             self.ui.pushButton.clicked.connect(self.bahceKirala)
+            self.ui.pushButton_bahcelerim.clicked.connect(self.kiraladigimBahceler)
             self.ui.pushButton_bahce.clicked.connect(self.bahceTuruSec)     
             self.ui.pushButton_1.clicked.connect(self.birSecildi)
             self.ui.pushButton_2.clicked.connect(self.ikiSecildi)
@@ -440,6 +461,13 @@ class Bahceler(QtWidgets.QMainWindow):
             self.ui.pushButton_14.clicked.connect(self.ondortSecildi)
             self.ui.pushButton_15.clicked.connect(self.onbesSecildi)
             self.ui.pushButton_16.clicked.connect(self.onaltiSecildi)
+
+        def kiraladigimBahceler(self):
+                bahceler = kiralama.Kiralama().get_kiraladigim_bahceler(self.kullanici.kullanici_id)
+                yazi = "Kiraladığım Bahçeler:\n"
+                for bahce in bahceler:
+                        yazi += f"Bahce Numarasi: {bahce[0]}\n"
+                QMessageBox.information(self, "Kiraladığım Bahçeler", yazi)
 
         def bahceKirala(self):
                 bahceNo, ok = QInputDialog.getDouble(

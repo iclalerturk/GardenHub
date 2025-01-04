@@ -142,6 +142,24 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+--drop trigger kullanici_kaydi on kullanicilar
+--drop function kullanici_kaydi_fonk
+CREATE TRIGGER kullanici_kaydi
+after insert ON Kullanicilar
+FOR EACH ROW
+EXECUTE FUNCTION kullanici_kaydi_fonk();
+
+CREATE OR REPLACE FUNCTION kullanici_kaydi_fonk()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- eklenen kullanici Kullanici tipinde eklensin
+    UPDATE Kullanicilar
+    SET user_type = 'Kullanici'
+    WHERE kullanici_id = NEW.kullanici_id;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
 --ekipman talebi kiralanan ekipmanlar olarak değiştirdim.
 --drop table EkipmanTalep
 drop table kiralananEkipmanlar

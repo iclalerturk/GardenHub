@@ -283,7 +283,7 @@ class KaydolSayfa(QtWidgets.QMainWindow):
                 conn.commit()
                 conn.close()
                 kullanici = kullanicilar.Kullanici.get_user_from_db(mail, sifre) 
-                QMessageBox.information(self, "Bilgi", "Kaydınız başarı ile tamamlandı.")
+                QMessageBox.information(self, "Bilgi", "Kaydınız başarı ile tamamlandı.\nkullanici tipini kullanici olarak oluşturan trigger tetiklendi.")
                 self.close()
                 self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(kullanici)
                 self.ilkSayfa.show()

@@ -42,6 +42,13 @@ class Kiralama:
                 return kiralamalar_listesi
             return None
     
+    def get_kiraladigim_bahceler(self, kullanici_id):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("SELECT bahce_id FROM Kiralamalar WHERE kullanici_id = %s", (kullanici_id,))
+        rows = self.cursor.fetchall()
+        return rows
+         
+
     def showKiralamaDetails(self, mail, sonuc):
         
             self.cursor = self.conn.cursor()
