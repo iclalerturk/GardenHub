@@ -277,16 +277,22 @@ class KaydolSayfa(QtWidgets.QMainWindow):
             if varmi:                 
                 QMessageBox.information(self, "Bilgi", "Bu Maile Sahip Kullanıcı Var.")
                 conn.close()
-            else:                  
-                query = "INSERT INTO kullanicilar VALUES( %s, %s, nextval('kullanici_id_seq'),%s, %s, %s)"               
-                cursor.execute(query, (isim, soyisim, mail, sifre, bdate))               
-                conn.commit()
-                conn.close()
-                kullanici = kullanicilar.Kullanici.get_user_from_db(mail, sifre) 
-                QMessageBox.information(self, "Bilgi", "Kaydınız başarı ile tamamlandı.\nkullanici tipini kullanici olarak oluşturan trigger tetiklendi.")
-                self.close()
-                self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(kullanici)
-                self.ilkSayfa.show()
+            else:             
+                try:
+                    query = "INSERT INTO kullanicilar VALUES( %s, %s, nextval('kullanici_id_seq'),%s, %s, %s)"               
+                    cursor.execute(query, (isim, soyisim, mail, sifre, bdate))               
+                    conn.commit()
+                    conn.close()
+                    kullanici = kullanicilar.Kullanici.get_user_from_db(mail, sifre) 
+                    QMessageBox.information(self, "Bilgi", "Kaydınız başarı ile tamamlandı.\nkullanici tipini kullanici olarak oluşturan trigger tetiklendi.")
+                    self.close()
+                    self.ilkSayfa = kullaniciAnaSayfa.KullaniciAnaSayfa(kullanici)
+                    self.ilkSayfa.show()     
+                except Exception as e:
+                    self.conn.rollback() 
+                    QMessageBox.information(self, "Bilgi", "18 Yaşından küçükler kaydolamaz. Kayıt başarısız oldu.")
+                    print(e)
+                    conn.close()
 
 if __name__ == "__main__":
     import sys

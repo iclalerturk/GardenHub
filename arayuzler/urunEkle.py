@@ -239,15 +239,20 @@ class UrunEkle(QtWidgets.QMainWindow):
             urun_adi=self.ui.ad_line.text()
             urunun_kilosu=self.ui.soyad_line.text()
             fiyat=self.ui.mail_line.text()
-            query="select urun_ekle(%s,%s,%s,%s)"
-            try:
-                self.cursor.execute(query, (urun_adi,urunun_kilosu,fiyat,self.kullanici.kullanici_id))
-                self.show_message("Başarılı", "Ürün başarıyla eklendi.", QMessageBox.Information)
-            except psycopg2.IntegrityError as e:
-                self.show_message("Başarısız", "Ürün eklenemedi. Lütfen tekrar deneyin.", QMessageBox.Warning)
-            except Exception as e:
-                self.show_message("Başarısız", "Ürün eklenemedi. Lütfen tekrar deneyin.", QMessageBox.Warning)
-            self.conn.commit()
+            if int(fiyat)<=0:
+                self.show_message("Başarısız", "Fiyat 0'dan büyük olmalıdır.", QMessageBox.Warning)
+            else:
+                query="select urun_ekle(%s,%s,%s,%s)"
+                try:
+                    self.cursor.execute(query, (urun_adi,urunun_kilosu,fiyat,self.kullanici.kullanici_id))
+                    self.show_message("Başarılı", "Ürün başarıyla eklendi.", QMessageBox.Information)
+                except psycopg2.IntegrityError as e:
+                    self.conn.rollback() 
+                    self.show_message("Başarısız", "Ürün eklenemedi. Lütfen tekrar deneyin.", QMessageBox.Warning)
+                except Exception as e:
+                    self.conn.rollback() 
+                    self.show_message("Başarısız", "Ürün eklenemedi. Lütfen tekrar deneyin.", QMessageBox.Warning)
+                self.conn.commit()
         def show_message(self, title, message, icon_type):
             msg = QMessageBox()
             msg.setIcon(icon_type)

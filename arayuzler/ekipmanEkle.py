@@ -234,13 +234,20 @@ class EkipmanEkle(QtWidgets.QMainWindow):
             self.close()
         def add_equipment(self):
             
-            ekipman_adi=self.ui.ad_line.text()
-            ekipman_sayisi=self.ui.soyad_line.text()
-            fiyat=self.ui.mail_line.text()
-            query="select ekipman_ekle(%s,%s,%s)"  
-            QMessageBox.information(self, "Bilgi", "Ekipman Eklenldi.")
-            self.cursor.execute(query, (ekipman_adi,ekipman_sayisi,fiyat))
-            self.conn.commit()
+             
+            
+            try:
+                ekipman_adi=self.ui.ad_line.text()
+                ekipman_sayisi=self.ui.soyad_line.text()
+                fiyat=self.ui.mail_line.text()
+                query="select ekipman_ekle(%s,%s,%s)" 
+                self.cursor.execute(query, (ekipman_adi,ekipman_sayisi,fiyat))
+                self.conn.commit()
+                QMessageBox.information(self, "Bilgi", "Ekipman Eklendi.")
+            except Exception as e:
+                print("Error: ", e)
+                self.conn.rollback() 
+                QMessageBox.information(self, "Bilgi", "Ekipman Eklenemedi.")
             
 
 if __name__ == "__main__":
