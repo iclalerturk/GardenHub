@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtGui import QIcon
 import kullaniciSecSayfasi_py
 import kullaniciAnaSayfa 
 import kullanicilar as user
@@ -7,7 +8,8 @@ import kullanicilar as user
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
-        MainWindow.setObjectName("MainWindow")
+        MainWindow.setObjectName("Garden Hub")
+        MainWindow.setWindowIcon(QIcon(':/gardenPic/saksı-Photoroom2.png'))
         MainWindow.setFixedSize(1920, 1080)
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
@@ -190,7 +192,7 @@ QGroupBox {
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Garden Hub"))
         self.label.setText(_translate("MainWindow", "KULLANICI GİRİŞİ"))
         self.label_5.setText(_translate("MainWindow", "E-Mail"))
         self.label_7.setText(_translate("MainWindow", "Şifre"))

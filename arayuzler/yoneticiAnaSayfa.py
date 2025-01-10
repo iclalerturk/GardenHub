@@ -11,6 +11,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setWindowIcon(QtGui.QIcon(':/gardenPic/saksı-Photoroom2.png'))
         MainWindow.setFixedSize(1920, 1080)
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
@@ -214,7 +215,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Garden Hub"))
         self.pushButton_5.setText(_translate("MainWindow", "\n"
 "KULLANICI\n"
 "SİL\n"

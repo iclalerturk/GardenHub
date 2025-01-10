@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QIcon
 import psycopg2
 import ekipmanlar
 import kullanicilar as Kullanici
@@ -8,6 +9,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setWindowIcon(QIcon(':/gardenPic/saksı-Photoroom2.png'))
         MainWindow.setFixedSize(1920, 1080)
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -124,7 +126,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Garben Hub"))
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
         item = self.tableWidget.horizontalHeaderItem(0)

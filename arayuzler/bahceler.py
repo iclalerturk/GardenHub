@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QIcon
 import kiralama
 import bahce_class
 import kullaniciAnaSayfa
@@ -9,6 +10,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setWindowIcon(QIcon(':/gardenPic/saksı-Photoroom2.png'))
         MainWindow.setFixedSize(1920, 1080)
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
@@ -376,7 +378,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Garden Hub"))
         self.pushButton.setText(_translate("MainWindow", "Bahçe Kirala"))
         self.pushButton_bahcelerim.setText(_translate("MainWindow", "Kiraladığım\nBahçeler"))
         self.pushButton_bahce.setText(_translate("MainWindow", "Bahçeleri Türüne\n Göre Sınıflandır"))

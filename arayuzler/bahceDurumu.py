@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QIcon
 import kiralama
 import yoneticiAnaSayfa
 
@@ -6,6 +7,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setWindowIcon(QIcon(':/gardenPic/saksı-Photoroom2.png'))
         MainWindow.setFixedSize(1920, 1080)
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -144,7 +146,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Garden Hub"))
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
         self.pushButton_3.setText(_translate("MainWindow", "İstenilen Kullanıcının\nKiralama Bilgilerini\n Gör"))

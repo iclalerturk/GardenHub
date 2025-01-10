@@ -8,6 +8,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
 
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setWindowIcon(QtGui.QIcon(':/gardenPic/saksı-Photoroom2.png'))
         MainWindow.setFixedSize(1920, 1080)
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
@@ -194,7 +195,7 @@ QGroupBox {
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Garden Hub"))
         self.label.setText(_translate("MainWindow", "ÜRÜN EKLE"))
         self.label_3.setText(_translate("MainWindow", "Ürün Adı"))
         self.soyad_label.setText(_translate("MainWindow", "Ürünün Kilosu"))
@@ -239,8 +240,12 @@ class UrunEkle(QtWidgets.QMainWindow):
             urun_adi=self.ui.ad_line.text()
             urunun_kilosu=self.ui.soyad_line.text()
             fiyat=self.ui.mail_line.text()
-            if int(fiyat)<=0:
-                self.show_message("Başarısız", "Fiyat 0'dan büyük olmalıdır.", QMessageBox.Warning)
+            try:
+                fiyat_int = int(fiyat)
+                if fiyat_int <= 0:
+                    self.show_message("Başarısız", "Fiyat 0'dan büyük olmalıdır.", QMessageBox.Warning)
+            except ValueError:
+                self.show_message("Başarısız", "Geçersiz fiyat değeri. Lütfen bir sayı girin.", QMessageBox.Warning)
             else:
                 query="select urun_ekle(%s,%s,%s,%s)"
                 try:

@@ -7,6 +7,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setWindowIcon(QIcon(':/gardenPic/saksı-Photoroom2.png'))
         MainWindow.setFixedSize(1920, 1080)
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
@@ -231,7 +232,7 @@ QGroupBox {
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Garden Hub"))
         self.label.setText(_translate("MainWindow", "Kullanıcı Ekle"))
         self.label_3.setText(_translate("MainWindow", "Ad"))
         self.soyad_label.setText(_translate("MainWindow", "Soyad"))

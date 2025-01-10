@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QIcon
 import yoneticiAnaSayfa
 import psycopg2
 
@@ -7,6 +8,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setWindowIcon(QIcon(':/gardenPic/saksı-Photoroom2.png'))
         MainWindow.setFixedSize(1920, 1080)
         MainWindow.setStyleSheet("background-color: rgb(47, 91, 76);\n"
 "background-color: rgb(47, 91, 76);")
@@ -193,7 +195,7 @@ QGroupBox {
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Garden Hub"))
         self.label.setText(_translate("MainWindow", "EKİPMAN EKLE"))
         self.label_3.setText(_translate("MainWindow", "Ekipman Adı"))
         self.soyad_label.setText(_translate("MainWindow", "Ekipman Adedi"))
@@ -233,9 +235,6 @@ class EkipmanEkle(QtWidgets.QMainWindow):
             self.ilkSayfa.show()
             self.close()
         def add_equipment(self):
-            
-             
-            
             try:
                 ekipman_adi=self.ui.ad_line.text()
                 ekipman_sayisi=self.ui.soyad_line.text()
