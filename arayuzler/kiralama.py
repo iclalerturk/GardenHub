@@ -49,10 +49,8 @@ class Kiralama:
         return rows
          
 
-    def showKiralamaDetails(self, mail, sonuc):
-        
-            self.cursor = self.conn.cursor()
-            
+    def showKiralamaDetails(self, mail, sonuc):      
+            self.cursor = self.conn.cursor()          
             query = "SELECT kullanici_id FROM kullanici_mail WHERE mail = %s"
             self.cursor.execute(query, (mail,))
             user_id = self.cursor.fetchone()

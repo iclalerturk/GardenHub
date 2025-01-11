@@ -28,7 +28,9 @@ create table urunler(
 	urun_adi varchar(20) not null,
 	kg int,
 	fiyat int NOT NULL CHECK (Fiyat > 0),
-	sahip_id int references kullanicilar(kullanici_id)	
+	sahip_id int,
+	constraint kullanicilar_kullanici_id_fkey foreign key (sahip_id) 
+	references kullanicilar(kullanici_id) on delete cascade
 );
 
 create or replace function urun_ekle(urun_adi2 varchar(20),urun_kilosu2 int,
@@ -118,7 +120,7 @@ BEGIN
     UPDATE bahceler
     SET durum = 'Kiralanmis'
     WHERE bahce_id = NEW.bahce_id;
-	--kullanicinin türünü kiracaı yap
+	--kullanicinin türünü kiracı yap
 	UPDATE kullanicilar
 	set user_type = 'Kiraci'
 	where kullanici_id=NEW.kullanici_id;
@@ -138,12 +140,12 @@ BEGIN
     -- silinen bahçenin durumunu "Bos" olarak güncelle
     UPDATE bahceler
     SET durum = 'Bos'
-    WHERE bahce_id = NEW.bahce_id;
-    RETURN NEW;
+    WHERE bahce_id = OLD.bahce_id;
+    RETURN OLD;
 END;
 $$ LANGUAGE plpgsql;
---drop trigger kullanici_kaydi on kullanicilar
---drop function kullanici_kaydi_fonk
+delete from kullanicilar where kullanici_id=18
+
 CREATE TRIGGER kullanici_kaydi
 after insert ON Kullanicilar
 FOR EACH ROW
@@ -160,15 +162,18 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
---ekipman talebi kiralanan ekipmanlar olarak değiştirdim.
---drop table EkipmanTalep
-drop table kiralananEkipmanlar
+
+
+--drop table kiralananEkipmanlar
 CREATE TABLE kiralananEkipmanlar (
     kullanici_id INT REFERENCES Kullanicilar(kullanici_id),
     ekipman_id INT REFERENCES Ekipman(ekipman_id),
     miktar INT default 0,
-    talep_tarihi DATE DEFAULT CURRENT_DATE
+    talep_tarihi DATE DEFAULT CURRENT_DATE,
+	constraint kullanicilar_kullanici_id_fkey foreign key (kullanici_id) 
+	references kullanicilar(kullanici_id) on delete cascade
 );
+
 
 CREATE OR REPLACE FUNCTION kullanici_mail_var_mi(email TEXT)
 RETURNS BOOLEAN AS $$
@@ -187,7 +192,7 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE VIEW kullanici_mail AS
 SELECT mail, kullanici_id
 FROM kullanicilar;
-
+--pazarda kullanıldı
 CREATE OR REPLACE VIEW get_urun AS
 SELECT urun_id, urun_adi, kg, fiyat, sahip_id from urunler;
 

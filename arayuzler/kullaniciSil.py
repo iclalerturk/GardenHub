@@ -202,7 +202,6 @@ class KullaniciSil(QtWidgets.QMainWindow):
             )
             cursor = conn.cursor()
             mail=self.ui.mail_line.text()
-            ###################################3kontrol yap ve silindi silinemedi mesajı ver bi de kullanıcı silindiğinde kiraladığı tarla boşaltılacak
             cursor.execute("SELECT kullanici_mail_var_mi(%s);", (mail,))
             varmi = cursor.fetchone()[0]
             if varmi:                 

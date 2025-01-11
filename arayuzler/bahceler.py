@@ -8,7 +8,6 @@ from PyQt5.QtWidgets import QMessageBox, QInputDialog
 from datetime import date
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowIcon(QIcon(':/gardenPic/saksı-Photoroom2.png'))
         MainWindow.setFixedSize(1920, 1080)
@@ -434,7 +433,6 @@ class Ui_MainWindow(object):
 "11\n"
 ""))
 import resimler_rc
-
 
 class Bahceler(QtWidgets.QMainWindow):
         def __init__(self, kullanici: Kullanici.Kullanici) -> None:

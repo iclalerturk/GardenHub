@@ -200,7 +200,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "GARDEN HUB"))
         self.pushButton_2.setText(_translate("MainWindow", "<- Geri"))
         self.pushButton_sirala.setText("Fiyata Göre\nSırala")
-        self.pushButton_aggregate.setText("Satıcı Stok Göster")
+        self.pushButton_aggregate.setText("10kg den fazla\nürünü olan Satıcıların\nStoğunu Göster")
         self.pushButton_stok.setText("Aradığın Ürünün\n Stoğunu Göster")
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "ÜRÜN ADI"))

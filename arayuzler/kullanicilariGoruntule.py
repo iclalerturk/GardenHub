@@ -174,7 +174,6 @@ class Ui_MainWindow(object):
 
 import resimler_rc
 
-
 class KullanicilariGoruntule(QtWidgets.QMainWindow):
     def __init__(self) -> None:
         super().__init__()
@@ -184,7 +183,7 @@ class KullanicilariGoruntule(QtWidgets.QMainWindow):
         self.ui.pushButton.clicked.connect(self.get_kiraci_olan_kullanicilar)
         self.ui.pushButton3.clicked.connect(self.get_kiraci_olmayan_kullanicilar)
         self.get_user()
-    
+
     def get_kiraci_olmayan_kullanicilar(self):
         hostname = 'localhost'
         username = 'postgres'
@@ -205,6 +204,7 @@ class KullanicilariGoruntule(QtWidgets.QMainWindow):
                 self.ui.tableWidget.setItem(row_idx, 2, QtWidgets.QTableWidgetItem(user[2]))
         except Exception as e:
             print
+
 
 
     def get_kiraci_olan_kullanicilar(self):
