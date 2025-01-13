@@ -27,10 +27,10 @@ INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Marul', 5, 60,2);
 INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Nane', 6, 60,2);
 INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Patates', 4, 40,2);
 INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Biber', 3, 80,2);
-INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Fasulye', 8, 70,2);
-INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Salatalık', 10, 30,2);
-INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Domates', 5, 55,2);
-INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Üzüm', 4, 50,2);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Fasulye', 8, 70,9);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Salatalık', 10, 30,9);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Domates', 5, 55,9);
+INSERT INTO urunler VALUES (nextval('urun_id_seq'),'Üzüm', 4, 50,9);
 --alter table urunler add column urun_id int;
 -- Ekipman
 

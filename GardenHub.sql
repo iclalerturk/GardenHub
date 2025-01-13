@@ -1,7 +1,7 @@
 create sequence kullanici_id_seq
 minvalue 1
 increment by 1
-
+--kullanicilar tablosu
 CREATE TABLE kullanicilar (
     isim VARCHAR(20) NOT NULL,
     soyisim VARCHAR(20) NOT NULL,
@@ -13,16 +13,16 @@ CREATE TABLE kullanicilar (
     user_type VARCHAR(50) CHECK (user_type IN ('Kiraci', 'Kullanici')),
     CONSTRAINT yas_sinir CHECK (AGE(CURRENT_DATE, bdate) >= INTERVAL '18 years')
 );
-
+--yonetici tablosu
 create table yonetici(
 	mail varchar(70),
 	sifre varchar(20)
 );
-
+--urun_id_seq
 create sequence urun_id_seq
 minvalue 1000
 increment by 1
-
+--urunler tablosu
 create table urunler(
 	urun_id int not null primary key,
 	urun_adi varchar(20) not null,
@@ -32,7 +32,7 @@ create table urunler(
 	constraint kullanicilar_kullanici_id_fkey foreign key (sahip_id) 
 	references kullanicilar(kullanici_id) on delete cascade
 );
-
+--urun_ekle fonksiyonu
 create or replace function urun_ekle(urun_adi2 varchar(20),urun_kilosu2 int,
 fiyat2 int, sahip_id2 int)
 returns void as $$
@@ -50,17 +50,18 @@ begin
 	end if;
 end;
 $$ language 'plpgsql'
-
+--ekipman_id_seq
 create sequence ekipman_id_seq
 minvalue 10000
 increment by 1
-
+--ekipman tablosu
 CREATE TABLE Ekipman (
 	ekipman_id int not null primary key,
 	ekipman_adi varchar(20) not null,
 	ekipman_sayisi int not null,
     fiyat NUMERIC(10,2) NOT NULL CHECK (fiyat > 0)
 );
+--ekipman_ekle fonksiyonu
 DROP FUNCTION ekipman_ekle(character varying,integer,numeric)
 create or replace function ekipman_ekle(ekipman_adi2 ekipman.ekipman_adi%type,ekipman_sayisi2 int,
 fiyat2 ekipman.fiyat%type )
@@ -89,7 +90,7 @@ CREATE TABLE Bahceler (
     durum VARCHAR(20) NOT NULL CHECK (Durum IN ('Bos', 'Kiralanmis')),
     fiyat NUMERIC(10,2) NOT NULL CHECK (Fiyat > 0)
 );
-
+--kiralama_id_seq
 create sequence kiralama_id_seq
 minvalue 1000
 increment by 1
@@ -103,11 +104,10 @@ CREATE TABLE Kiralamalar (
 	constraint kullanicilar_kullanici_id_fkey foreign key (kullanici_id) 
 	references kullanicilar(kullanici_id) on delete cascade
 );
-select * from kiralamalar
-drop trigger trigger_update_bahce_durum on kiralamalar
-drop function update_bahce_durum_on_kiralama
-drop table kiralamalar
 
+
+
+--bahce durumunu ne kullanici tipini güncelleme triggerı
 CREATE TRIGGER trigger_update_bahce_durum
 AFTER INSERT ON Kiralamalar
 FOR EACH ROW
@@ -128,7 +128,7 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
+--bahce durumunu sıfırlama triggerı
 CREATE TRIGGER trigger_sifirla_bahce_durum
 AFTER DELETE ON Kiralamalar
 FOR EACH ROW
@@ -145,7 +145,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 delete from kullanicilar where kullanici_id=18
-
+--kullanici kaydı triggerı
 CREATE TRIGGER kullanici_kaydi
 after insert ON Kullanicilar
 FOR EACH ROW
@@ -174,7 +174,7 @@ CREATE TABLE kiralananEkipmanlar (
 	references kullanicilar(kullanici_id) on delete cascade
 );
 
-
+--kullanici mail var mı fonksiyonu
 CREATE OR REPLACE FUNCTION kullanici_mail_var_mi(email TEXT)
 RETURNS BOOLEAN AS $$
 DECLARE
@@ -195,9 +195,9 @@ FROM kullanicilar;
 --pazarda kullanıldı
 CREATE OR REPLACE VIEW get_urun AS
 SELECT urun_id, urun_adi, kg, fiyat, sahip_id from urunler;
-
+--urun stogu record
 CREATE TYPE urun_stogu AS (urun_adi varchar(20), kg int, fiyat int);
-
+--urun stogu hesapla fonksiyonu cursor ve record kullanımı
 CREATE OR REPLACE FUNCTION urun_stogu_hesapla(urun_adi_1 varchar(20))
 RETURNS urun_stogu AS $$
 DECLARE
