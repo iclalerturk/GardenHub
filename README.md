@@ -1,5 +1,5 @@
 # GardenHub
-Implemented using Python and PostgreSQL. \n
+Implemented using Python and PostgreSQL. <br>
 Users can:
 ->Log in
 ->Register
